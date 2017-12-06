@@ -1,12 +1,39 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/shop/list",
+    "pages/shop/address",
+    "pages/mine/mine",
     "pages/logs/logs"
   ],
   "window":{
+    "backgroundColor": "#f8f8f8",
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#ff5801",
+    "navigationBarTitleText": "Ferry",
+    "navigationBarTextStyle":"light"
+  },
+  "tabBar": {
+    "selectedColor": "#ff5801",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/Shop_Tabbar_TakeOut_Empty@2x.png",
+        "selectedIconPath": "images/tabbar/Shop_Tabbar_TakeOut_Full@2x.png",
+        "text": "渡船"
+      },
+      {
+        "pagePath": "pages/shop/list",
+        "iconPath": "images/tabbar/Shop_Tabbar_Order_Empty@2x.png",
+        "selectedIconPath": "images/tabbar/Shop_Tabbar_Order_Full@2x.png",
+        "text": "口岸"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "images/tabbar/Shop_Tabbar_My_Empty@2x.png",
+        "selectedIconPath": "images/tabbar/Shop_Tabbar_My_Full@2x.png",
+        "text": "我的"
+      }
+    ]
   }
 }
