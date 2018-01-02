@@ -66,6 +66,7 @@ Page({
       that.setData({
         currentAddress: address
       })
+      console.log(address)
       that.loadData()
     })
   },
@@ -88,11 +89,15 @@ Page({
         var {
           shopList
         } = that.data
-
-        var list = data.list.map(item => {
+        console.log("get retiurn shoplist")
+        console.log(data);
+        var a =[]
+        a = JSON.parse(data)
+        var list = a.map(item => {
           item['distanceFormat'] = (item.distance / 1000).toFixed(2)
           return item
         })
+        console.log(list);
         that.setData({
           shopList: shopList ? shopList.concat(list) : list,
           page: page + 1,
@@ -121,7 +126,7 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: '渡船',
+      title: '买啊',
       path: '/pages/index/index'
     }
   }

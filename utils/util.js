@@ -190,7 +190,7 @@ export function getCurrentPage() {
 
 export function fetch(options) {
   wx.request({
-    url: `https://${host}/${options.url}`,
+    url: `http://${host}/${options.url}`,
     data: Object.assign(options.data, {
       'app_v': 'ipaotui_mall'
     }),
@@ -199,9 +199,11 @@ export function fetch(options) {
       'content-type': 'application/json'
     },
     success: function (res) {
+      console.log(res.data)
       const data = res.data
       console.log("ServerRetrun:"+ data)
       if (data.State == 'Success') {
+        console.log("yes" + data.data)
         options.success && options.success(data.data)
       } else {
         alert(data.info)

@@ -12,8 +12,9 @@ export function getSellers(options) {
   page = page || 0
   getApp().getCurrentAddress(address => {
     var location = address.location
+    console.log(location)
     fetch({
-      url: '/Sellers/getAllsellers',
+      url: 'seller/getAllSellers',
       data: {
         page,
         city_name: address.city,
@@ -133,14 +134,14 @@ export function getLoginInfo(options) {
   } = options
   wx.login({
     success(res) {
-      fetch({
-        url: 'index.php?m=Api&c=WeixinMall&a=getLoginInfo',
+      /*fetch({
+        url: 'User/onLogin',
         data: {
           wx_code: res['code'],
-          session_3rd: wx.getStorageSync('session_3rd')
+          session_3rd: wx.getStorageSync('  ')
         },
         success, error
-      })
+      })*/
     },
     error(res) {
       alert(res['errMsg'])

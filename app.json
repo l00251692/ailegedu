@@ -1,7 +1,7 @@
 {
-  "pages":[
-    "pages/index/index",
+  "pages":[ 
     "pages/shop/list",
+    "pages/index/index",
     "pages/shop/address",
     "pages/mine/mine",
     "pages/logs/logs"
@@ -10,23 +10,35 @@
     "backgroundColor": "#f8f8f8",
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#ff5801",
-    "navigationBarTitleText": "Ferry",
+    "navigationBarTitleText": "积木",
     "navigationBarTextStyle":"light"
   },
   "tabBar": {
     "selectedColor": "#ff5801",
     "list": [
       {
-        "pagePath": "pages/index/index",
-        "iconPath": "images/tabbar/Shop_Tabbar_TakeOut_Empty@2x.png",
-        "selectedIconPath": "images/tabbar/Shop_Tabbar_TakeOut_Full@2x.png",
-        "text": "渡船"
-      },
-      {
         "pagePath": "pages/shop/list",
         "iconPath": "images/tabbar/Shop_Tabbar_Order_Empty@2x.png",
         "selectedIconPath": "images/tabbar/Shop_Tabbar_Order_Full@2x.png",
-        "text": "口岸"
+        "text": "买啊"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/Shop_Tabbar_TakeOut_Empty@2x.png",
+        "selectedIconPath": "images/tabbar/Shop_Tabbar_TakeOut_Full@2x.png",
+        "text": "积木"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/Shop_Tabbar_TakeOut_Empty@2x.png",
+        "selectedIconPath": "images/tabbar/Shop_Tabbar_TakeOut_Full@2x.png",
+        "text": "找人"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/Shop_Tabbar_TakeOut_Empty@2x.png",
+        "selectedIconPath": "images/tabbar/Shop_Tabbar_TakeOut_Full@2x.png",
+        "text": "消息"
       },
       {
         "pagePath": "pages/mine/mine",
