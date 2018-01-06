@@ -196,10 +196,9 @@ export function fetch(options) {
     }),
     method: options.method || 'POST',
     header: {
-      'content-type': 'application/json'
+      'content-type': 'application/x-www-form-urlencoded'
     },
     success: function (res) {
-      console.log(res.data)
       const data = res.data
       console.log("ServerRetrun:"+ data)
       if (data.State == 'Success') {

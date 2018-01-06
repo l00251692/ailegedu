@@ -14,7 +14,7 @@ export function getSellers(options) {
     var location = address.location
     console.log(location)
     fetch({
-      url: 'seller/getAllSellers',
+      url: 'campus/getAllCampusWx',
       data: {
         page,
         city_name: address.city,
@@ -35,10 +35,11 @@ export function getSellerInfo(options) {
     seller_id,
     success, complete
   } = options
+  console.log('seller_ID:'+seller_id)
   getApp().getCurrentAddress(address => {
     var location = address.location
     fetch({
-      url: 'index.php?m=Mall&c=Seller&a=getSellerInfo',
+      url: 'campus/getCampusByIdWx',
       data: {
         seller_id,
         longitude: location.longitude,
@@ -57,7 +58,7 @@ export function getReviews(options) {
   } = options
   page = page || 0
   fetch({
-    url: 'index.php?m=Mall&c=Seller&a=getReviews',
+    url: 'campus/getReviews',
     data: {
       seller_id, page
     },
