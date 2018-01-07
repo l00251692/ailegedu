@@ -45,7 +45,7 @@ Page({
     this.id = options.id || 2
     console.log('ID:' + this.id)
     this.loadData()
-    this.loadReview()
+    //this.loadReview()
     
   },
   onReady: function () {
@@ -68,12 +68,15 @@ Page({
     getSellerInfo({
       seller_id: id,
       success(data) {
-        data['distanceFormat'] = +(data['distance'] / 1000).toFixed(2)
+        var a = []
+        a = JSON.parse(data)
+        console.log("sellerinfo:" + data);
+        a['distanceFormat'] = +(a['distance'] / 1000).toFixed(2)
         that.setData({
-          info: data
+          info: a
         })
         wx.setNavigationBarTitle({
-          title: data.seller_name
+          title: a.seller_name
         })
       },
       complete() {
@@ -102,7 +105,9 @@ Page({
         var {review: {
           list
         }} = that.data
-        var list2 = data.list.map(item => {
+        var a = []
+        a = JSON.parse(data)
+        var list2 = a.list.map(item => {
           item['timeFormat'] = datetimeFormat(item['time']);
           return item
         })
@@ -180,7 +185,10 @@ Page({
   increase(e) {
     var {order, info: {goods_map}} = this.data;
     var {goodsId, subId} = e.currentTarget.dataset;
-    var goods = goods_map[goodsId];
+    console.log(goodsId)
+    console.log(goods_map)
+    var goods = goods_map[goodsId-1];//liujingtao 修改增加-1，取回来的id多了个1
+    console.log(goods)
     var {goods_id, goods_name} = goods
     if (subId) {
       goods = goods.sub_goods_map[subId];

@@ -200,9 +200,7 @@ export function fetch(options) {
     },
     success: function (res) {
       const data = res.data
-      console.log("ServerRetrun:"+ data)
       if (data.State == 'Success') {
-        console.log("yes" + data.data)
         options.success && options.success(data.data)
       } else {
         alert(data.info)

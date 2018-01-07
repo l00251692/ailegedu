@@ -183,7 +183,7 @@
               <view class="weui-cell__hd weui-cell__hd_info">
                 配送服务
               </view>
-              <view class="weui-cell__bd">爱跑腿</view>
+              <view class="weui-cell__bd">积木</view>
             </view>
           </view>
         </swiper-item>
