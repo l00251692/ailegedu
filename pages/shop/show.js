@@ -300,8 +300,9 @@ Page({
 
   showSubGoods(e) {
     var {info: {goods_map}, order} = this.data;
+    console.log("0:" + JSON.stringify(this.data))
     var {goodsId} = e.currentTarget.dataset;
-    var {goods_id, goods_name, sub_goods} = goods_map[goodsId];
+    var {goods_id, goods_name, sub_goods} = goods_map[goodsId-1];//modify by ljt 增加减一处理
     this.setData({
       showSubGoods: true,
       activeSubGoods: {
