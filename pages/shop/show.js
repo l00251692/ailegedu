@@ -187,11 +187,16 @@ Page({
     var {goodsId, subId} = e.currentTarget.dataset;
     console.log(goodsId)
     console.log(goods_map)
-    var goods = goods_map[goodsId-1];//liujingtao 修改增加-1，取回来的id多了个1
+    for (var i = 0; i < goods_map.length; i++) {
+      if (goods_map[i].goods_id == goodsId) {
+        var goods = goods_map[i];
+        break;
+      }
+    }
     console.log(goods)
     var {goods_id, goods_name} = goods
     if (subId) {
-      goods = goods.sub_goods_map[subId];
+      goods = goods.sub_goods[subId];
       var {sub_id, sub_name} = goods
     }
     order.totalNum += 1;
@@ -300,15 +305,26 @@ Page({
 
   showSubGoods(e) {
     var {info: {goods_map}, order} = this.data;
-    console.log("0:" + JSON.stringify(this.data))
     var {goodsId} = e.currentTarget.dataset;
-    var {goods_id, goods_name, sub_goods} = goods_map[goodsId-1];//modify by ljt 增加减一处理
+    for(var i = 0; i< goods_map.length; i++)
+    {
+      if (goods_map[i].goods_id == goodsId)
+      {
+        var { goods_id, goods_name, property, sub_goods } = goods_map[i];
+        break;
+      }
+    }
+
     this.setData({
       showSubGoods: true,
       activeSubGoods: {
         goods_name, goods_id,
+        property,
         sub_goods,
         activeIndex: 0,
+        tmp0: 0,  //目前 先手写最多支持配置商品三个属性，实在想不到好的方法 
+        tmp1: 0,
+        tmp2: 0,
         subNums: this.calcSubNums(order.goods, goodsId)
       }
     })
@@ -322,6 +338,34 @@ Page({
     var {subIndex} = e.currentTarget.dataset;
     var {activeSubGoods} = this.data;
     activeSubGoods['activeIndex'] = subIndex
+    console.log(subIndex);
+    this.setData({
+      activeSubGoods
+    })
+  },
+  selectProperty0(e) {
+    var { index,propertyName, propertyValue } = e.currentTarget.dataset;
+    var { activeSubGoods } = this.data;
+    console.log("111:" + index);
+    activeSubGoods['tmp0'] = index;
+    this.setData({
+      activeSubGoods
+    })
+  },
+  selectProperty1(e) {
+    var { index, propertyName, propertyValue } = e.currentTarget.dataset;
+    var { activeSubGoods } = this.data;
+    console.log("111:" + index);
+    activeSubGoods['tmp1'] = index;
+    this.setData({
+      activeSubGoods
+    })
+  },
+  selectProperty2(e) {
+    var { index, propertyName, propertyValue } = e.currentTarget.dataset;
+    var { activeSubGoods } = this.data;
+    console.log("111:" + index);
+    activeSubGoods['tmp2'] = index;
     this.setData({
       activeSubGoods
     })

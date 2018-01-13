@@ -1,14 +1,14 @@
 <import src="goods-actions"/>
 
 <template name="sub-goods">
-  <view class="sub-goods">
+  <view class="sub-goods" >
     <view class="sub-goods__overlay" bindtap="hideSubGoods"></view>
     <view class="sub-goods__content">
       <icon bindtap="hideSubGoods" class="sub-goods__close" type="cancel" size="25" color="#999"/>
       <view class="sub-goods__hd">
         {{goods_name}}
       </view>
-      <view class="sub-goods__bd">
+      <view class="sub-goods__bd" wx:if="{{sub_goods && sub_goods.length > 0}}">
         <view >规格: </view>
         <view class="sub-goods__list">
           <view data-sub-index="{{index}}" bindtap="changeSubGoods" wx:for="{{sub_goods}}" wx:key="sub_id" class="sub-goods__item {{index == activeIndex? 'sub-goods__item_active': ''}} ">
@@ -16,6 +16,31 @@
           </view>
         </view>
       </view>
+
+      <view class="sub-goods__bd" wx:if="{{property && property.length > 0}}">
+        <view class="sub-goods__list" wx:if="{{property.length >0 &&property[0]}}">
+          <view >{{property[0].property_name}}:</view>
+          <view data-index ="{{valueidx}}" data-property-name = "{{property[0].property_name}}" data-property-value = "{{item.value_name}}" bindtap="selectProperty0"   wx:for="{{property[0].property_value}}" wx:key="value_id" wx:for-index="valueidx" class="sub-goods__item {{valueidx == tmp0? 'sub-goods__item_active': ''}} ">
+            {{item.value_name}}
+          </view>
+        </view>
+
+        <view class="sub-goods__list" wx:if="{{property.length >1 &&property[1]}}">
+          <view >{{property[1].property_name}}:</view>
+          <view data-index ="{{valueidx}}" data-property-name = "{{property[1].property_name}}" data-property-value = "{{item.value_name}}" bindtap="selectProperty1"   wx:for="{{property[1].property_value}}" wx:key="value_id" wx:for-index="valueidx" class="sub-goods__item {{valueidx == tmp1? 'sub-goods__item_active': ''}} ">
+            {{item.value_name}}
+          </view>
+        </view>
+
+        <view class="sub-goods__list" wx:if="{{property.length >2 &&property[2]}}">
+          <view >{{property[2].property_name}}:</view>
+          <view data-index ="{{valueidx}}" data-property-name = "{{property[2].property_name}}" data-property-value = "{{item.value_name}}" bindtap="selectProperty2"   wx:for="{{property[2].property_value}}" wx:key="value_id" wx:for-index="valueidx" class="sub-goods__item {{valueidx == tmp2? 'sub-goods__item_active': ''}} ">
+            {{item.value_name}}
+          </view>
+        </view>
+        
+      </view>
+
       <view class="sub-goods__ft weui-flex">
         <view class="weui-flex__item">
           <text class="primary-color sub-goods__price">¥{{sub_goods[activeIndex]['price']}}</text>
