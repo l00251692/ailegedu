@@ -67,7 +67,7 @@
                       选规格
                       <view wx:if="{{order['goodsNums'][item.goods_id] > 0}}" class="weui-badge goods-item__sub-goods-badge">{{order['goodsNums'][item.goods_id]}}</view>
                     </view>
-                    <template is="goods-actions" data="{{goods_id: item.goods_id, num: order['goodsNums'][item.goods_id]}}" wx:else />
+                    <template is="goods-actions" data="{{goods_id: item.goods_id, num: order['goodsNums'][item.goods_id],tmpf:null,tmps:null,tmpt:null,select_property:null}}" wx:else />
                   </view>
                 </view>
               </view>

@@ -10,7 +10,7 @@
       </view>
       <view class="cart-box__hd weui-flex">
         <view class="weui-flex__item">
-            餐盒费{{totalPackingFee}}元
+            打包费{{totalPackingFee}}元
         </view>
         <view class=" cart-box__btn-clear" bindtap="clearCart">
             <image class="cart-box__btn-clear-img" src="/images/delete@2x.png"></image>清空购物车
@@ -20,7 +20,8 @@
         <view wx:for="{{goods}}" wx:key="index" class="cart-box__item">
             <view class="cart-box__item-name">
                 {{item.goods_name}}
-                <view wx:if="{{item.sub_name}}" class="text-small grey-color">+{{item.sub_name}}</view>
+                <view wx:if="{{item.sub_name}}" class="text-small grey-color">{{item.sub_name}}</view>
+                <view  wx:if="{{item.select_property}}" class="text-small grey-color">{{item.select_property}}</view>
             </view>
             <view class="cart-box__item-price">
             ¥{{item.price}}

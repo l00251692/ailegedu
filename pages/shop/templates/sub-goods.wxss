@@ -19,7 +19,7 @@
 .sub-goods__content {
     position: absolute;
     left: 50%;
-    top: 30%;
+    top: 10%;
     width: 300px;
     box-sizing: border-box;
     background-color: #fff;

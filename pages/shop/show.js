@@ -141,15 +141,15 @@ Page({
   },
 
   addGoods(goods, item) {
-    var {goods_id, sub_id, num} = item
+    var { goods_id, sub_id, select_property, num} = item
     var itemIndex;
     if (sub_id) {
       itemIndex = goods.findIndex(item => {
-        return item['goods_id'] == goods_id && item['sub_id'] == sub_id
+        return item['goods_id'] == goods_id && item['sub_id'] == sub_id && item['select_property'] == select_property
       })
     } else {
       itemIndex = goods.findIndex(item => {
-        return item['goods_id'] == goods_id
+        return item['goods_id'] == goods_id && item['select_property'] == select_property
       })
     }
     if (itemIndex >= 0) {
@@ -160,17 +160,34 @@ Page({
     return goods
   },
   removeGoods(goods, item) {
-    var {goods_id, sub_id, num} = item
+    var { goods_id, sub_id, select_property,num} = item
+    console.log("remove:" + select_property);
     var itemIndex;
     if (sub_id) {
       itemIndex = goods.findIndex(item => {
-        return item['goods_id'] == goods_id && item['sub_id'] == sub_id
+        if (select_property)
+        {
+          return item['goods_id'] == goods_id && item['sub_id'] == sub_id && item['select_property'] == select_property
+        }
+        else
+        {
+          return item['goods_id'] == goods_id && item['sub_id'] == sub_id
+        }      
       })
     } else {
       itemIndex = goods.findIndex(item => {
-        return item['goods_id'] == goods_id
+        if (select_property)
+        {
+          return item['goods_id'] == goods_id && item['selectProperty'] == selectProperty
+        }
+        else
+        {
+          return item['goods_id'] == goods_id
+        }
       })
     }
+    console.log("dd:" + itemIndex);
+    console.log("goods:" + JSON.stringify(goods));
     if (itemIndex >= 0) {
       item = goods[itemIndex]
       if (item.num > num) {
@@ -184,16 +201,38 @@ Page({
 
   increase(e) {
     var {order, info: {goods_map}} = this.data;
-    var {goodsId, subId} = e.currentTarget.dataset;
+    var { goodsId, subId, tmpf, tmps, tmpt, selectProperty} = e.currentTarget.dataset;
     console.log(goodsId)
-    console.log(goods_map)
+    console.log("3333")
+    console.log(e.currentTarget.dataset)
     for (var i = 0; i < goods_map.length; i++) {
       if (goods_map[i].goods_id == goodsId) {
         var goods = goods_map[i];
         break;
       }
     }
-    console.log(goods)
+    var selectPropertyTmp = null;
+  
+    if (selectProperty != null)
+    {
+      console.log("here");
+      selectPropertyTmp = selectProperty;
+    }
+    else
+    {
+      if ((tmpf != null) && (goods.property!= null) && goods.property.length > 0 ) {
+        selectPropertyTmp = goods.property[0].property_value[tmpf].value_name;
+      }
+      if ((tmps != null) && (goods.property != null) && goods.property.length > 1 ) {
+        selectPropertyTmp = selectPropertyTmp + "," + goods.property[1].property_value[tmps].value_name;
+      }
+      if ((tmpt != null) && (goods.property != null) && goods.property.length > 2 ) {
+        selectPropertyTmp = selectPropertyTmp + "," + goods.property[2].property_value[tmpt].value_name;
+      }
+    }
+    
+    console.log(selectPropertyTmp);
+    
     var {goods_id, goods_name} = goods
     if (subId) {
       goods = goods.sub_goods[subId];
@@ -203,9 +242,11 @@ Page({
     order.totalGoodsPrice += +goods.price;
     order.totalPackingFee += +goods.packing_fee;
     order.totalPrice = +((order.totalGoodsPrice + order.totalPackingFee).toFixed(2));
+
     order.goods = this.addGoods(order.goods, {
       goods_id, goods_name,
       sub_id, sub_name,
+      select_property: selectPropertyTmp,
       price: goods.price,
       packing_fee: goods.packing_fee,
       num: 1
@@ -218,6 +259,7 @@ Page({
 
     if (subId) {
       this.setData({
+        showSubGoods: false,
         activeSubGoods: Object.assign(this.data.activeSubGoods, {
           subNums: this.calcSubNums(order.goods, goodsId)
         })
@@ -227,12 +269,26 @@ Page({
   },
   decrease(e) {
     var {order, info: {goods_map}} = this.data;
-    var {goodsId, subId} = e.currentTarget.dataset;
-
-    var goods = goods_map[goodsId];
-    if (subId) {
-      goods = goods.sub_goods_map[subId];
+    var { goodsId, subId, selectProperty} = e.currentTarget.dataset;
+    console.log("hh:"+ selectProperty);
+    console.log("goodsId:" + goodsId);
+    console.log("subId:" + subId);
+    for (var i = 0; i < goods_map.length; i++) {
+      if (goods_map[i].goods_id == goodsId) {
+        var goods = goods_map[i];
+        break;
+      }
     }
+    
+    if (subId) {
+      if (goods.sub_goods)
+      { 
+        goods = goods.sub_goods[subId];
+      }
+      
+    }
+
+    
     order.totalNum -= 1;
     order.totalGoodsPrice -= +goods.price;
     order.totalPackingFee -= +goods.packing_fee;
@@ -240,6 +296,7 @@ Page({
     order.goods = this.removeGoods(order.goods, {
       goods_id: goodsId,
       sub_id: subId,
+      select_property: selectProperty,
       num: 1
     })
     order.goodsNums = this.calcGoodsNums(order.goods)
