@@ -45,7 +45,7 @@ Page({
     this.id = options.id || 2
     console.log('ID:' + this.id)
     this.loadData()
-    //this.loadReview()
+    this.loadReview()
     
   },
   onReady: function () {
@@ -105,10 +105,13 @@ Page({
         var {review: {
           list
         }} = that.data
-        var a = []
+        console.log("111112:" + JSON.stringify(that.data));
+        console.log("111113:" + data);
+        var a = [];
         a = JSON.parse(data)
-        var list2 = a.list.map(item => {
-          item['timeFormat'] = datetimeFormat(item['time']);
+
+        var list2 = a.map(item => {
+          item['timeFormat'] = item['time'];
           return item
         })
 
@@ -186,8 +189,7 @@ Page({
         }
       })
     }
-    console.log("dd:" + itemIndex);
-    console.log("goods:" + JSON.stringify(goods));
+
     if (itemIndex >= 0) {
       item = goods[itemIndex]
       if (item.num > num) {
