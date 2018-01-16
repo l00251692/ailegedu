@@ -89,8 +89,6 @@ Page({
         var {
           shopList
         } = that.data
-        console.log("get retiurn shoplist")
-        console.log(data);
         var a =[]
         a = JSON.parse(data)
         var list = a.map(item => {

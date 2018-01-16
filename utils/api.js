@@ -289,9 +289,9 @@ export function deleteUserAddr(options) {
     })
 
   })
-}
+}*/
 
-// 添加准订单
+ 添加准订单
 export function addQuasiOrder(options) {
   const {
     seller_id,
@@ -334,7 +334,7 @@ export function addQuasiOrder(options) {
     })
   })
 }
-
+/*
 // 获取准订单
 export function getQuasiOrderInfo(options) {
   var {

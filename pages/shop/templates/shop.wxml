@@ -3,7 +3,7 @@
 <template name="shop">
   <view wx:if="{{is_rest == 1}}"  class="weui-media-box weui-media-box_appmsg shop__item">
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-      <image class="weui-media-box__thumb" src="{{pic_url}}" />
+      <image class="weui-media-box__thumb" src="{{pic_url || '/images/default-shop.png'}}" />
       <view class="shop__rest">休息中</view>
     </view>
     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
@@ -34,7 +34,7 @@
   </view>
   <navigator wx:else url="/pages/shop/show?id={{seller_id}}" class="weui-media-box weui-media-box_appmsg shop__item" hover-class="weui-cell_active">
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-      <image class="weui-media-box__thumb" src="{{pic_url}}" />
+      <image class="weui-media-box__thumb" src="{{pic_url || '/images/default-shop.png'}}" />
     </view>
     <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
       <view class="weui-media-box__title">{{seller_name}}</view>
