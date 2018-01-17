@@ -3,8 +3,8 @@ import {
   getLoginInfo, getUserAddrs
 } from './utils/api'
 import {
-  getCurrentAddress,
-  coordFormat
+  getCurrentAddress, getUserInfo,
+  coordFormat, fetch
 } from './utils/util'
 import {
   gcj02tobd09
@@ -17,23 +17,70 @@ App({
   getLoginInfo: function (cb) {
     var that = this
     if (this.globalData.loginInfo) {
+      console.log("无需再次登陆")
       cb && cb(this.globalData.loginInfo)
     } else {
       //调用登录接口
-      getLoginInfo({
+      wx.login({
+        success(res) {
+          console.log("登陆成功:" + res.code);
+          wx.getUserInfo({
+            success: function (userRes)
+            {
+              console.log("success:" + userRes.iv)
+              fetch({
+                url: 'user/toLoginWx',
+                data: {
+                  wx_code: res.code,
+                  encryptedData: userRes.encryptedData,
+                  iv: userRes.iv 
+                },
+                success(data) {
+                  console.log("用户信息:" + JSON.stringify(data));
+                  getApp().globalData.loginInfo = data
+                  cb && cb(data)
+                }
+              })
+            },
+            fail:function()
+            {
+              console.log("fail:")
+            }
+          })            
+        },
+        error(res) {
+          alert(res['errMsg'])
+          error && error(res['errMsg'])
+        }
+      })
+    }
+  },
+  /*setLoginInfo(loginInfo) {
+    if (loginInfo.session_3rd) {
+      wx.setStorageSync('session_3rd', loginInfo.session_3rd)
+    }
+    this.globalData.loginInfo = loginInfo
+  },*/
+
+  getUserInfo: function (cb) {
+    var that = this
+    if (this.globalData.userInfo) {
+      cb && cb(this.globalData.userInfo)
+    } else {
+      //调用登录接口
+      getUserInfo({
         success(data) {
-          that.setLoginInfo(data)
+          that.setUserInfo(data)
           cb && cb(data)
         }
       })
     }
   },
-  setLoginInfo(loginInfo) {
-    if (loginInfo.session_3rd) {
-      wx.setStorageSync('session_3rd', loginInfo.session_3rd)
-    }
-    this.globalData.loginInfo = loginInfo
+
+  setUserInfo(userInfo) {
+    this.globalData.userInfo = userInfo
   },
+
 
   // 获取当前地址
   getCurrentAddress(cb) {

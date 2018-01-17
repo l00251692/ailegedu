@@ -443,6 +443,7 @@ Page({
     }
   },
   onAddQuasiOrder(e) {
+    console.log("enter0");
     var that = this
     var {
       info: {seller_id},
@@ -456,16 +457,20 @@ Page({
     this.setData({
       loading: true
     })
-    getApp().getLoginInfo(loginInfo => {
-      if(!loginInfo.is_login) {
+    
+      /*if(!loginInfo.is_login) {
         wx.navigateTo({
-          url: '/pages/login/login',
+          url: 'pages/mine/mine',
         })
         this.setData({
           loading: false
         })
         return
-      }
+      }*/
+      console.log("enter1");
+      console.log("loginInfo" + JSON.stringify(getApp().globalData.loginInfo));
+      console.log("userInfo" + JSON.stringify(getApp().globalData.userInfo));
+      
       addQuasiOrder({
         seller_id, goods,
         success(data) {
@@ -483,7 +488,6 @@ Page({
           })
         }
       })
-    })
   },
   onShareAppMessage() {
     var {info:{seller_id, seller_name}} = this.data

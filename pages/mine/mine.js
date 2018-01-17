@@ -8,25 +8,26 @@ Page({
     loginInfo:{}
   },
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+
     var that = this
     getUserInfo(userInfo => {
+      app.globalData.userInfo = userInfo
       this.setData({
         userInfo
       })
     })
+    
   },
   onReady:function(){
     // 页面渲染完成
   },
   onShow:function(){
-    // 页面显示
-    var that = this
+    /*var that = this
     app.getLoginInfo(loginInfo => {
       that.setData({
         loginInfo: loginInfo.user_info
       })
-    })
+    })*/
   },
   onHide:function(){
     // 页面隐藏
@@ -57,11 +58,11 @@ Page({
       }
     })
   },
-  callback(loginInfo) {
+  /*callback(loginInfo) {
     this.setData({
       loginInfo: loginInfo.user_info
     })
-  },
+  },*/
   onShareAppMessage() {
     return {
       title: '我的信息',

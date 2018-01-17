@@ -2,9 +2,11 @@
   "pages":[ 
     "pages/shop/list",
     "pages/shop/show",
-    "pages/index/index",
     "pages/shop/address",
+    "pages/order/quasi",
+    "pages/order/show",
     "pages/mine/mine",
+    "pages/index/index",
     "pages/logs/logs"
   ],
   "window":{

@@ -131,12 +131,14 @@ export function logout(options) {
 // 获取登录信息
 export function getLoginInfo(options) {
   const {
-    success, error
+    success, error, 
   } = options
+  
   wx.login({
     success(res) {
-      /*fetch({
-        url: 'User/onLogin',
+      /*console.log("getLoginInfo:" + JSON.stringify(options))
+      fetch({
+        url: 'user/toLoginWx',
         data: {
           wx_code: res['code'],
           session_3rd: wx.getStorageSync('  ')
@@ -158,17 +160,17 @@ export function getUserAddrs(options) {
   } = options
 
   getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
+    if (getApp().globalData.loginInfo.user_info) {
       return alert('用户未登录')
     }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=User&a=getUserAddrs',
+    var { user_id } = getApp().globalData.loginInfo.userInfo
+    /*fetch({
+      url: 'user/getUserAddressWx',
       data: {
         user_id, user_token
       },
       success, error
-    })
+    })*/
 
   })
 }
@@ -291,8 +293,9 @@ export function deleteUserAddr(options) {
   })
 }*/
 
- 添加准订单
+ //添加准订单
 export function addQuasiOrder(options) {
+  console.log("enter12");
   const {
     seller_id,
     goods,
@@ -303,6 +306,7 @@ export function addQuasiOrder(options) {
       seller_id,
       goods: JSON.stringify(goods)
     }
+    console.log("enter3" + address);
     if (address.addr_id) {
       data = Object.assign({
         addr_id: address.addr_id
@@ -324,7 +328,7 @@ export function addQuasiOrder(options) {
       }
       var { user_id, user_token } = loginInfo.user_info
       fetch({
-        url: 'index.php?m=Mall&c=Order&a=addQuasiOrder',
+        url: 'order/createOrderWx',
         data: Object.assign({
           user_id, user_token,
         }, data),

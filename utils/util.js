@@ -319,15 +319,10 @@ export function splitByKeyword(text, keyword) {
   return res
 }
 
-var userInfo
 export function getUserInfo(cb) {
-  if (userInfo) {
-    return cb(userInfo)
-  } else {
     wx.getUserInfo({
       success(res) {
-        userInfo = res.userInfo
-        cb(userInfo)
+          cb(res.userInfo)
       },
       fail(res) {
         console.log(res)
@@ -355,7 +350,6 @@ export function getUserInfo(cb) {
         }
       }
     })
-  }
 }
 
 // 微信支付
