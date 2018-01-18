@@ -458,7 +458,7 @@ Page({
       loading: true
     })
     
-      /*if(!loginInfo.is_login) {
+    if (!getApp().globalData.loginInfo.is_login) {
         wx.navigateTo({
           url: 'pages/mine/mine',
         })
@@ -466,7 +466,7 @@ Page({
           loading: false
         })
         return
-      }*/
+      }
       console.log("enter1");
       console.log("loginInfo" + JSON.stringify(getApp().globalData.loginInfo));
       console.log("userInfo" + JSON.stringify(getApp().globalData.userInfo));
@@ -474,7 +474,7 @@ Page({
       addQuasiOrder({
         seller_id, goods,
         success(data) {
-
+          console.log("here:"+ data)
           that.setData({
             loading: false
           })

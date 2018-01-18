@@ -306,62 +306,62 @@ export function addQuasiOrder(options) {
       seller_id,
       goods: JSON.stringify(goods)
     }
-    console.log("enter3" + address);
+    console.log("enter3" + JSON.stringify(address));
     if (address.addr_id) {
       data = Object.assign({
         addr_id: address.addr_id
       }, data)
     } else {
       var location = address.location
+      var addresstr = address.address
       data = Object.assign({
-        city_id: address.city_id,
+        /*city_id: address.city_id,
         city_name: address.city,
         district_id: address.district_id,
         district_name: address.district,
         longitude: location.longitude,
-        latitude: location.latitude
+        latitude: location.latitude*/
+        addr_id: addresstr
       }, data)
     }
-    getApp().getLoginInfo(loginInfo => {
-      if (!loginInfo.user_info) {
-        return alert('用户未登录')
-      }
-      var { user_id, user_token } = loginInfo.user_info
-      fetch({
+    
+    if(!getApp().globalData.loginInfo.is_login){
+      return alert('用户未登录')
+    }
+        
+    var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+    fetch({
         url: 'order/createOrderWx',
         data: Object.assign({
-          user_id, user_token,
+          user_id,
         }, data),
         success, error
-      })
-
     })
   })
 }
-/*
+
 // 获取准订单
 export function getQuasiOrderInfo(options) {
   var {
     quasi_order_id,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=Order&a=getQuasiOrderInfo',
-      data: {
-        user_id, user_token,
-        quasi_order_id
-      },
-      success, error
-    })
 
+  if (!getApp().globalData.loginInfo.is_login) {
+    return alert('用户未登录')
+  }
+
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'order/getQuasiOrderInfoWx',
+    data: {
+      user_id, user_token,
+      quasi_order_id
+    },
+    success, error
   })
 }
-
+/*
 // 更新准订单地址
 export function updateOrderAddr(options) {
   var {
