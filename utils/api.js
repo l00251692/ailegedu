@@ -159,20 +159,19 @@ export function getUserAddrs(options) {
     success, error
   } = options
 
-  getApp().getLoginInfo(loginInfo => {
-    if (getApp().globalData.loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id } = getApp().globalData.loginInfo.userInfo
-    /*fetch({
-      url: 'user/getUserAddressWx',
-      data: {
-        user_id, user_token
-      },
-      success, error
-    })*/
+  if (!getApp().globalData.loginInfo.is_login) {
+    return alert('用户未登录')
+  }
+  var { user_id } = getApp().globalData.loginInfo.userInfo
+  /*fetch({
+    url: 'user/getUserAddressWx',
+    data: {
+      user_id, user_token
+    },
+    success, error
+  })*/
 
-  })
+
 }
 // 获取用户地址
 export function getUserAddr(options) {
@@ -295,18 +294,18 @@ export function deleteUserAddr(options) {
 
  //添加准订单
 export function addQuasiOrder(options) {
-  console.log("enter12");
   const {
     seller_id,
     goods,
     success, error
   } = options
+
   getApp().getCurrentAddress(address => {
     var data = {
       seller_id,
       goods: JSON.stringify(goods)
     }
-    console.log("enter3" + JSON.stringify(address));
+  
     if (address.addr_id) {
       data = Object.assign({
         addr_id: address.addr_id
@@ -350,7 +349,7 @@ export function getQuasiOrderInfo(options) {
   if (!getApp().globalData.loginInfo.is_login) {
     return alert('用户未登录')
   }
-
+  console.log("quasi_order_id:"+quasi_order_id)
   var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
   fetch({
     url: 'order/getQuasiOrderInfoWx',
@@ -406,30 +405,30 @@ export function updateOrderCoupon(options) {
 
   })
 }
-
+*/
 // 添加订单
 export function addOrder(options) {
   var {
     quasi_order_id, remark,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=Order&a=addOrder',
-      data: {
-        user_id, user_token,
-        quasi_order_id, remark
-      },
-      success, error
-    })
-
+  
+  if (!getApp().globalData.loginInfo.is_login)
+  {
+    return alert('用户未登录')
+  }
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'order/submitOrder',
+    data: {
+      user_id,
+      quasi_order_id, remark
+    },
+    success, error
   })
-}
 
+}
+/*
 // 取消订单
 export function cancelOrder(options) {
   var {
@@ -525,31 +524,31 @@ export function reviewsOrder(options) {
 
   })
 }
-
+*/
 // 获取支付参数
 export function getPayment(options) {
   var {
     order_id,
+    pay_money,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=WeixinMall&a=getPayment',
-      data: {
-        user_id, user_token,
-        order_id
-      },
-      success, error
-    })
-
+  if (!getApp().globalData.loginInfo.is_login) {
+    return alert('用户未登录')
+  }
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'pay/getPaymentWx',
+    data: {
+      order_id,
+      user_id,
+      pay_money
+    },
+    success, error
   })
+
 }
 
-
+/*
 // 获取分组列表
 export function getSellersByCategory(options) {
   var {

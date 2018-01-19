@@ -40,12 +40,12 @@ Page({
       loading: true
     })
     wx.showNavigationBarLoading()
+    console.log("111id:" + id)
     getQuasiOrderInfo({
       quasi_order_id: id,
       success(data) {
         var a = [];
         a = JSON.parse(data)
-        a.cut_money_total = parseInt(a.cut_money_total) + parseInt(a.cut_money) + parseInt(a.coupon_money)
         that.setData({
           info: a,
           loading: false
@@ -140,9 +140,9 @@ Page({
       remark: content,
       quasi_order_id: id,
       success(data) {
-        var order_id = data['order']['order_id']
         getPayment({
-          order_id,
+          order_id:id,
+          pay_money: info.pay_price,
           success(data) {
             requestPayment({
               data,
@@ -150,13 +150,17 @@ Page({
                 that.setData({
                   loading: false
                 })
-                wx.switchTab({
-                  url: '/pages/order/list',
+                console.log("requestPayment success:")
+                wx.navigateTo({
+                  url: `/pages/order/list`
+                })
+                /*wx.switchTab({
+                  url: '/pages/shop/show',
                   success(res) {
                     var {callback} = getCurrentPage()
                     callback && callback()
                   }
-                })
+                })*/
               }
             })
           },

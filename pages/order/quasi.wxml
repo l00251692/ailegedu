@@ -17,7 +17,7 @@
   <view class="weui-cells">
     <view class="weui-cell weui-cell_access">
       <view class="weui-cell__bd">支付方式</view>
-      <view class="">在线支付</view>
+      <view class="">微信支付</view>
     </view>
 
   <!--*<navigator url="/pages/mine/coupon?id={{info.user_coupon_id}}&callback=callbackCoupon" wx:if="{{info.user_coupon_id}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
@@ -58,7 +58,7 @@
       <view wx:if="{{info.cut_money > 0}}" class="quasi-goods__list">
         <view class="quasi-goods__item">
           <view class="quasi-goods__item-name quasi-goods__item-name_grey">
-          <image class="quasi-goods__item-name-icon" src="/images/icon_jian.png"></image>商城优惠
+          <image class="quasi-goods__item-name-icon" src="/images/icon_jian.png"></image>优惠
           </view>
           <view class="quasi-goods__item-num"></view>
           <view class="quasi-goods__item-price">-¥{{info.cut_money}}</view>

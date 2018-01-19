@@ -5,6 +5,7 @@
     "pages/shop/address",
     "pages/order/quasi",
     "pages/order/show",
+    "pages/order/list",
     "pages/mine/mine",
     "pages/index/index",
     "pages/logs/logs"

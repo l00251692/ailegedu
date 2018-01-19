@@ -467,9 +467,7 @@ Page({
         })
         return
       }
-      console.log("enter1");
-      console.log("loginInfo" + JSON.stringify(getApp().globalData.loginInfo));
-      console.log("userInfo" + JSON.stringify(getApp().globalData.userInfo));
+      
       
       addQuasiOrder({
         seller_id, goods,
@@ -478,8 +476,10 @@ Page({
           that.setData({
             loading: false
           })
+          var a = [];
+          a = JSON.parse(data)
           wx.navigateTo({
-            url: `/pages/order/quasi?id=${data.quasi_order_id}`
+            url: `/pages/order/quasi?id=${a.quasi_order_id}`
           })
         },
         error() {

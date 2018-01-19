@@ -357,6 +357,7 @@ export function requestPayment(options) {
   var {
     data, success, error, complete
   } = options
+  console.log("payment:" + data)
   wx.requestPayment(Object.assign({
     complete(res) {
       if (res.errMsg == 'requestPayment:ok') {
@@ -370,8 +371,9 @@ export function requestPayment(options) {
           complete && complete()
         })
       } else {
-        alert('支付失败', function () {
-          error && error()
+        alert('支付失败按照成功继续', function () {
+          success && success()
+          //error && error()
           complete && complete()
         })
       }
