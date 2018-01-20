@@ -451,28 +451,24 @@ export function cancelOrder(options) {
 
   })
 }
-
+*/
 // 获取订单列表
 export function getOrders(options) {
   var {
     page,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=Order&a=getOrders',
-      data: {
-        user_id, user_token,
-        page
-      },
-      success, error
-    })
 
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'order/getOrdersMineWx',
+    data: {
+      user_id,
+      page
+    },
+    success, error
   })
+
 }
 
 // 获取订单详情
@@ -481,23 +477,18 @@ export function getOrderInfo(options) {
     order_id,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=Order&a=getOrderInfo',
-      data: {
-        user_id, user_token,
-        order_id
-      },
-      success, error
-    })
-
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'order/getOrdersInfoWx',
+    data: {
+      user_id,
+      order_id
+    },
+    success, error
   })
-}
 
+}
+/*
 // 订单评论
 export function reviewsOrder(options) {
   var {

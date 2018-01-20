@@ -1,6 +1,6 @@
 'use strict';
 //import timeago from './timeago.min'
-//import dateFormat from './dateformat'
+import dateFormat from './dateformat'
 //import distance from './distance'
 import QQMapWX from './qqmap-wx-jssdk.min'
 import {

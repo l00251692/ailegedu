@@ -1,6 +1,7 @@
 <!--pages/order/list.wxml-->
 <import src="/templates/load-more.wxml" />
-<view wx:if="{{loginInfo.is_login}}">
+<!--<view wx:if="{{loginInfo.is_login}}">-->
+<view >
   <view class="order-list">
     <view class="order-item" wx:for="{{list}}" wx:key="order_id">
       <view class="order-item__hd">
@@ -24,10 +25,10 @@
   </view>
   <template is="load-more" data="{{hasMore: hasMore, loading: loading}}"></template>
 </view>
-<view wx:elif="{{loginInfo}}" class="order-logout">
+<!--<view wx:elif="{{loginInfo}}" class="order-logout">
   <image class="order-logout__bg" src="/images/order-logout@2x.png"></image>
   <view class="order-logout__tip">
     您还没有登录, 登录后查看订单
   </view>
   <navigator url="/pages/login/login" class="weui-btn weui-btn_primary weui-btn_mini" hover-class="button-hover">登录</navigator>
-</view>
+</view>-->

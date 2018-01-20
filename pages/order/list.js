@@ -17,17 +17,13 @@ var initData = {
 
 Page({
   data: {
-    ORDER_STATES,
+    ORDER_STATES  
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     console.log('onLoad')
     var that = this
-    
-    that.setData({
-      loginInfo: getApp().globalData.loginInfo
-    })
-    if (loginInfo.is_login) {
+    if (getApp().globalData.loginInfo.is_login) {
       that.initData()
     }
   },
@@ -64,6 +60,7 @@ Page({
       success(data) {
         var {list} = that.data
         var {list: list2, count, page} = data
+        console.log("orderlist:"+ JSON.stringify(data))
         list2 = list2.map(item => {
           item['add_time_format'] = datetimeFormat(item.add_time)
           return item
@@ -71,7 +68,7 @@ Page({
         that.setData({
           loading: false,
           list: list ? list.concat(list2) : list2,
-          hasMore: count == 10,
+          hasMore: count == 5,
           page: page + 1
         })
 
@@ -116,16 +113,14 @@ Page({
   },
   onReachBottom(e) {
     var {
-      loginInfo: {is_login},
       hasMore, loading
     } = this.data
-    if (is_login && hasMore && !loading) {
+    if (getApp().globalData.loginInfo.is_login && hasMore && !loading) {
       this.loadData()
     }
   },
   onPullDownRefresh() {
-    var {loginInfo: {is_login}} = this.data
-    if (is_login) {
+    if (getApp().globalData.loginInfo.is_login) {
       wx.showNavigationBarLoading()
       this.initData(() => {
         wx.hideNavigationBarLoading()

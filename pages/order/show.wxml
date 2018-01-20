@@ -2,7 +2,7 @@
 <view class="order-show-tab tab">
   <view class="tab__navbar">
     <view bindtap="navChange" id="{{index}}" wx:for="{{tabNavs}}" wx:key="{{index}}" class="tab__navbar-item {{index == activeNavIndex?  'tab__navbar-item_active': ''}} ">
-      订单状态
+      {{tabNavs[index]}}
     </view>
     <view bindtap="onPhoneTap" class="phone">
       <image class="phone__icon" src="/images/chat_phone_normal.png"></image>
@@ -37,14 +37,14 @@
             {{info.seller_name}}
           </view>
           <view class=" weui-flex__item"></view>
-          <view class="grey-color">爱跑腿专送</view>
+          <view class="grey-color">{{info.deliver}}</view>
         </view>
         <view class="quasi-goods__bd">
           <view class="quasi-goods__list">
             <view wx:for="{{info.goods}}" wx:key="{{index}}" class="quasi-goods__item">
               <view class="quasi-goods__item-name">{{item.goods_name}}</view>
               <view class="quasi-goods__item-num">x{{item.num}}</view>
-              <view class="quasi-goods__item-price">¥{{item.price_sum}}</view>
+              <view class="quasi-goods__item-price">¥{{item.prcie_sum}}</view>
             </view>
           </view>
           <view class="quasi-goods__list">
@@ -115,7 +115,7 @@
             配送服务
           </view>
           <view class="weui-cell__bd">
-            爱跑腿专送
+           {{info.deliver}}
           </view>
         </view>
         <view class="weui-cell">
@@ -150,7 +150,7 @@
             支付方式
           </view>
           <view class="weui-cell__bd">
-            在线支付
+            微信支付
           </view>
         </view>
       </view>

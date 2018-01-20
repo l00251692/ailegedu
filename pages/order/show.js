@@ -76,13 +76,19 @@ Page({
     var that = this
     var order_id = this.id
     wx.showNavigationBarLoading()
+    console.log("hhhhorder_id:" + order_id)
     getOrderInfo({
       order_id,
       success(data) {
+        console.log("SUCCESS:"+JSON.stringify(data))
         data['add_time_format'] = datetimeFormat(data.add_time)
         data['cut_money_total'] = +data.cut_money + +data.coupon_money
         data['flow'] = data.flow.map(item => {
           item['time_format'] = datetimeFormat(item.time)
+          return item
+        })
+        data['goods'] = data.goods.map(item => {
+          item['prcie_sum'] = parseInt(item.num) * (parseInt(item.price) + parseInt(item.packing_fee))
           return item
         })
         that.setData({
