@@ -3,12 +3,15 @@
 
 <!--index.wxml-->
 <view class="topbar">
-  <navigator url="./address?callback=callback" class="address trangle">
+  <!--<navigator url="./address?callback=callback" class="address trangle">
     <image class="address__icon" src="/images/location.png"></image>{{currentAddress ? currentAddress.title : '定位中...'}}
-  </navigator>
-  <navigator url="./search" class="search">
+  </navigator>-->
+  <view  class="address">
+    <image class="address__icon" src="/images/location.png"></image>{{currentAddress ? currentAddress.title : '定位中...'}}
+  </view>
+  <!--<navigator url="./search" class="search">
     <icon type="search" size="20" /> 搜索
-  </navigator>
+  </navigator>-->
 </view>
 
 <view class="weui-panel weui-panel_access">

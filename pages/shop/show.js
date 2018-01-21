@@ -443,11 +443,10 @@ Page({
     }
   },
   onAddQuasiOrder(e) {
-    console.log("enter0");
     var that = this
     var {
       info: {seller_id},
-      order: {goods},
+      order: { goods, totalPackingFee },
       loading
     } = this.data
     if (loading) {
@@ -470,7 +469,7 @@ Page({
       
       
       addQuasiOrder({
-        seller_id, goods,
+        seller_id, goods, totalPackingFee,
         success(data) {
           console.log("here:"+ data)
           that.setData({

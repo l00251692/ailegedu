@@ -6,6 +6,8 @@
     "pages/order/quasi",
     "pages/order/show",
     "pages/order/list",
+    "pages/address/select",
+    "pages/address/add",
     "pages/mine/mine",
     "pages/index/index",
     "pages/logs/logs"

@@ -95,6 +95,7 @@ Page({
           item['distanceFormat'] = (item.distance / 1000).toFixed(2)
           return item
         })
+        console.log("shopList:" + shopList);
         console.log(list);
         that.setData({
           shopList: shopList ? shopList.concat(list) : list,

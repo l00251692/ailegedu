@@ -163,13 +163,13 @@ export function getUserAddrs(options) {
     return alert('用户未登录')
   }
   var { user_id } = getApp().globalData.loginInfo.userInfo
-  /*fetch({
-    url: 'user/getUserAddressWx',
+  fetch({
+    url: 'receiver/getUserAddressWx',
     data: {
-      user_id, user_token
+      user_id,
     },
     success, error
-  })*/
+  })
 
 
 }
@@ -180,23 +180,18 @@ export function getUserAddr(options) {
     success, error
   } = options
 
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
+
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+    /*fetch({
       url: 'index.php?m=Mall&c=User&a=getUserAddr',
       data: {
         user_id, user_token,
         addr_id
       },
       success, error
-    })
-
-  })
+    })*/
 }
-/*
+
 // 新增用户地址
 export function addUserAddr(options) {
   if (options.addr_id) {
@@ -206,31 +201,26 @@ export function addUserAddr(options) {
     receiver, phone, detail, address,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    var gps = address.gps
-    if (!gps) {
-      var location = coordFormat(address.location)
-      gps = `${location.longitude},${location.latitude}`
-    }
-    fetch({
-      url: 'index.php?m=Mall&c=User&a=addUserAddr',
-      data: {
-        user_id, user_token,
-        receiver, phone, detail,
-        gps,
-        addr: address.title,
-        city_id: address.city_id,
-        city_name: address.city,
-        district_id: address.district_id,
-        district_name: address.district,
-      },
-      success, error
-    })
-
+  
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  var gps = address.gps
+  if (!gps) {
+    var location = coordFormat(address.location)
+    gps = `${location.longitude},${location.latitude}`
+  }
+  fetch({
+    url: 'receiver/addUserAddrWx',
+    data: {
+      user_id,
+      receiver, phone, detail,
+      gps,
+      addr: address.title,
+      city_id: address.city_id,
+      city_name: address.city,
+      district_id: address.district_id,
+      district_name: address.district,
+    },
+    success, error
   })
 }
 
@@ -241,18 +231,15 @@ export function updateUserAddr(options) {
     addr_id,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
+
+    var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
     var gps = address.gps
     if (!gps) {
       var location = coordFormat(address.location)
       gps = `${location.longitude},${location.latitude}`
     }
     fetch({
-      url: 'index.php?m=Mall&c=User&a=updateUserAddr',
+      url: 'receiver/updateUserAddrWx',
       data: {
         user_id, user_token,
         receiver, phone, detail,
@@ -265,8 +252,6 @@ export function updateUserAddr(options) {
       },
       success, error
     })
-
-  })
 }
 
 // 删除地址
@@ -275,67 +260,44 @@ export function deleteUserAddr(options) {
     addr_id,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=User&a=deleteUserAddr',
-      data: {
-        user_id, user_token,
-        addr_id
-      },
-      success, error
-    })
 
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'receiver/deleteUserAddrWx',
+    data: {
+      user_id,
+      addr_id
+    },
+    success, error
   })
-}*/
+}
 
  //添加准订单
 export function addQuasiOrder(options) {
   const {
     seller_id,
+    totalPackingFee,
     goods,
     success, error
   } = options
 
-  getApp().getCurrentAddress(address => {
-    var data = {
-      seller_id,
-      goods: JSON.stringify(goods)
-    }
-  
-    if (address.addr_id) {
-      data = Object.assign({
-        addr_id: address.addr_id
-      }, data)
-    } else {
-      var location = address.location
-      var addresstr = address.address
-      data = Object.assign({
-        /*city_id: address.city_id,
-        city_name: address.city,
-        district_id: address.district_id,
-        district_name: address.district,
-        longitude: location.longitude,
-        latitude: location.latitude*/
-        addr_id: addresstr
-      }, data)
-    }
-    
-    if(!getApp().globalData.loginInfo.is_login){
-      return alert('用户未登录')
-    }
-        
-    var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
-    fetch({
-        url: 'order/createOrderWx',
-        data: Object.assign({
-          user_id,
-        }, data),
-        success, error
-    })
+  var data = {
+    seller_id,
+    totalPackingFee,
+    goods: JSON.stringify(goods)
+  }
+ 
+  if(!getApp().globalData.loginInfo.is_login){
+    return alert('用户未登录')
+  }
+      
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+      url: 'order/createOrderWx',
+      data: Object.assign({
+        user_id,
+      }, data),
+      success, error
   })
 }
 
