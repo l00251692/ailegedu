@@ -43,6 +43,7 @@
           <view class="quasi-goods__list">
             <view wx:for="{{info.goods}}" wx:key="{{index}}" class="quasi-goods__item">
               <view class="quasi-goods__item-name">{{item.goods_name}}</view>
+              <view class="quasi-goods__item-property">{{item.select_property}}</view>
               <view class="quasi-goods__item-num">x{{item.num}}</view>
               <view class="quasi-goods__item-price">¥{{item.prcie_sum}}</view>
             </view>

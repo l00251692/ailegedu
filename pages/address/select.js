@@ -73,6 +73,7 @@ Page({
     })
   },
   callback() {
+    console.log("callback ener")
     this.loadData()
   },
   onDelete(e) {

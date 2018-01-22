@@ -48,7 +48,7 @@
 }
 
 .quasi-goods__item-name {
-  flex: 2;
+  flex: 3;
 }
 
 .quasi-goods__item-name-icon {
@@ -60,6 +60,12 @@
 
 .quasi-goods__item-name_grey {
   color: #999;
+}
+.quasi-goods__item-property{
+  flex: 4;
+  color: #999;
+  font-size:15px;
+  margin-top:2px;
 }
 
 .quasi-goods__item-num {

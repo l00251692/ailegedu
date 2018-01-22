@@ -39,6 +39,7 @@
       <view class="quasi-goods__list">
         <view wx:for="{{info.goods}}" wx:key="{{index}}" class="quasi-goods__item">
           <view class="quasi-goods__item-name">{{item.goods_name}}</view>
+          <view class="quasi-goods__item-property">{{item.select_property}}</view>
           <view class="quasi-goods__item-num">x{{item.num}}</view>
           <view class="quasi-goods__item-price">¥{{item.price_sum}}</view>
         </view>
@@ -82,7 +83,7 @@
     <navigator url="./content?callback=callbackContent&content={{content}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
       <view class="weui-cell__bd weui-cell__bd_content">备注</view>
       <view>{{content}}</view>
-      <view class="weui-cell__ft weui-cell__ft_in-access">{{content ? '' : '口味, 偏好等要求'}}</view>
+      <view class="weui-cell__ft weui-cell__ft_in-access">{{content ? '' : '其他要求'}}</view>
     </navigator>
   </view>
 

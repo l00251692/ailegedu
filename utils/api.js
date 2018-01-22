@@ -164,9 +164,9 @@ export function getUserAddrs(options) {
   }
   var { user_id } = getApp().globalData.loginInfo.userInfo
   fetch({
-    url: 'receiver/getUserAddressWx',
+    url: 'receiver/getUserAddrsWx',
     data: {
-      user_id,
+      user_id
     },
     success, error
   })
@@ -180,16 +180,19 @@ export function getUserAddr(options) {
     success, error
   } = options
 
+  if (!getApp().globalData.loginInfo.is_login) {
+    return alert('用户未登录')
+  }
 
   var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
-    /*fetch({
-      url: 'index.php?m=Mall&c=User&a=getUserAddr',
-      data: {
-        user_id, user_token,
-        addr_id
-      },
-      success, error
-    })*/
+  fetch({
+    url: 'receiver/getUserAddrWx',
+    data: {
+      user_id,
+      addr_id
+    },
+    success, error
+  })
 }
 
 // 新增用户地址
@@ -322,29 +325,25 @@ export function getQuasiOrderInfo(options) {
     success, error
   })
 }
-/*
+
 // 更新准订单地址
 export function updateOrderAddr(options) {
   var {
     quasi_order_id, addr_id,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=Order&a=updateOrderAddr',
-      data: {
-        user_id, user_token,
-        quasi_order_id, addr_id
-      },
-      success, error
-    })
-
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'order/updateOrderAddrWx',
+    data: {
+      user_id,
+      quasi_order_id, addr_id
+    },
+    success, error
   })
+
 }
+/*
 // 更新准订单红包
 export function updateOrderCoupon(options) {
   var {
@@ -371,7 +370,7 @@ export function updateOrderCoupon(options) {
 // 添加订单
 export function addOrder(options) {
   var {
-    quasi_order_id, remark,
+    quasi_order_id, remark, addr_id,
     success, error
   } = options
   
@@ -383,8 +382,9 @@ export function addOrder(options) {
   fetch({
     url: 'order/submitOrder',
     data: {
-      user_id,
-      quasi_order_id, remark
+      user_id, 
+      quasi_order_id, addr_id,
+      remark
     },
     success, error
   })

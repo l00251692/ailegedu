@@ -40,12 +40,12 @@ Page({
       loading: true
     })
     wx.showNavigationBarLoading()
-    console.log("111id:" + id)
     getQuasiOrderInfo({
       quasi_order_id: id,
       success(data) {
         var a = [];
         a = JSON.parse(data)
+        console.log("getQuasiOrderInfo:" + data)
         that.setData({
           info: a,
           loading: false
@@ -58,6 +58,7 @@ Page({
     })
     
   },
+  //用户选择地址时修改地址信息回调函数
   callbackAddress(addr_id) {
     var that = this
     var {id} = this
@@ -73,9 +74,8 @@ Page({
       quasi_order_id: id,
       addr_id,
       success(data) {
-        data['cut_money_total'] = +data.cut_money + +data.coupon_money
         that.setData({
-          info: data,
+          info: JSON.parse(data),
           loading: false
         })
         wx.hideNavigationBarLoading()
@@ -139,6 +139,7 @@ Page({
     addOrder({
       remark: content,
       quasi_order_id: id,
+      addr_id: info.receiver_addr_id,
       success(data) {
         getPayment({
           order_id:id,

@@ -16,9 +16,12 @@ Page({
     this.id = options.id
     this.callback = options.callback || 'callback'
     this.initValidate()
+    console.log("222")
     if (this.id) {
+      console.log("333")
       this.loadData()
     } else {
+      console.log("444")
       this.initAddress()
     }
   },
@@ -96,6 +99,8 @@ Page({
     getUserAddr({
       addr_id,
       success(data) {
+        console.log("get user addr:" + data)
+        data = JSON.parse(data)
         that.setData({
           receiver: data.receiver,
           phone: data.phone,
