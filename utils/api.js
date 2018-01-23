@@ -12,7 +12,6 @@ export function getSellers(options) {
   page = page || 0
   getApp().getCurrentAddress(address => {
     var location = address.location
-    console.log(location)
     fetch({
       url: 'campus/getAllCampusWx',
       data: {
