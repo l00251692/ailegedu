@@ -127,6 +127,7 @@ Page({
     var that = this
     var {id} = this
     var {loading, content, info} = this.data
+    console.log("onAddOrder" + content)
     if (loading) {
       return
     }

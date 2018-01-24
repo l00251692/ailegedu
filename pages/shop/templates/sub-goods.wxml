@@ -42,9 +42,12 @@
       </view>
 
       <view class="sub-goods__ft weui-flex">
-        <view class="weui-flex__item">
+        <view class="weui-flex__item" wx:if="{{sub_goods && sub_goods.length > 0}}">
           <text class="primary-color sub-goods__price">¥{{sub_goods[activeIndex]['price']}}</text>
           <text class="text-small">({{sub_goods[activeIndex]['sub_name']}})</text>
+        </view>
+        <view class="weui-flex__item" wx:else>
+          <text class="primary-color sub-goods__price">¥{{price}}</text>
         </view>
         <!--<template is="goods-actions" wx:if="{{subNums[sub_goods[activeIndex]['sub_id']] > 0}}"  data="{{goods_id, sub_id: sub_goods[activeIndex]['sub_id'], num: subNums[sub_goods[activeIndex]['sub_id']], tmpf:tmp0,tmps:tmp1,tmpt:tmp2}}"></template>-->
         <view data-goods-id="{{goods_id}}" data-sub-id="{{sub_goods[activeIndex]['sub_id']}}" data-tmpf="{{tmp0}}" data-tmps="{{tmp1}}" data-tmpt="{{tmp2}}" data-select-property="{{selectProperty}}" bindtap="increase" class="sub-goods__add-cart">

@@ -6,6 +6,7 @@
     "pages/order/quasi",
     "pages/order/show",
     "pages/order/list",
+    "pages/order/content",
     "pages/address/select",
     "pages/address/add",
     "pages/mine/mine",

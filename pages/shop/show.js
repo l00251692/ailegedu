@@ -232,9 +232,6 @@ Page({
         selectPropertyTmp = selectPropertyTmp + "," + goods.property[2].property_value[tmpt].value_name;
       }
     }
-    
-    console.log(selectPropertyTmp);
-    
     var {goods_id, goods_name} = goods
     if (subId) {
       goods = goods.sub_goods[subId];
@@ -259,7 +256,7 @@ Page({
       order
     })
 
-    if (subId) {
+    if (subId || selectPropertyTmp) {
       this.setData({
         showSubGoods: false,
         activeSubGoods: Object.assign(this.data.activeSubGoods, {
@@ -369,7 +366,7 @@ Page({
     {
       if (goods_map[i].goods_id == goodsId)
       {
-        var { goods_id, goods_name, property, sub_goods } = goods_map[i];
+        var { goods_id, goods_name, property, sub_goods, price } = goods_map[i];
         break;
       }
     }
@@ -378,6 +375,7 @@ Page({
       showSubGoods: true,
       activeSubGoods: {
         goods_name, goods_id,
+        price,
         property,
         sub_goods,
         activeIndex: 0,
