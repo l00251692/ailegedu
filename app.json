@@ -7,8 +7,10 @@
     "pages/order/show",
     "pages/order/list",
     "pages/order/content",
+    "pages/order/review",
     "pages/address/select",
     "pages/address/add",
+    "pages/address/list",
     "pages/mine/mine",
     "pages/index/index",
     "pages/logs/logs"

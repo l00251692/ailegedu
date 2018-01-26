@@ -1,7 +1,7 @@
 // pages/address/list.js
 import {
   getUserAddrs, deleteUserAddr
-} from '../../utils/apis'
+} from '../../utils/api'
 import {
   confirm
 } from '../../utils/util'
@@ -43,7 +43,7 @@ Page({
     getUserAddrs({
       success(data) {
         that.setData({
-          list: data,
+          list: JSON.parse(data),
           loading: false
         })
         wx.hideNavigationBarLoading()

@@ -51,7 +51,6 @@ Page({
           list: JSON.parse(data),
           loading: false
         })
-        console.log("get111:" + data)
         wx.hideNavigationBarLoading()
         cb && cb()
         if(data.length === 0) {

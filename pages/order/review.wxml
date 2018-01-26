@@ -3,11 +3,11 @@
 <view class="review">
   <view class="review-box">
     <view class="review-box__hd">
-      <view class="">爱跑腿专送</view>
-      <view class="text-small">
+      <view class="">{{info.deliver}}</view>
+      <!--<view class="text-small">
         {{reach_date}} {{reach_time}} 左右到达
-        <!--<picker bindchange="onChangeTime" mode="time" value="{{reach_time}}" class="correct trangle">更正</picker>-->
-      </view>
+        <picker bindchange="onChangeTime" mode="time" value="{{reach_time}}" class="correct trangle">更正</picker>
+      </view>-->
     </view>
     <view class="review-box__bd">
       <view class="">{{RATE_LABELS[service]?RATE_LABELS[service]: '为配送打分'}}</view>
@@ -27,7 +27,7 @@
       </view>
       <view class="review-content">
         <textarea bindinput="onContentInput" class="review-content__textarea" placeholder="写下您对配送和商家的评价吧~" />
-        <view wx:if="{{content.length < limitLength}}" class="review-content__tips">还需输入{{limitLength - content.length}}个字</view>
+        <!--<view wx:if="{{content.length < limitLength}}" class="review-content__tips">还需输入{{limitLength - content.length}}个字</view>-->
       </view>
     </view>
   </view>

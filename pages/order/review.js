@@ -1,7 +1,7 @@
 // pages/order/review.js
 import {
   getOrderInfo, reviewsOrder
-} from '../../utils/apis'
+} from '../../utils/api'
 
 import dateFormat from '../../utils/dateformat'
 
@@ -109,9 +109,9 @@ Page({
     getOrderInfo({
       order_id,
       success(data) {
-        var [reach_date, reach_time] = datetimeFormat(data.receive_time).split(' ')
+        //var [reach_date, reach_time] = datetimeFormat(data.receive_time).split(' ')
         that.setData({
-          reach_date, reach_time,
+          //reach_date, reach_time,
           info: data,
           loading: false,
         })
@@ -153,7 +153,7 @@ Page({
     var that = this
     var {id: order_id} = this
     var {
-      limitLength,
+      //limitLength,
       service, quality, content,
       info: {receive_time}
     } = this.data
@@ -165,9 +165,11 @@ Page({
       return alert('请为商家打分')
     }
 
-    if (content.length < limitLength) {
+    console.log("service" + service)
+
+    /*if (content.length < limitLength) {
       return alert(`评论内容不能小于${limitLength}个字`)
-    }
+    }*/
 
     // var reach_date = dateFormat(new Date(receive_time * 1000), "yyyy-mm-dd")
 
