@@ -1,54 +1,73 @@
-//index.js
-//获取应用实例
-const app = getApp()
+      import {
+  getBannerInfo,getProjectList
+} from '../../utils/api'
+
+var app = getApp();
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    page: 0,
+    hasMore: true,
+    loading: false
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+
+    onLoad: function () {
+
+        wx.getLocation({
+            success: function (res) {
+                console.log(res);
+            },
+        })        
+        this.getBanner();
+        this.getProjectList();  
+    },
+    onShow: function () {
+      // 页面显示
+    },
+    search: function (e) {
+
+        wx.navigateTo({
+            url: '/pages/activity/search/index'
+        });
+
+    },
+    getBanner:function(e) {
+        var that = this;
+        getBannerInfo(
+        {
+            success(data) {
+              that.setData({
+                banner_arr: JSON.parse(data)
+              })
+            }
+        }) 
+        console.log("111:" + this.banner_arr)      
+    },
+    getProjectList: function (e) {
+      var that = this;
+      var { page } = this.data
+
+      getProjectList(
+      {
+          page,
+          success(data) {
+            console.log("getProjectList:" + data)
+            var list  = JSON.parse(data)
+            var { projectList} = that.data
+            that.setData({
+              projectList: projectList ? projectList.concat(list) : list,
+              page: page + 1,
+              hasMore: data.count == 10,
+              loading: false
+            })
+          }
       })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
+    },
+    create_project:function(e)
+    {
+      wx.navigateTo({
+        url: '/pages/project/create'
+      });
     }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
+
 })

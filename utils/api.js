@@ -580,3 +580,37 @@ export function getShareUserList(options) {
   })
 }
 */
+
+
+// 获取banner信息
+export function getBannerInfo(options) {
+  var {
+    success
+  } = options
+
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'project/getBannerInfoWx',
+    data: {
+      user_id,
+    },
+    success
+  })
+
+}
+//获取发布的项目列表
+export function getProjectList(options) {
+  var {
+    page,success
+  } = options
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'project/getProjectListWx',
+    data: {
+      user_id,
+      page
+    },
+    success
+  })
+
+}

@@ -1,0 +1,116 @@
+
+<!--pages/shop/show.wxml-->
+<view class="shop-show">
+  <!-- <view class="shop-info weui-panel weui-panel_access">
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_appmsg">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb shop-info__pic" src="{{info.pic_url || '/images/default-shop.png'}}" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">{{info.seller_name}}</view>
+          <view class="weui-media-box__desc shop-info__desc">
+            <view>
+              {{info.min_price}}元起送 | 配送费{{info.delivery_fee}} | {{info.reach_time}}分钟
+            </view>
+            <view wx:if="{{info.notice}}">
+              商家公告: {{info.notice}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{info.promotion && info.promotion.length > 0}}" class="promotion">
+        <swiper class="promotion-swiper" vertical="true" autoplay="true" interval="5000">
+          <swiper-item wx:key="index" wx:for="{{info.promotion}}" class="promotion-item">
+            <image class="promotion-item__icon" src="{{item.pic_url}}"></image>
+            <text>{{item.info}}</text>
+          </swiper-item>
+        </swiper>
+        <view class="promotion-total">
+          {{info.promotion.length}}个活动
+        </view>
+      </view>
+    </view>
+  </view> -->
+  <view class="banner">
+       <view class="banner-img">
+          <image src="http://localhost/JiMuImage/banner/banner1.png" />
+       </view>
+        <text class="banner-img--license">关注点赞</text>
+        <text class="banner-title">关注这个是什么主题</text>
+    </view>
+  <view class="shop-content">
+    <view class=" weui-tab weui-tab_shop">
+      <view class="weui-navbar">
+        <view wx:for="{{tabs}}" wx:key="*this" id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+          <view class="weui-navbar__title">{{item}}</view>
+        </view>
+      </view>
+      <swiper bindchange="swiperChange" current="{{activeIndex}}" autoplay="{{false}}" class="weui-tab__panel">
+      <swiper-item class="weui-tab__content weui-tab__content_info">
+          <view class="head">
+                <view class="left">
+                    <image class="img" src="https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epuibz5Qwf2IYwnGBLwbWsn8aRHXcrYKvQoVqS5Ls3fnksQfiaQMz9nJLIwJLzpBFoIPMYDKLQdDaPg/0"></image>
+                    <text class="username">xxx。definded</text>
+                    <view class="time"><text >update:2018-01-22 21:30:20</text></view>
+                </view>
+                <view class="right">
+                    <text class="num">点击关注</text>
+                </view>
+          </view>
+          <view class="info_text"><text class="info_text_area">box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
+例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。
+box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
+例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。
+box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
+例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。
+box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
+例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。
+box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
+例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。</text></view>
+        </swiper-item>
+        <swiper-item class="weui-tab__content weui-tab__content_review">
+          <scroll-view class="scroll-view_review" enable-back-to-top="true" bindscrolltolower="onScrolltolower" scroll-y="true">
+            <!-- <view class="shop-rate">
+              <view class="shop-rate__overall">
+                <view class="shop-rate__overall-num">{{info.overall}}</view>
+                <view class="classname">综合评分</view>
+              </view>
+              <view class="shop-rate__score">
+                <view class="shop-rate__score-item">
+                  <view class="shop-rate__score-item-label">商家评分</view>
+                  <template is="star-rate" data="{{value: info.quality}}"></template>
+                  <view class="shop-rate__score-item-num">{{info.quality}}</view>
+                </view>
+                <view class="shop-rate__score-item">
+                  <view class="shop-rate__score-item-label">配送评分</view>
+                  <template is="star-rate" data="{{value: info.service}}"></template>
+                  <view class="shop-rate__score-item-num">{{info.service}}</view>
+                </view>
+              </view>
+            </view> -->
+            <view class="shop-review">
+              <view class="review-list">
+                <view wx:for="{{review.list}}" wx:key="{{index}}" class="review-item">
+                  <view class="">
+                    <image class="review-item__head-img" src="{{item.head_pic || '/images/default-image.png'}}"></image>
+                  </view>
+                  <view class="review-item__content">
+                    <view class="review-item__hd">
+                      <view class="review-item__add-time">{{item.timeFormat}}</view>
+                      <view class="review-item__nick">{{item.nick}}</view>
+                    </view>
+                    <view class="review-item__bd">
+                      {{item.content}}
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <template is="load-more" data="{{loading: review.loading, hasMore: review.hasMore}}"></template>
+          </scroll-view>
+        </swiper-item>  
+      </swiper>
+    </view>
+  </view>
+</view>

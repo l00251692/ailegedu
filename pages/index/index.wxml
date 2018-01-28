@@ -1,13 +1,50 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class="parent">
+    <view class="search_box">
+        <view class="search">
+            <image src="/images/index/search.png" bindtap='search'></image>
+            <form bindsubmit="search">
+                <input type="text" name="search_val" placeholder='搜索'></input>
+            </form>
+        </view>
+    </view>
+    <view class="content">
+        <!--banner  -->
+        <view class="banner">
+            <swiper autoplay="true" interval="2000" duration="1000" circular="true">
+                <block wx:for="{{banner_arr}}" wx:key="{{banner_id}}">
+                    <swiper-item>
+                       <image src="{{item.carousel_img}}" class="slide-image" mode="aspectFill" />
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+        <!--list  -->
+        <view class="list_wrap">
+            <!--<text class="title">活动</text>-->
+            <view class="list"  wx:for="{{projectList}}" wx:key="{{project_id}}">
+                <navigator class="item" url="/pages/project/details/detail?id={{item.project_id}}">
+                    <view class="top">
+                        <text class="item_title">{{item.item_title}}</text>
+                        <text class="subtitle">{{item.subtitle}}</text>
+                    </view>
+                    <view class="pro_img">
+                        <image src="{{item.project_head}}" mode="aspectFill"></image>
+                        <text class="tip">{{item.create_time}}</text>
+                    </view>
+                    <view class="foot">
+                        <view class="left">
+                            <image class="img" src="{{item.create_userHead}}"></image>
+                            <text class="activity_title">{{item.create_userName}}</text>
+                        </view>
+                        <view class="right">
+                            <text class="num">关注:<text>{{item.interest}}人</text></text>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <view>
+      <image src="https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epuibz5Qwf2IYwnGBLwbWsn8aRHXcrYKvQoVqS5Ls3fnksQfiaQMz9nJLIwJLzpBFoIPMYDKLQdDaPg/0" class="img-plus-style"  bindtap="create_project"></image> 
+    </view>
 </view>
