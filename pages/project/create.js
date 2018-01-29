@@ -3,6 +3,7 @@ const dateTimePicker = require('../../utils/dateTimePicker');
 Page({
 
     data:{
+        tempFilePaths:"/images/default-project-head.png",
         date: '2018-10-01',
         time: '12:00',
         dateTimeArray: null,
@@ -77,5 +78,32 @@ Page({
             dateTimeArray1: dateArr,
             dateTime1: arr
         });
+    },
+
+    chooseImage: function () {
+      var that = this;
+      wx.chooseImage({
+        count: 1, // 默认9 
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
+        sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有 
+        success: function (res) {
+          that.setData({
+            tempFilePaths: res.tempFilePaths
+          }) 
+          var tempFilePaths1 = res.tempFilePaths
+          wx.uploadFile({
+            url: 'http://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址 
+            filePath: tempFilePaths1[0],
+            name: 'file',
+            formData: {
+              'user': 'test'
+            },
+            success: function (res) {
+              var data = res.data
+              //do something 
+            }
+          })
+        }
+      })
     }
 })

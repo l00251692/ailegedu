@@ -1,5 +1,6 @@
 .parent{
-    padding-bottom:30rpx;
+    height:100%;
+    overflow:hidden;
 }
 .top{
     position:relative;
@@ -32,69 +33,70 @@
 
 /*content  */
 .content{
-    padding:0 0 0 26rpx;
+    padding:0 0 0 0;
+    height:auto;
+    margin-bottom:80rpx;
+    overflow:hidden;
 }
-.form_area .item_form label{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
-    padding-right:40rpx;
-    border-bottom:1px solid #e8e8e8;
-} 
-.form_area .item_form .date{
-    padding-right:40rpx;
-    /* padding-right:110rpx; */
-    position:relative;
+
+.title{
+  position:relative;
+  display:flex;
+  margin-left:20rpx;
+  margin-right:20rpx;
+  border-bottom:2rpx solid #e8e8e8;
 }
-.form_area .item_form .date picker{
-    padding-right:70rpx;
-    position:relative;
-}
-.form_area .item_form .date image{
-    display:block;
-    width:36rpx;
-    height:38rpx;
-    position:absolute;
-    top:50%;
-    margin-top:-19rpx;
-    right:0;
-}
-.form_area .item_form label .input_inf{
-    flex:2;
+
+.input_inf{
+    flex:20%;
     font:28rpx/120rpx '微软雅黑';
     color:#2a2a2a;
     font-weight:bold;
 }
-.form_area .item_form label input , .form_area .item_form label picker{
-    display:block;
-    flex:8;
-    height:126rpx;
-    font:28rpx/86rpx '微软雅黑';
+.input_inf2{
+    flex:80%;
+    font:28rpx/120rpx '微软雅黑';
     color:#919191;
+    height:120rpx;
+    width:100%;
 }
 
-.form_area  .input_area{
-    display:block;
+.intruction{
+  position:relative;
+  margin-left:20rpx;
+  margin-right:20rpx;
+  height:100%;
 }
-.form_area  .input_area .title_inf{
+
+.instr_inf{
     flex:4;
     font:28rpx/86rpx '微软雅黑';
     color:#2a2a2a;
     font-weight:bold;
 }
-.form_area  .input_area  textarea{
+
+.textarea{
     font:26rpx/40rpx '微软雅黑';
     color:#7a7985;
-    height:160rpx;
+    height:500rpx;
+    margin-bottom:80rpx;
+    padding:5px 8px;
+    width:100%;
+    text-align:left;
+    border:2rpx solid #e8e8e8;
+    box-sizing:border-box;
+
 }
-.form_area .publish{
-    width:35%;
-    font:30rpx/100rpx '微软雅黑';
+.create{
+    position:fixed;
+    bottom:0;
+    height:80rpx;
+    width:100%;
+    font:60rpx '微软雅黑';
     color:#2a2a2a;
     text-align:center;
     background:#fed612;
-    border-radius:50rpx;
 }
-.form_area .publish::after{
+.create::after{
     border:none;
 }

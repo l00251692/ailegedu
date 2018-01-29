@@ -1,53 +1,24 @@
 <view class="parent">
     <view class="top">
-        <image src="/images/default-project-head.png"></image>
-        <view class="add_poster">
+        <image src="{{tempFilePaths}}"></image>
+        <view class="add_poster" bindtap='chooseImage'>
             <image src="/images/carmara.png"></image>
             添加封面
         </view>
     </view>
     <!--内容  -->
     <view class="content">
-        <view class="form_area">
-            <form bindsubmit='formsbumit'>
-                <view class="item_form">
-                    <label>
-                        <text class="input_inf">主题</text>
-                        <input type="text" name="title" placeholder='项目主题'></input>
-                    </label>
-                </view>
-                <!-- <view class="item_form">
-                    <label>
-                        <text class="input_inf">集结口号</text>
-                        <input type="text" name="slogan" placeholder='请输入集结口号'></input>
-                    </label>
-                </view>
-                <view class="item_form">
-                    <label>
-                        <text class="input_inf">人数</text>
-                        <input type="text" name="num" placeholder='1 人'></input>
-                    </label>
-                </view>
-                <view class="item_form">
-                    <label class="date">
-                        <text class="input_inf">起止时间</text>
-                        <picker mode="multiSelector" value="{{dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
-                            <view class="tui-picker-detail">
-                               {{dateTimeArray1[0][dateTime1[0]]}}-{{dateTimeArray1[1][dateTime1[1]]}}-{{dateTimeArray1[2][dateTime1[2]]}} {{dateTimeArray1[3][dateTime1[3]]}}:{{dateTimeArray1[4][dateTime1[4]]}}
-                            </view>
-                            <image src="/images/date.png"></image>
-                        </picker>
-                    </label>
-                </view> -->
-                <view class="item_form input_area">
-                    <text class="title_inf">项目介绍</text>
-                    <textarea placeholder='请输入项目介绍，运营模式，团队组成，召集对象等'></textarea>
-                </view>
-                <button class="publish" bindtap='publish'>发布</button>
-            </form>
-
-        </view>
+        <view class="title">
+            <text class="input_inf">标题</text>
+            <input type="text" class="input_inf2" name="title" placeholder='项目标题'></input>
+         </view>
+         <view class="intruction">
+            <text class="instr_inf">项目介绍</text>
+            <textarea placeholder='请输入项目介绍，运营模式，团队组成，召集对象等' maxlength="5000"class ="textarea">  </textarea>
+          </view>
     </view>
-
+    <view class="create">
+        <button bindtap="onSubmit" loading="{{loading}}" disabled="{{loading}}" type="primary">提交</button>
+    </view>
 
 </view>
