@@ -211,6 +211,28 @@ export function fetch(options) {
   })
 }
 
+export function uploadFile(options) {
+  wx.uploadFile({
+    url: `http://${host}/${options.url}`,
+    filePath: options.data.filePath,
+    name: 'image',
+    header: {
+      "Content-Type": "multipart/form-data"
+    },
+    formData: options.data,
+    success: function (res) {
+      const data = JSON.parse(res.data)
+      if (data.State == 'Success') {
+        options.success && options.success(data.data)
+      } else {
+        alert(data.info)
+        options.error && options.error(data.info)
+      }
+      options.complete && options.complete()
+    }
+  }) 
+}
+
 // 提示框
 export function alert(content, callback) {
   wx.showModal({

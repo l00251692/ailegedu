@@ -1,3 +1,4 @@
+<import src="/templates/load-more.wxml" />
 <view class="parent">
     <!-- <view class="search_box">
         <view class="search">
@@ -18,17 +19,15 @@
                 </block>
             </swiper>
         </view>
-        <!--list  -->
         <view class="list_wrap">
-            <!--<text class="title">活动</text>-->
             <view class="list"  wx:for="{{projectList}}" wx:key="{{project_id}}">
-                <navigator class="item" url="/pages/project/details/detail?id={{item.project_id}}">
+                <navigator class="item" url="/pages/project/detail?id={{item.project_id}}">
                     <view class="top">
                         <text class="item_title">{{item.item_title}}</text>
                         <text class="subtitle">{{item.subtitle}}</text>
                     </view>
                     <view class="pro_img">
-                        <image src="{{item.project_head}}" mode="aspectFill"></image>
+                        <image src="{{item.project_head || '/images/default-project-head.png'}}" mode="aspectFill"></image>
                         <text class="tip">{{item.create_time}}</text>
                     </view>
                     <view class="foot">
@@ -47,4 +46,5 @@
     <view>
       <image src="https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epuibz5Qwf2IYwnGBLwbWsn8aRHXcrYKvQoVqS5Ls3fnksQfiaQMz9nJLIwJLzpBFoIPMYDKLQdDaPg/0" class="img-plus-style"  bindtap="create_project"></image> 
     </view>
+    <template is="load-more" data="{{loading: loading, hasMore: hasMore, noMoreLabel: '我是有底线的'}}"></template>
 </view>

@@ -13,7 +13,7 @@
     "pages/address/list",
     "pages/mine/mine",
     "pages/index/index",
-    "pages/project/details/detail",
+    "pages/project/detail",
     "pages/project/create",
     "pages/logs/logs"
   ],

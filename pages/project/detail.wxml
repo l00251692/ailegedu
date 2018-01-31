@@ -1,6 +1,5 @@
-
+<import src="/templates/load-more.wxml" />
 <!--pages/shop/show.wxml-->
-<import src="../../../templates/load-more" />
 <view class="shop-show">
   <!-- <view class="shop-info weui-panel weui-panel_access">
     <view class="weui-panel__bd">
@@ -35,10 +34,10 @@
   </view> -->
   <view class="banner">
        <view class="banner-img">
-          <image src="http://localhost/JiMuImage/banner/banner1.png" />
+          <image src="{{info.project_head || '/images/default-project-head.png'}}" />
        </view>
         <text class="banner-img--license">关注点赞</text>
-        <text class="banner-title">关注这个是什么主题</text>
+        <text class="banner-title">{{info.item_title}}</text>
     </view>
   <view class="shop-content">
     <view class=" weui-tab weui-tab_shop">
@@ -51,56 +50,45 @@
       <swiper-item class="weui-tab__content weui-tab__content_info">
           <view class="head">
                 <view class="left">
-                    <image class="img" src="https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83epuibz5Qwf2IYwnGBLwbWsn8aRHXcrYKvQoVqS5Ls3fnksQfiaQMz9nJLIwJLzpBFoIPMYDKLQdDaPg/0"></image>
-                    <text class="username">xxx。definded</text>
-                    <view class="time"><text >update:2018-01-22 21:30:20</text></view>
+                    <image class="img" src="{{info.create_userHead}}"></image>
+                    <text class="username">{{info.create_userName}}</text>
+                    <view class="time"><text >{{info.create_time}}</text></view>
                 </view>
                 <view class="right">
                     <text class="num">点击关注</text>
                 </view>
           </view>
-          <view class="info_text"><text class="info_text_area">box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
-例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。
-box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
-例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。
-box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
-例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。
-box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
-例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。
-box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元素。
-例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这可令浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。</text></view>
+          <view class="info_text"><text class="info_text_area">{{info.subtitle}}</text></view>
         </swiper-item>
         <swiper-item class="weui-tab__content weui-tab__content_review">
+        <scroll-view enable-back-to-top="true" bindscrolltolower="onScrolltolower" scroll-y="true">
           <view class="comments">
             <view class="item touch-active" wx:for="{{comments}}" wx:key="" wx:for-item="c">
               <view class="i-left">
-                <image class="c-u-img" src="{{c.avatar}}"></image>
+                <image class="c-u-img" src="{{c.user_head}}"></image>
               </view>
               <view class="i-right">
                 <view class="top">
-                  <text class="u-name">{{c.uName}}</text>
+                  <text class="u-name">{{c.user_name}}</text>
                   <text class="time">{{c.time}}</text>
                 </view>
 
                 <!--评论内容-->
                 <view class="content">
-                  {{c.content}}
+                  {{c.comment}}
                 </view>
               </view>
             </view>
           </view>
-
+        
           <!--加载更多模版-->
-          <block wx:if="{{isLoading}}">
+          <block wx:if="{{loading}}">
             <template is="loading" />
           </block>
           <block wx:else>
             <template is="nodata" />
           </block>
           
-
-          评论盒子
-          <view class="cf-bg" catchtap="cemojiCfBg" style="display:{{cfBg ? 'block' : 'none'}}"></view>
           <!-- <view class="comment-fixed">
             <view class="cf-box">
               <view class="emoji iconfont icon-emoji" catchtap="emojiShowHide"></view>
@@ -119,16 +107,17 @@ box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元
               </scroll-view>
             </view>
           </view> -->
+          </scroll-view>
         </swiper-item>  
       </swiper>
-       <view class="comment-fixed" wx:if="{{activeIndex == 1}}">
+      <view class="cf-bg" catchtap="cemojiCfBg" style="display:{{cfBg ? 'block' : 'none'}}"></view>
+      <view class="comment-fixed" wx:if="{{activeIndex == 1}}">
             <view class="cf-box">
               <view class="emoji iconfont icon-emoji" catchtap="emojiShowHide"></view>
-              <textarea class="cf-content" bindfocus="textAreaFocus" maxlength="200" bindblur="textAreaBlur" auto-height value="{{content}}" placeholder="我要评论" />
+              <textarea class="cf-content" bindinput="onCommentInput" bindfocus="textAreaFocus" maxlength="200"  auto-height value="{{content}}" placeholder="我要评论" />
               <text class="cf-send touch-active" bindtap="send">发送</text>
             </view>
-
-            
+      
             <view class="emoji-box {{isShow ? 'emoji-move-in' : 'emoji-move-out'}} {{isLoad ? 'no-emoji-move' : ''}}">
               <scroll-view scroll-y="true" bindscroll="emojiScroll" style="height:200px">
                 <block wx:for="{{emojis}}" wx:for-item="e" wx:key="">
@@ -139,6 +128,6 @@ box-sizing 属性允许您以特定的方式定义匹配某个区域的特定元
               </scroll-view>
             </view>
           </view> 
-    </view>
+      </view>
   </view>
 </view>

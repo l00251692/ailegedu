@@ -105,8 +105,6 @@ Page({
         var {review: {
           list
         }} = that.data
-        console.log("111112:" + JSON.stringify(that.data));
-        console.log("111113:" + data);
         var a = [];
         a = JSON.parse(data)
 

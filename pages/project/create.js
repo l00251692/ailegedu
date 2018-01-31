@@ -1,85 +1,20 @@
 
-const dateTimePicker = require('../../utils/dateTimePicker');
+import {
+  createProject
+} from '../../utils/api'
+
+import {
+  uploadFile,alert, getPrevPage
+} from '../../utils/util'
+
 Page({
 
     data:{
-        tempFilePaths:"/images/default-project-head.png",
-        date: '2018-10-01',
-        time: '12:00',
-        dateTimeArray: null,
-        dateTime: null,
-        dateTimeArray1: null,
-        dateTime1: null,
-        startYear: 2000,
-        endYear: 2050
+      tempFilePaths: ['/images/default-project-head.png'],
     },
     onLoad: function () {
 
-        // 获取完整的年月日 时分秒，以及默认显示的数组
-        var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
-        var obj1 = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
-        // 精确到分的处理，将数组的秒去掉
-        // var lastArray = obj1.dateTimeArray.pop();
-        // var lastTime = obj1.dateTime.pop();
-
-        // var lastArray = obj1.dateTimeArray.pop();
-        var lastArray = obj1.dateTimeArray.splice(obj1.dateTime.length - 2,2);
-        // var lastTime = obj1.dateTime.pop();
-        var lastTime = obj1.dateTime.splice(obj1.dateTime.length - 2, 2);
-
-        console.log(obj1);
-
-        console.log(obj1.dateTimeArray);
-        console.log(obj1.dateTime);
-
-        this.setData({
-            dateTime: obj.dateTime,
-            dateTimeArray: obj.dateTimeArray,
-            dateTimeArray1: obj1.dateTimeArray,
-            dateTime1: obj1.dateTime
-        });
     },
-    publish: function () {
-
-        wx.navigateTo({
-            url: '/pages/publish/publish_success/index'
-        });
-
-    },
-    changeDate(e) {
-        this.setData({ date: e.detail.value });
-    },
-    changeTime(e) {
-        this.setData({ time: e.detail.value });
-    },
-    changeDateTime(e) {
-        this.setData({ dateTime: e.detail.value });
-    },
-    changeDateTime1(e) {
-        this.setData({ dateTime1: e.detail.value });
-    },
-    changeDateTimeColumn(e) {
-        var arr = this.data.dateTime, dateArr = this.data.dateTimeArray;
-        arr[e.detail.column] = e.detail.value;
-        dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
-
-        this.setData({
-            dateTimeArray: dateArr,
-            dateTime: arr
-        });
-    },
-    changeDateTimeColumn1(e) {
-        var arr = this.data.dateTime1, dateArr = this.data.dateTimeArray1;
-
-        arr[e.detail.column] = e.detail.value;
-        dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
-
-        this.setData({
-            dateTimeArray1: dateArr,
-            dateTime1: arr
-        });
-    },
-
     chooseImage: function () {
       var that = this;
       wx.chooseImage({
@@ -90,18 +25,85 @@ Page({
           that.setData({
             tempFilePaths: res.tempFilePaths
           }) 
-          var tempFilePaths1 = res.tempFilePaths
-          wx.uploadFile({
-            url: 'http://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址 
-            filePath: tempFilePaths1[0],
-            name: 'file',
-            formData: {
-              'user': 'test'
-            },
-            success: function (res) {
-              var data = res.data
-              //do something 
-            }
+        }
+      })
+    },
+    onTitleInput(e) {
+      var { value: title } = e.detail
+      this.setData({
+        title
+      })
+    },
+    onInstructionInput(e) {
+      var { value: instruction } = e.detail
+      this.setData({
+        instruction
+      })
+    },
+    onSubmit: function () {
+      var that = this
+      var {
+        tempFilePaths, title, instruction
+      } = this.data
+      console.log("111:" + tempFilePaths)
+      if (title == null) {
+        return alert('请输入标题')
+      }
+
+      if (instruction == null) {
+        return alert('请输入项目介绍')
+      }
+
+      this.setData({
+        loading: true
+      })
+      createProject({
+        title, instruction, 
+        success(data) {
+          var a = []
+          a = JSON.parse(data)
+          if (tempFilePaths[0] == '/images/default-project-head.png')
+          {
+            that.setData({
+              loading: false
+            })
+            alert('创建项目成功', function () {
+              var callback = getPrevPage()['callback']
+              callback && callback()
+              wx.navigateBack()
+            })
+          }
+          else
+          {
+            uploadFile(
+              {
+                url: 'project/updateProjectImgWx',
+                data: {
+                  project_id: a.project_id,
+                  filePath: tempFilePaths[0] //filePath为必须，在公共函数里写了
+                },
+                success(data) {
+                  that.setData({
+                    loading: false
+                  })
+                  alert('创建项目成功', function () {
+                    var callback = getPrevPage()['callback']
+                    callback && callback()
+                    wx.navigateBack()
+                  })
+                },
+                error(data) {
+                  alert('创建失败，请稍后')
+                  that.setData({
+                    loading: false
+                  })
+                }
+              })
+          } 
+        },
+        error(data) {
+          that.setData({
+            loading: false
           })
         }
       })

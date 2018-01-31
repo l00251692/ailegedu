@@ -100,7 +100,7 @@ Page({
         that.setData({
           shopList: shopList ? shopList.concat(list) : list,
           page: page + 1,
-          hasMore: data.count == 10,
+          hasMore: data.count == 0,
           loading: false
         })
       }

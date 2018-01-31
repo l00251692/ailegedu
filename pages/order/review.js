@@ -154,8 +154,8 @@ Page({
     var {id: order_id} = this
     var {
       //limitLength,
-      service, quality, content,
-      info: {receive_time}
+      service, quality, content
+      //info: {receive_time}
     } = this.data
     if (!service) {
       return alert('请为配送打分')

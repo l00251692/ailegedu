@@ -614,3 +614,72 @@ export function getProjectList(options) {
   })
 
 }
+//获得项目详情
+export function getProjectInfo(options) {
+  var {
+    project_id, success
+  } = options
+  fetch({
+    url: 'project/getProjectInfoWx',
+    data: {
+      project_id,
+    },
+    success
+  })
+
+}
+
+//获取发布的项目列表
+export function createProject(options) {
+  var {
+    title, instruction, success
+  } = options
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'project/createProjectWx',
+    data: {
+      user_id,
+      title,
+      instruction
+    },
+    success
+  })
+
+}
+
+
+export function sendProjdectComment(options) {
+  var {
+    project_id, comment, success, error
+  } = options
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'project/sendProjdecCommentWx',
+    data: {
+      user_id,
+      project_id,
+      comment
+    },
+    success,
+    error
+  })
+
+}
+
+
+export function getCommentList(options) {
+  var {
+    project_id, page, success, error
+  } = options
+
+  fetch({
+    url: 'project/getCommentListWx',
+    data: {
+      project_id,
+      page,
+    },
+    success,
+    error
+  })
+
+}
