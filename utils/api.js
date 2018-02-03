@@ -34,7 +34,6 @@ export function getSellerInfo(options) {
     seller_id,
     success, complete
   } = options
-  console.log('seller_ID:'+seller_id)
   getApp().getCurrentAddress(address => {
     var location = address.location
     fetch({
@@ -151,6 +150,21 @@ export function getLoginInfo(options) {
     }
   })
 }
+
+export function getMineInfo(options) {
+  const {
+    success,
+  } = options
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'user/getMineInfoWx',
+    data: {
+      user_id,
+    },
+    success
+  })
+}
+
 
 // 获取用户地址列表
 export function getUserAddrs(options) {
@@ -432,6 +446,23 @@ export function getOrders(options) {
 
 }
 
+export function getShopOrders(options) {
+  var {
+    page,campus_id,
+    success, error
+  } = options
+  console.log("getShopOrders:" + page)
+  fetch({
+    url: 'order/getShopOrdersWx',
+    data: {
+      campus_id,
+      page
+    },
+    success, error
+  })
+
+}
+
 // 获取订单详情
 export function getOrderInfo(options) {
   var {
@@ -488,6 +519,42 @@ export function getPayment(options) {
       order_id,
       user_id,
       pay_money
+    },
+    success, error
+  })
+
+}
+
+export function setRecvOrder(options) {
+  var {
+    order_id,
+    success, error
+  } = options
+
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'order/setRecvOrderWx',
+    data: {
+      order_id,
+      user_id
+    },
+    success, error
+  })
+
+}
+
+export function setRejectOrder(options) {
+  var {
+    order_id,
+    success, error
+  } = options
+
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'order/setRejectOrderWx',
+    data: {
+      order_id,
+      user_id
     },
     success, error
   })

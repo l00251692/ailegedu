@@ -12,6 +12,7 @@
     "pages/address/add",
     "pages/address/list",
     "pages/mine/mine",
+    "pages/mine/shoporder",
     "pages/index/index",
     "pages/project/detail",
     "pages/project/create",

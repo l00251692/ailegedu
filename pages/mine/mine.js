@@ -1,6 +1,6 @@
 // pages/mine/mine.js
 import { getUserInfo, makePhoneCall } from '../../utils/util'
-import { logout } from '../../utils/api'
+import { logout, getMineInfo } from '../../utils/api'
 
 const app = getApp()
 Page({
@@ -11,12 +11,19 @@ Page({
 
     var that = this
     getUserInfo(userInfo => {
-      app.globalData.userInfo = userInfo
-      this.setData({
+      that.setData({
         userInfo
       })
     })
-    
+
+    getMineInfo({
+      success(data) {
+        console.log("hakdh" + JSON.stringify(data))
+        that.setData({
+          campus_id: data.campus_id
+        })
+      }
+    })  
   },
   onReady:function(){
     // 页面渲染完成

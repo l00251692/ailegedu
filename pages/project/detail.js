@@ -138,6 +138,15 @@ Page({
     )
   },
 
+  initComment(){
+    this.setData({
+      page: 0,
+      hasMore: true,
+      loading: false,
+      comments: null
+    })
+  },
+
   loadReview() {
     var that = this;
     var id = this.id
@@ -184,6 +193,7 @@ Page({
     })
   },
   onScrolltolower(e) {
+    console.log("onScrolltolower")
     var {
       hasMore, loading
     } = this.data
@@ -283,8 +293,8 @@ Page({
     if (that.data.content.trim().length > 0) {
       sendProjdectComment({
         project_id:this.id,
-        //comment: that.data.content,
-        comment:"你好啊",
+        comment: that.data.content,
+        //comment:"你好啊",
         success(data)
         {
           that.setData({
@@ -292,6 +302,8 @@ Page({
             isShow: false,
             cfBg: false
           })
+          that.initComment()
+          that.loadReview()
         },
         error(data)
         {

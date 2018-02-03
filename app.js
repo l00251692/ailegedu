@@ -17,17 +17,14 @@ App({
   getLoginInfo: function (cb) {
     var that = this
     if (this.globalData.loginInfo) {
-      console.log("无需再次登陆")
       cb && cb(this.globalData.loginInfo)
     } else {
       //调用登录接口
       wx.login({
         success(res) {
-          console.log("登陆成功:" + res.code);
           wx.getUserInfo({
             success: function (userRes)
             {
-              console.log("success:" + userRes.iv)
               fetch({
                 url: 'user/toLoginWx',
                 data: {
@@ -36,7 +33,6 @@ App({
                   iv: userRes.iv 
                 },
                 success(data) {
-                  console.log("用户信息:" + JSON.stringify(data));
                   getApp().globalData.loginInfo = data
                   cb && cb(data)
                 }

@@ -95,6 +95,6 @@
     <text class="primary-color">¥{{info.pay_price}}</text>
   </view>
   <button bindtap="onAddOrder" loading="{{loading}}" disabled="{{disabled || loading}}" class="weui-btn menu-cart__btn" type="primary">
-    提交订单
+    去支付
   </button>
 </view>

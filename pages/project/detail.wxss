@@ -261,6 +261,7 @@
 }
 .scroll-view_review{
   height: 100%;
+  padding-bottom:30rpx;
 }
 
 .shop-rate {
@@ -455,7 +456,7 @@ overflow:hidden;
 
 /*评论页面*/
 .comments {
-  margin-top: 10px;
+  margin-top: 6rpx;
 }
 
 .content {
