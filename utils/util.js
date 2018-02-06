@@ -379,7 +379,7 @@ export function requestPayment(options) {
   var {
     data, success, error, complete
   } = options
-  console.log("payment:" + data)
+
   wx.requestPayment(Object.assign({
     complete(res) {
       if (res.errMsg == 'requestPayment:ok') {

@@ -1,7 +1,7 @@
 // pages/order/quasi.js
 import {
   getQuasiOrderInfo, updateOrderAddr, updateOrderCoupon,
-  addOrder, getPayment
+  addOrder, getPayment, paySuccess
 } from '../../utils/api'
 
 import {
@@ -148,22 +148,35 @@ Page({
           success(data) {
             requestPayment({
               data,
-              complete() {
-                that.setData({
-                  loading: false
+              success(data)
+              {
+                paySuccess({
+                  order_id: id,
+                  success(data){
+                    that.setData({
+                      loading: false
+                    })
+                    wx.navigateTo({
+                      url: `/pages/order/list`
+                    })
+                  }               
                 })
-                console.log("requestPayment success:")
-                wx.navigateTo({
-                  url: `/pages/order/list`
-                })
-                /*wx.switchTab({
-                  url: '/pages/shop/show',
-                  success(res) {
-                    var {callback} = getCurrentPage()
-                    callback && callback()
-                  }
-                })*/
-              }
+              },
+              // complete() {
+              //   that.setData({
+              //     loading: false
+              //   })
+              //   wx.navigateTo({
+              //     url: `/pages/order/list`
+              //   })
+              //   /*wx.switchTab({
+              //     url: '/pages/shop/show',
+              //     success(res) {
+              //       var {callback} = getCurrentPage()
+              //       callback && callback()
+              //     }
+              //   })*/
+              // }
             })
           },
           error() {

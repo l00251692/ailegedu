@@ -1,7 +1,7 @@
 // pages/order/list.js
 import { ORDER_STATES } from './constant'
 import {
-  getOrders, getPayment
+  getOrders, getPayment, paySuccess
 } from '../../utils/api'
 
 import {
@@ -60,7 +60,7 @@ Page({
       success(data) {
         var {list} = that.data
         var {list: list2, count, page} = data
-        console.log("orderlist:"+ JSON.stringify(data))
+        console.log("myorderlist:"+ JSON.stringify(data))
         list2 = list2.map(item => {
           item['add_time_format'] = datetimeFormat(item.add_time)
           return item
@@ -71,7 +71,7 @@ Page({
           hasMore: count == 5,
           page: page + 1
         })
-
+        console.log("get list  ok")
         cb && cb()
 
       }
@@ -95,13 +95,23 @@ Page({
         requestPayment({
           data,
           success(data) {
-            that.initData()
+            paySuccess({
+              order_id,
+              success(data)
+              {
+                that.setData({
+                  loading: false
+                })
+                that.initData()
+              }
+            })  
           },
-          complete() {
-            that.setData({
-              loading: false
-            })
-          }
+          // complete() {
+            
+          //   that.setData({
+          //     loading: false
+          //   })
+          //}
         })
       },
       error() {

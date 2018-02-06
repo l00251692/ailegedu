@@ -9,7 +9,10 @@ Page({
     loading: false
   },
     onLoad: function () {
-        this.init();       
+      var that = this
+      getApp().getLoginInfo(loginInfo =>{
+        that.init()
+      })    
     },
     onShow: function () {
       // 页面显示
@@ -37,15 +40,18 @@ Page({
       })
     },
     getBanner:function(e) {
-        var that = this;
-        getBannerInfo(
-        {
-            success(data) {
-              that.setData({
-                banner_arr: JSON.parse(data)
-              })
-            }
-        })      
+      if (this.data.loading) {
+        return;
+      }
+      var that = this;
+      getBannerInfo(
+      {
+          success(data) {
+            that.setData({
+              banner_arr: JSON.parse(data)
+            })
+          }
+      })      
     },
     getProjectList: function (e) { 
       if (this.data.loading) {

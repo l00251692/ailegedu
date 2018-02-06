@@ -16,47 +16,31 @@ App({
   },
   getLoginInfo: function (cb) {
     var that = this
-    if (this.globalData.loginInfo) {
+    if (this.globalData.loginInfo) 
+    {
       cb && cb(this.globalData.loginInfo)
-    } else {
-      //调用登录接口
-      wx.login({
-        success(res) {
-          wx.getUserInfo({
-            success: function (userRes)
-            {
-              fetch({
-                url: 'user/toLoginWx',
-                data: {
-                  wx_code: res.code,
-                  encryptedData: userRes.encryptedData,
-                  iv: userRes.iv 
-                },
-                success(data) {
-                  getApp().globalData.loginInfo = data
-                  cb && cb(data)
-                }
-              })
-            },
-            fail:function()
-            {
-              console.log("fail:")
-            }
-          })            
+    } 
+    else 
+    {
+      getLoginInfo({
+        success(data)
+        {
+          getApp().setLoginInfo(data)
+          cb && cb(data)
         },
         error(res) {
-          alert(res['errMsg'])
-          error && error(res['errMsg'])
+          alert("登录失败，请稍后...")
         }
       })
     }
   },
-  /*setLoginInfo(loginInfo) {
-    if (loginInfo.session_3rd) {
-      wx.setStorageSync('session_3rd', loginInfo.session_3rd)
+  setLoginInfo(loginInfo) {
+    console.log("setLoginInfo:" + JSON.stringify(loginInfo))
+    if (loginInfo.session_key) {
+      wx.setStorageSync('session_3rd', loginInfo.session_key)
     }
     this.globalData.loginInfo = loginInfo
-  },*/
+  },
 
   getUserInfo: function (cb) {
     var that = this
@@ -88,16 +72,16 @@ App({
     getCurrentAddress(address => {
       address = that.setCurrentAddress(address)
       cb(address)
-      this.getLoginInfo(loginInfo => {
-        if (loginInfo.is_login) {
-          this.findNearbyUserAddr(userAddress => {
-            if (!userAddress) {
-              return
-            }
-            that.setCurrentAddress(userAddress)
-          })
-        }
-      })
+      // this.getLoginInfo(loginInfo => {
+      //   if (loginInfo.is_login) {
+      //     this.findNearbyUserAddr(userAddress => {
+      //       if (!userAddress) {
+      //         return
+      //       }
+      //       that.setCurrentAddress(userAddress)
+      //     })
+      //   }
+      // })
     })
   },
   setCurrentAddress(address) {

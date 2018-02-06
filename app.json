@@ -1,5 +1,8 @@
 {
   "pages":[ 
+    "pages/index/index",
+    "pages/project/detail",
+    "pages/project/create",
     "pages/shop/list",
     "pages/shop/show",
     "pages/shop/address",
@@ -13,49 +16,34 @@
     "pages/address/list",
     "pages/mine/mine",
     "pages/mine/shoporder",
-    "pages/index/index",
-    "pages/project/detail",
-    "pages/project/create",
     "pages/logs/logs"
   ],
   "window":{
-    "backgroundColor": "#f8f8f8",
+    "backgroundColor": "#5cd79a",
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#ff5801",
+    "navigationBarBackgroundColor": "#5cd79a",
     "navigationBarTitleText": "积木",
     "navigationBarTextStyle":"light"
   },
   "tabBar": {
-    "selectedColor": "#ff5801",
+    "selectedColor": "#5cd79a",
     "list": [
       {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/Tabbar_Home_Empty.png",
+        "selectedIconPath": "images/tabbar/Tabbar_Home_Full.png",
+        "text": "首页"
+      },
+      {
         "pagePath": "pages/shop/list",
-        "iconPath": "images/tabbar/Shop_Tabbar_Order_Empty@2x.png",
-        "selectedIconPath": "images/tabbar/Shop_Tabbar_Order_Full@2x.png",
-        "text": "买啊"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "images/tabbar/Shop_Tabbar_TakeOut_Empty@2x.png",
-        "selectedIconPath": "images/tabbar/Shop_Tabbar_TakeOut_Full@2x.png",
-        "text": "积木"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "images/tabbar/Shop_Tabbar_TakeOut_Empty@2x.png",
-        "selectedIconPath": "images/tabbar/Shop_Tabbar_TakeOut_Full@2x.png",
-        "text": "找人"
-      },
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "images/tabbar/Shop_Tabbar_TakeOut_Empty@2x.png",
-        "selectedIconPath": "images/tabbar/Shop_Tabbar_TakeOut_Full@2x.png",
-        "text": "消息"
+        "iconPath": "images/tabbar/Tabbar_Find_Empty.png",
+        "selectedIconPath": "images/tabbar/Tabbar_Find_Full.png",
+        "text": "逛一逛"
       },
       {
         "pagePath": "pages/mine/mine",
-        "iconPath": "images/tabbar/Shop_Tabbar_My_Empty@2x.png",
-        "selectedIconPath": "images/tabbar/Shop_Tabbar_My_Full@2x.png",
+        "iconPath": "images/tabbar/Tabbar_My_Empty.png",
+        "selectedIconPath": "images/tabbar/Tabbar_My_Full.png",
         "text": "我的"
       }
     ]

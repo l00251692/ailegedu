@@ -131,23 +131,34 @@ export function getLoginInfo(options) {
   const {
     success, error, 
   } = options
-  
+
+  //调用登录接口
   wx.login({
     success(res) {
-      /*console.log("getLoginInfo:" + JSON.stringify(options))
-      fetch({
-        url: 'user/toLoginWx',
-        data: {
-          wx_code: res['code'],
-          session_3rd: wx.getStorageSync('  ')
+      console.log("登录成功")
+      wx.getUserInfo({
+        success: function (userRes) {
+          fetch({
+            url: 'user/toLoginWx',
+            data: {
+              wx_code: res.code,
+              encryptedData: userRes.encryptedData,
+              iv: userRes.iv
+            },
+            success,
+            error
+          })
         },
-        success, error
-      })*/
+        fail: function () {
+          console.log("login fail:")
+        }
+      })
     },
     error(res) {
       alert(res['errMsg'])
       error && error(res['errMsg'])
     }
+
   })
 }
 
@@ -525,6 +536,22 @@ export function getPayment(options) {
 
 }
 
+export function paySuccess(options) {
+  var {
+    order_id, success
+  } = options
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'pay/setPaySuccessWx',
+    data: {
+      order_id,
+      user_id,
+    },
+    success
+  })
+
+}
+
 export function setRecvOrder(options) {
   var {
     order_id,
@@ -655,12 +682,9 @@ export function getBannerInfo(options) {
     success
   } = options
 
-  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
   fetch({
     url: 'project/getBannerInfoWx',
-    data: {
-      user_id,
-    },
+    data: {},
     success
   })
 
@@ -670,11 +694,10 @@ export function getProjectList(options) {
   var {
     page,success
   } = options
-  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  
   fetch({
     url: 'project/getProjectListWx',
     data: {
-      user_id,
       page
     },
     success

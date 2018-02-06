@@ -66,7 +66,6 @@ Page({
       that.setData({
         currentAddress: address
       })
-      console.log(address)
       that.loadData()
     })
   },
@@ -95,8 +94,6 @@ Page({
           item['distanceFormat'] = (item.distance / 1000).toFixed(2)
           return item
         })
-        console.log("shopList:" + shopList);
-        console.log(list);
         that.setData({
           shopList: shopList ? shopList.concat(list) : list,
           page: page + 1,
@@ -125,7 +122,7 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: '买啊',
+      title: '逛一逛',
       path: '/pages/index/index'
     }
   }
