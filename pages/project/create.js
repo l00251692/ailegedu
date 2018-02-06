@@ -10,7 +10,7 @@ import {
 Page({
 
     data:{
-      tempFilePaths: ['/images/default-project-head.png'],
+      tempFilePaths: ['/images/index/pro_img.png'],
     },
     onLoad: function () {
 
@@ -45,13 +45,13 @@ Page({
       var {
         tempFilePaths, title, instruction
       } = this.data
-      console.log("111:" + tempFilePaths)
+
       if (title == null) {
         return alert('请输入标题')
       }
 
       if (instruction == null) {
-        return alert('请输入项目介绍')
+        return alert('请输入内容介绍')
       }
 
       this.setData({
@@ -60,9 +60,7 @@ Page({
       createProject({
         title, instruction, 
         success(data) {
-          var a = []
-          a = JSON.parse(data)
-          if (tempFilePaths[0] == '/images/default-project-head.png')
+          if (tempFilePaths[0] == '/images/index/pro_img.png')
           {
             that.setData({
               loading: false
@@ -79,7 +77,7 @@ Page({
               {
                 url: 'project/updateProjectImgWx',
                 data: {
-                  project_id: a.project_id,
+                  project_id: data.project_id,
                   filePath: tempFilePaths[0] //filePath为必须，在公共函数里写了
                 },
                 success(data) {

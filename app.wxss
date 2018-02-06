@@ -53,16 +53,16 @@ page {
 button[type=primary], .weui-btn_primary {
   position: relative;
   color: #fff;
-  background-color: #ff5801;
+  background-color: #5cd79a;
 }
 
 .weui-btn_primary {
-  line-height: 2.55555556;
-  font-size: 18px;
+  line-height: 80rpx;
+  font-size: 32rpx;
   text-align: center;
   box-sizing: border-box;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 0px;
   -webkit-tap-highlight-color: transparent;
   overflow: hidden;
 }
@@ -77,22 +77,22 @@ button[type=primary], .weui-btn_primary {
 }
 
 button[type="primary"][plain] {
-  color: #ff5801;
-  border-color: #ff5801;
+  color: #5cd79a;
+  border-color: #5cd79a;
 }
 
 button[type="primary"][disabled], button[loading][type="primary"] {
-  background-color: #ffa97c;
+  background-color: #5ddfc9;
 }
 
 .button-hover[type=primary], .button-hover.weui-btn_primary {
   color: rgba(255, 255, 255, 0.8);
-  background-color: #ee5200;
+  background-color: #5ddfc9;
 }
 
 .button-hover[type=primary][plain] {
-  color: #ee5200;
-  border-color: #ee5200;
+  color: #5ddfc9;
+  border-color: #5ddfc9;
 }
 
 .button-sp-area {

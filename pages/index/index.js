@@ -87,6 +87,6 @@ Page({
        }
     },
     callback() {
-       this.initData()
+       this.init()
     },
 })

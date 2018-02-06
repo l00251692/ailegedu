@@ -35,7 +35,6 @@
 .content{
     padding:0 0 0 0;
     height:auto;
-    margin-bottom:80rpx;
     overflow:hidden;
 }
 
@@ -76,7 +75,7 @@
 }
 
 .textarea{
-    font:26rpx/40rpx '微软雅黑';
+    font:28rpx/40rpx '微软雅黑';
     color:#7a7985;
     height:500rpx;
     margin-bottom:80rpx;
@@ -95,7 +94,6 @@
     font:60rpx '微软雅黑';
     color:#2a2a2a;
     text-align:center;
-    background:#fed612;
 }
 .create::after{
     border:none;

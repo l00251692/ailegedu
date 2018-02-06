@@ -51,7 +51,7 @@ page {
   line-height: 50px;
   text-align: center;
   color: #fff;
-  background-color: #ff5801;
+  background-color: #5cd79a;
 }
 
 .address-actions {

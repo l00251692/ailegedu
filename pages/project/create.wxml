@@ -13,12 +13,12 @@
             <input type="text" bindinput="onTitleInput" class="input_inf2" name="title" placeholder='项目标题'></input>
          </view>
          <view class="intruction">
-            <text class="instr_inf">项目介绍</text>
+            <text class="instr_inf">内容介绍</text>
             <textarea bindinput="onInstructionInput" placeholder='请输入项目介绍，运营模式，团队组成，召集对象等' maxlength="5000"class ="textarea">  </textarea>
           </view>
     </view>
     <view class="create">
-        <button bindtap="onSubmit" loading="{{loading}}" disabled="{{loading}}" type="primary">提交</button>
+        <button bindtap="onSubmit" loading="{{loading}}" disabled="{{loading}}" type="primary">发布</button>
     </view>
 
 </view>
