@@ -16,6 +16,7 @@
     "pages/address/list",
     "pages/mine/mine",
     "pages/mine/shoporder",
+    "pages/project/mine",
     "pages/logs/logs"
   ],
   "window":{

@@ -12,6 +12,10 @@
             <text class="input_inf">标题</text>
             <input type="text" bindinput="onTitleInput" class="input_inf2" name="title" placeholder='项目标题'></input>
          </view>
+         <view class="concat">
+            <text class="concat_inf">联系方式</text>
+            <input type="text" bindinput="onConcatInput" class="concat_inf2" name="concat" placeholder='QQ/微信(选填)'></input>
+         </view>
          <view class="intruction">
             <text class="instr_inf">内容介绍</text>
             <textarea bindinput="onInstructionInput" placeholder='请输入项目介绍，运营模式，团队组成，召集对象等' maxlength="5000"class ="textarea">  </textarea>

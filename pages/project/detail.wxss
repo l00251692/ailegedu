@@ -113,7 +113,7 @@
   left: 10%;
   bottom: -1rpx;
   width: 80%;
-  border-bottom: 5rpx solid #ff5801;
+  border-bottom: 5rpx solid #5cd79a;
 }
 
 /* menu-tab */
@@ -393,8 +393,8 @@ overflow:hidden;
 } 
 .head .left image{
     display:block;
-    width:100rpx;
-    height:100rpx;
+    width:80rpx;
+    height:80rpx;
     border-radius:50%;
     position:absolute;
     left:20rpx;
@@ -432,12 +432,31 @@ overflow:hidden;
     font-weight:bold;
 }
 
+.concat{
+  position:relative;
+  left:40rpx;
+  border-bottom:2rpx solid #e8e8e8;
+  margin-top:20rpx;
+}
+
+.concat_inf{
+    font:28rpx/66rpx '微软雅黑';
+    color:#2a2a2a;
+}
+
+.concat_inf2{
+    font:28rpx/66rpx '微软雅黑';
+    color:#919191;
+    width:100%;
+    margin-left:20rpx;
+}
+
 .info_text
 {
-  margin-top: 1.6em;
-  margin-bottom: 1.6em;
-  padding-left: 15px;
-  padding-right: 15px;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
   color: #999999;
 }
 
@@ -445,8 +464,8 @@ overflow:hidden;
 {
   margin-top: .77em;
   margin-bottom: .3em;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
   color: #999999;
   font-size: 30rpx;
   line-height:40rpx;
@@ -553,12 +572,12 @@ overflow:hidden;
   text-align: center;
   padding: 0 2px !important;
   font-size: 12px;
-  background-color: #e64340;
+  background-color: #5cd79a;
   color: #fff;
 }
 
 .cf-send.touch-active:active {
-  background-color: #b03f3e;
+  background-color: #5ddfc9;
 }
 
 .emoji {

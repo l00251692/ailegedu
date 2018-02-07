@@ -14,12 +14,12 @@
   </navigator>-->
 </view>
 <view class="category">
-  <navigator class="category__item" wx:for="{{category}}" wx:key="category_id">
+  <view class="category__item" wx:for="{{category}}" wx:key="category_id">
     <view>
       <image src="{{item.icon}}" class="category__icon"></image>
     </view>
     {{item.title}}
-  </navigator>
+  </view>
 </view>
 
 <view class="weui-panel weui-panel_access">

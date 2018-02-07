@@ -95,7 +95,7 @@
   left: 10%;
   bottom: -1rpx;
   width: 80%;
-  border-bottom: 5rpx solid #ff5801;
+  border-bottom: 5rpx solid #5cd79a;
 }
 
 /* menu-tab */
@@ -127,7 +127,7 @@
 .menu-item_active {
   background-color: #fff;
   border-color: #fff;
-  border-left: 5rpx solid #ff5801;
+  border-left: 5rpx solid #5cd79a;
 }
 
 /* goods-list */

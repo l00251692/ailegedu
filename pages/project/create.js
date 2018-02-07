@@ -34,6 +34,12 @@ Page({
         title
       })
     },
+    onConcatInput(e) {
+    var { value: concat } = e.detail
+      this.setData({
+        concat
+    })
+  },
     onInstructionInput(e) {
       var { value: instruction } = e.detail
       this.setData({
@@ -43,7 +49,7 @@ Page({
     onSubmit: function () {
       var that = this
       var {
-        tempFilePaths, title, instruction
+        tempFilePaths, title, concat,instruction
       } = this.data
 
       if (title == null) {
@@ -58,7 +64,7 @@ Page({
         loading: true
       })
       createProject({
-        title, instruction, 
+        title, concat, instruction, 
         success(data) {
           if (tempFilePaths[0] == '/images/index/pro_img.png')
           {

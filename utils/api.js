@@ -704,6 +704,22 @@ export function getProjectList(options) {
   })
 
 }
+
+export function getMyProjectList(options) {
+  var {
+    page, success
+  } = options
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'project/getMyProjectListWx',
+    data: {
+      user_id,
+      page
+    },
+    success
+  })
+
+}
 //获得项目详情
 export function getProjectInfo(options) {
   var {
@@ -722,7 +738,7 @@ export function getProjectInfo(options) {
 //获取发布的项目列表
 export function createProject(options) {
   var {
-    title, instruction, success
+    title, concat, instruction, success
   } = options
   var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
   fetch({
@@ -730,6 +746,7 @@ export function createProject(options) {
     data: {
       user_id,
       title,
+      concat,
       instruction
     },
     success

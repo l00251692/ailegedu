@@ -9,42 +9,42 @@ Page({
     category: [
       {
         "category_id": "1",
-        "title": "本地特产",
+        "title": "创业",
         "icon": "/images/category/1.png"
       },
       {
         "category_id": "2",
-        "title": "美食外卖",
+        "title": "最好的时间",
         "icon": "/images/category/2.png"
       },
       {
         "category_id": "3",
-        "title": "甜品蛋糕",
+        "title": "是15年前",
         "icon": "/images/category/3.png"
       },
       {
         "category_id": "4",
-        "title": "果蔬生鲜",
+        "title": "和现在",
         "icon": "/images/category/4.png"
       },
       {
         "category_id": "5",
-        "title": "超市便利",
+        "title": "免费",
         "icon": "/images/category/5.png"
       },
       {
         "category_id": "6",
-        "title": "进口产品",
+        "title": "入驻",
         "icon": "/images/category/6.png"
       },
       {
         "category_id": "7",
-        "title": "优惠活动",
+        "title": "不限范围",
         "icon": "/images/category/7.png"
       },
       {
         "category_id": "8",
-        "title": "全部分类",
+        "title": "就在此刻",
         "icon": "/images/category/8.png"
       }
     ],

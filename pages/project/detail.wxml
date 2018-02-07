@@ -34,9 +34,9 @@
   </view> -->
   <view class="banner">
        <view class="banner-img">
-          <image src="{{info.project_head || '/images/default-project-head.png'}}" />
+          <image src="{{info.project_head || '/images/index/pro_img.png'}}" />
        </view>
-        <text class="banner-img--license">关注点赞</text>
+        <!-- <text class="banner-img--license">关注点赞</text> -->
         <text class="banner-title">{{info.item_title}}</text>
     </view>
   <view class="shop-content">
@@ -55,9 +55,14 @@
                     <view class="time"><text >{{info.create_time}}</text></view>
                 </view>
                 <view class="right">
-                    <text class="num">点击关注</text>
+                    <!-- <text class="num">回复:{{info.interest}}</text> -->
                 </view>
           </view>
+          <view class="concat">
+            <text class="concat_inf">联系方式</text>
+            <text class="concat_inf2" wx:if="{{info.concat}}">{{info.concat}}</text>
+            <text class="concat_inf2" wx:else>暂未提供</text>
+         </view>
           <view class="info_text"><text class="info_text_area">{{info.subtitle}}</text></view>
         </swiper-item>
         <swiper-item class="weui-tab__content weui-tab__content_review">
