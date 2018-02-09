@@ -2,6 +2,7 @@
 <import src="/templates/load-more.wxml" />
 <!--<view wx:if="{{loginInfo.is_login}}">-->
 <view >
+  <view class="header"> {{tip}} </view>
   <view class="order-list">
     <view class="order-item" wx:for="{{list}}" wx:key="order_id">
       <view class="order-item__hd">

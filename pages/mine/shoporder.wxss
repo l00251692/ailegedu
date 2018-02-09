@@ -1,6 +1,16 @@
 /* pages/order/list.wxss */
 @import '/templates/load-more.wxss';
 
+
+.header{
+  width:100%;
+  background:#5cd79a;
+  text-align:center;
+  padding-bottom:25rpx;
+  color:#ff0000;
+  text-decoration:blink;
+  font-weight:bold;
+}
 .order-logout {
   text-align: center;
 }
