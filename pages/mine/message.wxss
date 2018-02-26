@@ -1,0 +1,25 @@
+/* pages/address/select.wxss */
+
+page {
+  background: #e8e8e8
+}
+
+
+.message__list {
+  background-color: #fff;
+}
+
+.message__item {
+  position: relative;
+  padding: 50rpx 30rpx;
+  border-bottom: 1rpx solid #e8e8e8;
+}
+
+.primary-color {
+  color: #000 !important;
+}
+
+.grey-color {
+  color: #999 !important;
+}
+

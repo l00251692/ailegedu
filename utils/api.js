@@ -129,13 +129,12 @@ export function logout(options) {
 // 获取登录信息
 export function getLoginInfo(options) {
   const {
-    success, error, 
+    success, error, fail
   } = options
 
   //调用登录接口
   wx.login({
     success(res) {
-      console.log("登录成功")
       wx.getUserInfo({
         success: function (userRes) {
           fetch({
@@ -149,9 +148,7 @@ export function getLoginInfo(options) {
             error
           })
         },
-        fail: function () {
-          console.log("login fail:")
-        }
+        fail
       })
     },
     error(res) {
@@ -166,6 +163,9 @@ export function getMineInfo(options) {
   const {
     success,
   } = options
+  if (!getApp().globalData.loginInfo.is_login) {
+    return alert('用户未登录')
+  }
   var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
   fetch({
     url: 'user/getMineInfoWx',

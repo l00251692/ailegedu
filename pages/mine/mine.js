@@ -5,25 +5,28 @@ import { logout, getMineInfo } from '../../utils/api'
 const app = getApp()
 Page({
   data: { 
-    loginInfo:{}
+    loginInfo:null
   },
   onLoad:function(options){
 
     var that = this
-    getUserInfo(userInfo => {
-      that.setData({
-        userInfo
-      })
-    })
-
-    getMineInfo({
-      success(data) {
-        console.log("hakdh" + JSON.stringify(data))
+    getApp().getLoginInfo(loginInfo => {
+      if (loginInfo != null && loginInfo.is_login) {
         that.setData({
-          campus_id: data.campus_id
+          loginInfo: loginInfo,
+          userInfo: loginInfo.userInfo
         })
-      }
-    })  
+
+        getMineInfo({
+          success(data) {
+            that.setData({
+              campus_id: data.campus_id
+            })
+          }
+        }) 
+      }  
+    })
+ 
   },
   onReady:function(){
     // 页面渲染完成
@@ -70,6 +73,29 @@ Page({
       loginInfo: loginInfo.user_info
     })
   },*/
+  onLogin(){
+    var { loginInfo} = this.data
+    if (loginInfo == null)
+    {
+      var that = this
+      getApp().getLoginInfo(loginInfo => {
+        if (loginInfo != null && loginInfo.is_login) {
+          that.setData({
+            loginInfo: loginInfo,
+            userInfo: loginInfo.userInfo
+          })
+
+          getMineInfo({
+            success(data) {
+              that.setData({
+                campus_id: data.campus_id
+              })
+            }
+          })
+        }
+      })
+    }
+  },
   onShareAppMessage() {
     return {
       title: '我的信息',

@@ -16,6 +16,7 @@
     "pages/address/list",
     "pages/mine/mine",
     "pages/mine/shoporder",
+    "pages/mine/message",
     "pages/project/mine",
     "pages/logs/logs"
   ],
@@ -23,7 +24,7 @@
     "backgroundColor": "#5cd79a",
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#5cd79a",
-    "navigationBarTitleText": "积木",
+    "navigationBarTitleText": "蜗牛",
     "navigationBarTextStyle":"light"
   },
   "tabBar": {

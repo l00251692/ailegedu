@@ -25,6 +25,10 @@
                     <view class="top">
                         <text class="item_title">{{item.item_title}}</text>
                     </view>
+                    <view class="item_info">
+                        <text class="tip">{{item.subtitle}}</text>
+                        <image class="pro_img" src="{{item.project_head || '/images/index/pro_img.png'}}" mode="aspectFill"></image>
+                    </view>
                     <view class="foot">
                         <view class="left">
                             <image class="img" src="{{item.create_userHead}}"></image>
@@ -35,11 +39,7 @@
                             <text class="num">{{item.create_time}}</text>
                         </view>
                     </view>
-                    <view class="item_info">
-                        <text class="tip">{{item.subtitle}}</text>
-                        <image class="pro_img" src="{{item.project_head || '/images/index/pro_img.png'}}" mode="aspectFill"></image>
-                    </view>
-                    <view class="line"></view>
+                    <!-- <view class="line"></view> -->
                 </navigator>
             </view>
         </view>

@@ -4,7 +4,7 @@ import {
 } from './utils/api'
 import {
   getCurrentAddress, getUserInfo,
-  coordFormat, fetch
+  coordFormat, fetch, confirm
 } from './utils/util'
 import {
   gcj02tobd09
@@ -16,7 +16,7 @@ App({
   },
   getLoginInfo: function (cb) {
     var that = this
-    if (this.globalData.loginInfo) 
+    if (this.globalData.loginInfo.is_login) 
     {
       cb && cb(this.globalData.loginInfo)
     } 
@@ -29,7 +29,40 @@ App({
           cb && cb(data)
         },
         error(res) {
-          alert("登录失败，请稍后...")
+          console.log("获取用户信息失败，请稍后...")
+          cb && cb(res)
+        },
+        fail(res){
+          if (res.errMsg == 'getUserInfo:fail auth deny' && wx.openSetting) {
+            confirm({
+              content: '若不授用户信息权限, 则无法正常显示用户头像和昵称以及发布相关信息, 请重新授权用户信息权限',
+              cancelText: '不授权',
+              confirmText: '授权',
+              ok() {
+                wx.openSetting({
+                  success(res) {
+                    console.log(res)
+                    if (res.authSetting['scope.userInfo']) 
+                    {
+                      getLoginInfo({
+                        success(data) {
+                          getApp().setLoginInfo(data)
+                          cb && cb(data)
+                        }
+                      })
+                    } 
+                    else {
+                      alert('获取用户信息失败')
+                    }
+                  }
+                })
+              }
+            })
+
+          } else {
+            alert('获取用户信息失败')
+          }
+          cb && cb()
         }
       })
     }
@@ -130,7 +163,10 @@ App({
   },
 
   globalData: {
-    loginInfo: null,
+    loginInfo:{
+      is_login: 0,
+      userInfo:null
+    },
     currentAddress: null
   }
 })

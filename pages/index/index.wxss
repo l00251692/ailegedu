@@ -28,7 +28,8 @@
 
 
 .list_wrap{
-    padding-top:30rpx;
+    padding-top:20rpx;
+    background:#e8e8e8;
 }
 .list_wrap .title{
     display:block;
@@ -50,6 +51,10 @@
     left:12rpx;
     transform:translateY(-50%);
 } 
+
+.list {
+    background:#ffffff;
+}
 
 .list .item{
     padding:18rpx 36rpx 0;

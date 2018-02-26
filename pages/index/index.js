@@ -1,6 +1,9 @@
 import {
   getBannerInfo,getProjectList
 } from '../../utils/api'
+import {
+  alert
+} from '../../utils/util'
 
 Page({
   data: {
@@ -10,9 +13,7 @@ Page({
   },
     onLoad: function () {
       var that = this
-      getApp().getLoginInfo(loginInfo =>{
-        that.init()
-      })    
+      this.init()    
     },
     onShow: function () {
       // 页面显示
@@ -63,7 +64,6 @@ Page({
       {
           page,
           success(data) {
-            console.log("getProjectList:" + data.count)
             var list  = data.list
             var { projectList} = that.data
             that.setData({
@@ -77,9 +77,18 @@ Page({
     },
     create_project:function(e)
     {
-      wx.navigateTo({
-        url: '/pages/project/create'
-      });
+      getApp().getLoginInfo(loginInfo => {
+        if (loginInfo != null && loginInfo.is_login){
+          wx.navigateTo({
+            url: '/pages/project/create'
+          });
+        }
+        else
+        {
+          alert("用户未授权，请先在'我的'页面登录")
+        }
+         
+      })
     },
     onReachBottom(e) {
        if (this.data.hasMore && !this.data.loading) {
