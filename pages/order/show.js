@@ -6,7 +6,7 @@ import {
   makePhoneCall, requestPayment, confirm, alert
 } from '../../utils/util'
 import {
-  getOrderInfo, getPayment,
+  getOrderInfo, getPayment, paySuccess,
   cancelOrder
 } from '../../utils/api'
 Page({
@@ -149,13 +149,21 @@ Page({
     this.setData({
       loading: true
     })
+    console.log("akldhaldhorder_id=" + order_id)
     getPayment({
       order_id,
       success(data) {
         requestPayment({
           data,
-          success(data) {
-            that.loadData()
+          success() {
+            console.log("akldhaldhorder_id2=" + order_id) 
+            paySuccess({
+              order_id,
+              prepay_id: data.prepay_id,
+              success(data) {
+                that.loadData()
+              }
+            })
           },
           complete() {
             that.setData({
@@ -173,9 +181,9 @@ Page({
   },
   onCancelTap(e) {
     var that = this;
-    var {info: {order_id, title}} = this.data
+    var {info: {order_id}} = this.data
     confirm({
-      content: `是否取消订单 ${title}`,
+      content: `是否取消订单`,
       confirmText: '取消订单',
       ok() {
         cancelOrder({

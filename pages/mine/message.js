@@ -1,38 +1,22 @@
+import { getMsgList, setProjectCommentRead } from '../../utils/api'
+import {
+  datetimeFormat
+} from '../../utils/util'
 
 Page({
   data: {
-    list:[
-      {
-        msg_id:0,
-        type:1,
-        title:'项目召集啊啊',
-        user:'你好啊poue王磊都快来啊回复',
-        color: 'inherit'
-      },
-      {
-        msg_id: 1,
-        type: 1,
-        title: '项目召集啊啊2',
-        color: 'inherit'
-      },
-      {
-        msg_id: 2,
-        type: 1,
-        title: '项目召集啊啊3',
-        color: '#999'
-      }
-    ]
 
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    this.loadData()
+    
   },
   onReady: function () {
     // 页面渲染完成
   },
   onShow: function () {
     // 页面显示
+    this.loadData()
   },
   onHide: function () {
     // 页面隐藏
@@ -54,14 +38,48 @@ Page({
     this.setData({
       loading: true
     })
+
+    getMsgList({
+      success(data) {
+        var list2 = data.list.map(item => {
+          item['time'] = datetimeFormat(item['time']);
+          if (item['is_read'] == 1)
+          {
+            item['color'] ='#999'
+          }
+          else{
+            item['color'] = 'inherit'
+          }
+          return item
+        })
+        that.setData({
+          list: list2,
+          msgCount: data.count
+        })
+      },
+      error(data){
+        that.setData({
+          list: [],
+          msgCount:0
+        })
+      }
+    }) 
   },
   callback() {
+    console.log("message callback")
     this.loadData()
   },
   onMsginfo:function (e)
   {
+    //设置消息已读
+    var project_id = e.currentTarget.dataset.projectId
+    setProjectCommentRead({
+      project_id,
+      success(data){
+      }
+    })
     wx.navigateTo({
-      url: '/pages/project/detail?id=' + e.currentTarget.dataset.msgId
+      url: '/pages/project/detail?id=' + project_id + ''
     })
   }
 })

@@ -45,7 +45,6 @@ Page({
       success(data) {
         var a = [];
         a = JSON.parse(data)
-        console.log("getQuasiOrderInfo:" + data)
         that.setData({
           info: a,
           loading: false
@@ -127,7 +126,7 @@ Page({
     var that = this
     var {id} = this
     var {loading, content, info} = this.data
-    console.log("onAddOrder" + content)
+    
     if (loading) {
       return
     }
@@ -148,10 +147,11 @@ Page({
           success(data) {
             requestPayment({
               data,
-              success(data)
+              success()
               {
-                paySuccess({
+                paySuccess({   
                   order_id: id,
+                  prepay_id: data.prepay_id,
                   success(data){
                     that.setData({
                       loading: false

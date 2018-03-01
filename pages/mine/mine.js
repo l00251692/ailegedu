@@ -8,7 +8,12 @@ Page({
     loginInfo:null
   },
   onLoad:function(options){
-
+    
+  },
+  onReady:function(){
+    // 页面渲染完成
+  },
+  onShow:function(){
     var that = this
     getApp().getLoginInfo(loginInfo => {
       if (loginInfo != null && loginInfo.is_login) {
@@ -20,24 +25,13 @@ Page({
         getMineInfo({
           success(data) {
             that.setData({
-              campus_id: data.campus_id
+              campus_id: data.campus_id,
+              count: data.unread_msg_count
             })
           }
-        }) 
-      }  
+        })
+      }
     })
- 
-  },
-  onReady:function(){
-    // 页面渲染完成
-  },
-  onShow:function(){
-    /*var that = this
-    app.getLoginInfo(loginInfo => {
-      that.setData({
-        loginInfo: loginInfo.user_info
-      })
-    })*/
   },
   onHide:function(){
     // 页面隐藏
@@ -68,11 +62,9 @@ Page({
       }
     })
   },
-  /*callback(loginInfo) {
-    this.setData({
-      loginInfo: loginInfo.user_info
-    })
-  },*/
+  callback() {
+    this.onLogin()
+  },
   onLogin(){
     var { loginInfo} = this.data
     if (loginInfo == null)
@@ -88,7 +80,8 @@ Page({
           getMineInfo({
             success(data) {
               that.setData({
-                campus_id: data.campus_id
+                campus_id: data.campus_id,
+                count: data.unread_msg_count
               })
             }
           })

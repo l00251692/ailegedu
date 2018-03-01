@@ -381,6 +381,11 @@ export function requestPayment(options) {
   } = options
 
   wx.requestPayment(Object.assign({
+    'timeStamp': data.timeStamp,
+    'nonceStr': data.nonceStr,
+    'package': data.package,
+    'signType': data.signType,
+    'paySign': data.paySign,
     complete(res) {
       if (res.errMsg == 'requestPayment:ok') {
         alert('支付成功', function () {

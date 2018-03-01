@@ -202,9 +202,7 @@ Page({
   increase(e) {
     var {order, info: {goods_map}} = this.data;
     var { goodsId, subId, tmpf, tmps, tmpt, selectProperty} = e.currentTarget.dataset;
-    console.log(goodsId)
-    console.log("3333")
-    console.log(e.currentTarget.dataset)
+
     for (var i = 0; i < goods_map.length; i++) {
       if (goods_map[i].goods_id == goodsId) {
         var goods = goods_map[i];
@@ -215,7 +213,6 @@ Page({
   
     if (selectProperty != null)
     {
-      console.log("here");
       selectPropertyTmp = selectProperty;
     }
     else
@@ -267,9 +264,7 @@ Page({
   decrease(e) {
     var {order, info: {goods_map}} = this.data;
     var { goodsId, subId, selectProperty} = e.currentTarget.dataset;
-    console.log("hh:"+ selectProperty);
-    console.log("goodsId:" + goodsId);
-    console.log("subId:" + subId);
+
     for (var i = 0; i < goods_map.length; i++) {
       if (goods_map[i].goods_id == goodsId) {
         var goods = goods_map[i];
@@ -401,7 +396,6 @@ Page({
   selectProperty0(e) {
     var { index,propertyName, propertyValue } = e.currentTarget.dataset;
     var { activeSubGoods } = this.data;
-    console.log("111:" + index);
     activeSubGoods['tmp0'] = index;
     this.setData({
       activeSubGoods
@@ -410,7 +404,6 @@ Page({
   selectProperty1(e) {
     var { index, propertyName, propertyValue } = e.currentTarget.dataset;
     var { activeSubGoods } = this.data;
-    console.log("111:" + index);
     activeSubGoods['tmp1'] = index;
     this.setData({
       activeSubGoods
@@ -419,7 +412,6 @@ Page({
   selectProperty2(e) {
     var { index, propertyName, propertyValue } = e.currentTarget.dataset;
     var { activeSubGoods } = this.data;
-    console.log("111:" + index);
     activeSubGoods['tmp2'] = index;
     this.setData({
       activeSubGoods
@@ -451,38 +443,26 @@ Page({
 
     this.setData({
       loading: true
-    })
-    
-    if (!getApp().globalData.loginInfo.is_login) {
-        wx.navigateTo({
-          url: 'pages/mine/mine',
-        })
-        this.setData({
+    })  
+    addQuasiOrder({
+      seller_id, goods, totalPackingFee,
+      success(data) {
+        that.setData({
           loading: false
         })
-        return
+        var a = [];
+        a = JSON.parse(data)
+        wx.navigateTo({
+          url: `/pages/order/quasi?id=${a.quasi_order_id}`
+        })
+      },
+      error() {  
+        that.setData({
+          loading: false
+        })
+        alert("提交订单失败，请稍候")
       }
-      
-      
-      addQuasiOrder({
-        seller_id, goods, totalPackingFee,
-        success(data) {
-          console.log("here:"+ data)
-          that.setData({
-            loading: false
-          })
-          var a = [];
-          a = JSON.parse(data)
-          wx.navigateTo({
-            url: `/pages/order/quasi?id=${a.quasi_order_id}`
-          })
-        },
-        error() {
-          that.setData({
-            loading: false
-          })
-        }
-      })
+    })
   },
   onShareAppMessage() {
     var {info:{seller_id, seller_name}} = this.data

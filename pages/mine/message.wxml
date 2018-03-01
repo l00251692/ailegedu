@@ -1,9 +1,10 @@
 <!--pages/address/list.wxml-->
 <view class="message">
   <view class="message__list">
-    <view wx:for="{{list}}" wx:key="msg_id" class="message__item" data-msg-id="{{item.msg_id}}" bindtap="onMsginfo">
+    <view wx:for="{{list}}" wx:key="msg_id" class="message__item" data-project-id="{{item.project_id}}" bindtap="onMsginfo">
       <view style="color:{{item.color}}">
         {{item.user}}  在话题“{{item.title}}”中发表了评论
+        <view class="time">{{item.time}}</view>
       </view>
     </view>
   </view>

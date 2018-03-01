@@ -94,9 +94,10 @@ Page({
       success(data) {
         requestPayment({
           data,
-          success(data) {
+          success() {
             paySuccess({
               order_id,
+              prepay_id: data.prepay_id,
               success(data)
               {
                 that.setData({

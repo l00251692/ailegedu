@@ -161,7 +161,7 @@ export function getLoginInfo(options) {
 
 export function getMineInfo(options) {
   const {
-    success,
+    success
   } = options
   if (!getApp().globalData.loginInfo.is_login) {
     return alert('用户未登录')
@@ -315,17 +315,29 @@ export function addQuasiOrder(options) {
   }
  
   if(!getApp().globalData.loginInfo.is_login){
-    return alert('用户未登录')
-  }
-      
-  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
-  fetch({
+    //用户先登录
+    getApp().getLoginInfo(loginInfo=>{
+      var { user_id, user_token } = loginInfo.userInfo
+      fetch({
+        url: 'order/createOrderWx',
+        data: Object.assign({
+          user_id,
+        }, data),
+        success, error
+      })
+    })
+  } 
+  else
+  {
+    var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+    fetch({
       url: 'order/createOrderWx',
       data: Object.assign({
         user_id,
       }, data),
       success, error
-  })
+    })
+  } 
 }
 
 // 获取准订单
@@ -414,30 +426,29 @@ export function addOrder(options) {
   })
 
 }
-/*
+
 // 取消订单
 export function cancelOrder(options) {
   var {
     order_id,
     success, error
   } = options
-  getApp().getLoginInfo(loginInfo => {
-    if (!loginInfo.user_info) {
-      return alert('用户未登录')
-    }
-    var { user_id, user_token } = loginInfo.user_info
-    fetch({
-      url: 'index.php?m=Mall&c=Order&a=cancelOrder',
-      data: {
-        user_id, user_token,
-        order_id
-      },
-      success, error
-    })
-
+  
+  if (!getApp().globalData.loginInfo.is_login) {
+    return alert('用户未登录')
+  }
+  
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  fetch({
+    url: 'order/cancelOrderWx',
+    data: {
+      user_id,
+      order_id
+    },
+    success, error
   })
 }
-*/
+
 // 获取订单列表
 export function getOrders(options) {
   var {
@@ -538,7 +549,7 @@ export function getPayment(options) {
 
 export function paySuccess(options) {
   var {
-    order_id, success
+    order_id, prepay_id, success
   } = options
   var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
   fetch({
@@ -546,6 +557,7 @@ export function paySuccess(options) {
     data: {
       order_id,
       user_id,
+      prepay_id
     },
     success
   })
@@ -789,4 +801,36 @@ export function getCommentList(options) {
     error
   })
 
+}
+
+export function getMsgList(options) {
+
+  var {
+     success, error
+  } = options
+
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+
+  fetch({
+    url: 'user/getMsgListWx',
+    data: {
+      user_id
+    },
+    success,
+    error
+  })
+}
+
+export function setProjectCommentRead(options) {
+    var { project_id,  success} = options
+    var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+
+    fetch({
+      url: 'user/setProjectCommentReadWx',
+      data: {
+        user_id,
+        project_id
+      },
+      success
+    })
 }

@@ -32,20 +32,20 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/tabbar/Tabbar_Home_Empty.png",
-        "selectedIconPath": "images/tabbar/Tabbar_Home_Full.png",
+        "iconPath": "images/tabBar/Tabbar_Home_Empty.png",
+        "selectedIconPath": "images/tabBar/Tabbar_Home_Full.png",
         "text": "首页"
       },
       {
         "pagePath": "pages/shop/list",
-        "iconPath": "images/tabbar/Tabbar_Find_Empty.png",
-        "selectedIconPath": "images/tabbar/Tabbar_Find_Full.png",
+        "iconPath": "images/tabBar/Tabbar_Find_Empty.png",
+        "selectedIconPath": "images/tabBar/Tabbar_Find_Full.png",
         "text": "逛一逛"
       },
       {
         "pagePath": "pages/mine/mine",
-        "iconPath": "images/tabbar/Tabbar_My_Empty.png",
-        "selectedIconPath": "images/tabbar/Tabbar_My_Full.png",
+        "iconPath": "images/tabBar/Tabbar_My_Empty.png",
+        "selectedIconPath": "images/tabBar/Tabbar_My_Full.png",
         "text": "我的"
       }
     ]
