@@ -19,20 +19,38 @@
                 </block>
             </swiper>
         </view>
+        <view class="tip_title">
+          <text>最新发布</text>
+        </view>
         <view class="list_wrap">
             <view class="list"  wx:for="{{projectList}}" wx:key="{{project_id}}">
                 <navigator class="item" url="/pages/project/detail?id={{item.project_id}}">
                     <view class="top">
-                        <text class="item_title">{{item.item_title}}</text>
+                        <view class="left">
+                            <image class="img" src="{{item.create_userHead}}"></image>
+                            <text class="user">{{item.create_userName}}</text>
+                        </view>
+                        <view class="right">
+                            <text class="univ">南京林业大学</text>
+                        </view>
                     </view>
                     <view class="item_info">
-                        <text class="tip">{{item.subtitle}}</text>
+                        <!-- <text class="tip">{{item.subtitle}}</text> -->
                         <image class="pro_img" src="{{item.project_head || '/images/index/pro_img.png'}}" mode="aspectFill"></image>
+                        <view class="title">
+                          <text class="item_title">{{item.item_title}}</text>
+                        </view>
                     </view>
                     <view class="foot">
                         <view class="left">
-                            <image class="img" src="{{item.create_userHead}}"></image>
-                            <text class="activity_title">{{item.create_userName}}</text>
+                            <view class="focus">
+                              <image src="/images/index/favor_fill.png"></image>
+                              <text class="text">101</text>
+                            </view>
+                            <view class="comment">
+                              <image src="/images/index/comment_fill.png"></image>
+                              <text class="text">200</text>
+                            </view>
                         </view>
                         <view class="right">
                             <!-- <text class="num">关注:<text>{{item.interest}}人</text></text> -->
