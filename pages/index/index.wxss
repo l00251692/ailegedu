@@ -41,7 +41,7 @@
 }
 .list_wrap .title{
     display:block;
-    padding-left:20rpx;
+    padding-left:40rpx;
     font:32rpx/60rpx '微软雅黑';
     color:#191919;
     padding-top:10rpx;

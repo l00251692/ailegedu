@@ -7,7 +7,7 @@ import {
 Page({
   data: {
     art: {},
-    tabs: ["详情", "讨论"],
+    tabs: ["项目详情", "评论"],
     activeIndex: 0,
     hasMore: true,
     loading: false,

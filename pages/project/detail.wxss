@@ -432,29 +432,27 @@ overflow:hidden;
     font-weight:bold;
 }
 
-.concat{
+.infoitem{
   position:relative;
   left:40rpx;
   border-bottom:2rpx solid #e8e8e8;
-  margin-top:20rpx;
+  display:-webkit-box;
 }
 
-.concat_inf{
+.infoitem_inf{
     font:28rpx/66rpx '微软雅黑';
     color:#2a2a2a;
 }
 
-.concat_inf2{
+.infoitem_inf2{
     font:28rpx/66rpx '微软雅黑';
     color:#919191;
     width:100%;
-    margin-left:20rpx;
+    padding-left:20rpx;
 }
 
 .info_text
 {
-  margin-top: 1.2em;
-  margin-bottom: 1.2em;
   padding-left: 40rpx;
   padding-right: 40rpx;
   color: #999999;
@@ -471,7 +469,37 @@ overflow:hidden;
   line-height:40rpx;
   text-indent:2em;
 }
+.bottom {
+  display:-webkit-box;
+  -webkit-box-orient:horizontal;
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:50px;
+  align-items:center;
+  background: #e22222;
 
+}
+
+.share {
+  display:-webkit-box;
+  background: #222222;
+  border: 2px solid #666;
+  -webkit-box-flex: 1;
+}
+.like {
+  display:-webkit-box;
+  background: #555555;
+  border: 2px solid #666;
+  -webkit-box-flex: 1;
+}
+.leaveDate {
+  display:-webkit-box;
+  background: #888888;
+  border: 2px solid #666;
+  -webkit-box-flex: 3;
+}
 
 /*评论页面*/
 .comments {

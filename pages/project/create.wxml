@@ -3,22 +3,50 @@
         <image src="{{tempFilePaths}}"></image>
         <view class="add_poster" bindtap='chooseImage'>
             <image src="/images/carmara.png"></image>
-            添加封面
+            上传封面
         </view>
     </view>
     <!--内容  -->
     <view class="content">
         <view class="title">
-            <text class="input_inf">标题</text>
-            <input type="text" bindinput="onTitleInput" class="input_inf2" name="title" placeholder='项目标题'></input>
+            <text class="input_inf">项目名称*</text>
+            <input type="text" bindinput="onTitleInput" class="input_inf2" name="title" placeholder='请填写项目名称'></input>
+         </view>
+         <view class="location">
+            <text class="location_inf">所在高校*</text>
+            <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" range="{{university}}" range-key="{{'name'}}">
+              <view class="picker">
+                {{selectUniv}}
+              </view>
+            </picker>
+         </view>
+         <view class="location">
+            <text class="location_inf">截止时间*</text>
+            <picker mode="date" value="{{date}}" start="2018-01-01" end="2019-12-31" bindchange="bindDateChange">
+              <view class="picker">
+                  {{date}}
+              </view>
+            </picker>
          </view>
          <view class="concat">
             <text class="concat_inf">联系方式</text>
-            <input type="text" bindinput="onConcatInput" class="concat_inf2" name="concat" placeholder='QQ/微信(选填)'></input>
+            <input type="text" bindinput="onConcatInput" class="concat_inf2" name="concat" placeholder='电话/QQ/微信'></input>
          </view>
          <view class="intruction">
-            <text class="instr_inf">内容介绍</text>
-            <textarea bindinput="onInstructionInput" placeholder='请输入项目介绍，运营模式，团队组成，召集对象等' maxlength="5000"class ="textarea">  </textarea>
+            <text class="instr_inf">项目介绍*</text> <text class="tip">（基本情况，团队组成，众筹目标，投资汇报等）</text>
+            <textarea bindinput="onInstructionInput" placeholder='最多输入5000字' maxlength="5000"class ="textarea">       </textarea>
+          </view>
+          <view class="upload-img">
+            <text class="upload-img_inf">上传图片</text> 
+          </view> 
+          <view class="img-upload">
+            <view class="img-add" bindtap="chooseImage2">
+              <image src="/images/add.png"></image>
+            </view>
+            <view class="img-item" bindlongtap="editImage2" wx:for="{{uploadimgs}}" wx:key="{{index}}">
+              <icon type="clear" size="20" color="red" style="display:{{editable?'block':'none'}}" bindtap="deleteImg2" data-index="{{index}}"/>
+              <image src="{{item}}" mode="aspectFill"></image>
+            </view>
           </view>
     </view>
     <view class="create">
