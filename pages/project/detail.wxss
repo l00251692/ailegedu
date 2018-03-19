@@ -300,6 +300,12 @@
   color: #ff5801;
 }
 
+.info_img {
+  width:90%;
+  padding-bottom:2rpx;
+  padding-top:2rpx;
+}
+
 /*shop-review*/
 .shop-review {
   margin-top: 10px;
@@ -434,7 +440,8 @@ overflow:hidden;
 
 .infoitem{
   position:relative;
-  left:40rpx;
+  padding-left:40rpx;
+  padding-right:40rpx;
   border-bottom:2rpx solid #e8e8e8;
   display:-webkit-box;
 }
@@ -476,29 +483,41 @@ overflow:hidden;
   bottom:0;
   left:0;
   right:0;
-  height:50px;
+  height:100rpx;
   align-items:center;
-  background: #e22222;
-
+  z-index: 50;
+  border-top:2rpx solid #e8e8e8;
+  background:#ffffff;
 }
 
 .share {
   display:-webkit-box;
-  background: #222222;
-  border: 2px solid #666;
   -webkit-box-flex: 1;
+  -webkit-box-align: center; 
+  -webkit-box-pack: center;
+}
+.share image{
+  width:60rpx;
+  height:60rpx;
 }
 .like {
   display:-webkit-box;
-  background: #555555;
-  border: 2px solid #666;
   -webkit-box-flex: 1;
+  -webkit-box-align: center; 
+  -webkit-box-pack: center;
 }
+
+.like image{
+  width:60rpx;
+  height:60rpx;
+}
+
 .leaveDate {
   display:-webkit-box;
-  background: #888888;
-  border: 2px solid #666;
   -webkit-box-flex: 3;
+  -webkit-box-align: center; 
+  -webkit-box-pack: center;
+  background-color: #5cd79a
 }
 
 /*评论页面*/

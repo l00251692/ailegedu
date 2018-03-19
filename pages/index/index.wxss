@@ -220,13 +220,8 @@
     text-align:right;
 }
 .list .item .foot .right .num{
-    font:20rpx/40rpx '微软雅黑';
-    color:#141414;
-}
-.list .item .foot .right .num text{
-    font:20rpx/40rpx '微软雅黑';
-    color:#141414;
-    font-weight:bold;
+    font:24rpx/40rpx '微软雅黑';
+    color:#5cd79a;
 }
 
 .line{

@@ -750,8 +750,10 @@ export function getProjectInfo(options) {
 //获取发布的项目列表
 export function createProject(options) {
   var {
-    title, concat, instruction, success
+    title, concat, instruction, date, selectUniv,success,error
   } = options
+  console.log(selectUniv)
+  console.log(date)
   var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
   fetch({
     url: 'project/createProjectWx',
@@ -759,9 +761,12 @@ export function createProject(options) {
       user_id,
       title,
       concat,
-      instruction
+      instruction,
+      date, 
+      selectUniv
     },
-    success
+    success,
+    error
   })
 
 }
@@ -833,4 +838,13 @@ export function setProjectCommentRead(options) {
       },
       success
     })
+}
+export function getUnivList(options){
+  var { success } = options
+
+  fetch({
+    url: 'project/getUnivListWx',
+    data: {},
+    success
+  })
 }

@@ -1,6 +1,6 @@
 <view class="parent">
     <view class="top">
-        <image src="{{tempFilePaths}}"></image>
+        <image src="{{tempFilePaths || '/images/index/default-project-head.png'}}" ></image>
         <view class="add_poster" bindtap='chooseImage'>
             <image src="/images/carmara.png"></image>
             上传封面

@@ -18,11 +18,11 @@
       <swiper-item class="weui-tab__content weui-tab__content_info">
           <view class="infoitem">
             <text class="infoitem_inf">发起人</text>
-            <text class="infoitem_inf2">xxx defindex</text>
+            <text class="infoitem_inf2">{{info.create_userName}}</text>
           </view>
           <view class="infoitem">
             <text class="infoitem_inf">所在高校</text>
-            <text class="infoitem_inf2">南京林业大学</text>
+            <text class="infoitem_inf2">{{info.location}}</text>
           </view>
           <view class="infoitem">
             <text class="infoitem_inf">联系方式</text>
@@ -30,13 +30,23 @@
             <text class="infoitem_inf2" wx:else>无</text>
           </view>
           <scroll-view scroll-y style="height: 400rpx" class="info_text">
-            <text >这是给噶埃里克导航啊老客户大锅饭卡拉哈拉开到韩国；昂达拉开个会拉开个会阿拉开个会这是给噶埃里克导航啊老客户大锅饭卡拉哈拉开到韩国；昂达拉开个会拉开个会阿拉开个会这是给噶埃里克导航啊老客户大锅饭卡拉哈拉开到韩国；昂达拉开个会拉开个会阿拉开个会这是给噶埃里克导航啊老客户大锅饭卡拉哈拉开到韩国；昂达拉开个会拉开个会阿拉开个会这是给噶埃里克导航啊老客户大锅饭卡拉哈拉开到韩国；昂达拉开个会拉开个会阿拉开个会这是给噶埃里克导航啊老客户大锅饭卡拉哈拉开到韩国；昂达拉开个会拉开个会阿拉开个会这是给噶埃里克导航啊老客户大锅饭卡拉哈拉开到韩国；昂达拉开个会拉开个会阿拉开个会</text>
+            <text >{{info.subtitle}}</text>
+            <image wx:for="{{info.addImgarr}}" class="info_img" src="{{item.url}}"> 
+            </image>
           </scroll-view>
           
           <view class="bottom">
-            <view class="share"></view>
-            <view class="like"></view>
-            <view class="leaveDate"></view>
+            <view class="share" bindtap='onShare'>
+              <image src='/images/index/share.png'></image>
+            </view>
+            <view class="like" bindtap='onLike'>
+              <image wx:if="{{isLike}}" src='/images/index/like_fill.png'></image>
+              <image wx:else src='/images/index/like_fill.png'></image>
+            </view>
+            <view class="leaveDate">
+              <text wx:if="{{info.days > 0}}"> 距离结束还有{{info.days}}天</text>
+              <text wx:else> 已结束 </text> 
+            </view>
           </view>
       </swiper-item>
       <swiper-item class="weui-tab__content weui-tab__content_review">

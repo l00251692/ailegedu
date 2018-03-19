@@ -1,6 +1,6 @@
 
 import {
-  createProject
+  createProject, getUnivList
 } from '../../utils/api'
 
 import {
@@ -11,37 +11,49 @@ import dateFormat from '../../utils/dateformat'
 Page({
 
     data:{
-      tempFilePaths: ['/images/index/default-project-head.png'],
-      provinceList: [
-        { "proviceId": "1", "name": "江苏", "initial": "B" }
-      ],
-      univList: [
-        {
-          "provinceId": "1",
-          "univs": [
-            { "id": "1", "name": "南京林业大学" },
-            { "id": "2", "name": "河海大学" }
-          ]
-        },
-      ],
+      tempFilePaths:null,
+      // provinceList: [
+      //   { "proviceId": "1", "name": "江苏" }
+      // ],
+      // univList: [
+      //   {
+      //     "provinceId": "1",
+      //     "univs": [
+      //       { "id": "1", "name": "南京林业大学" },
+      //       { "id": "2", "name": "河海大学" }
+      //     ]
+      //   },
+      // ],
       selectProv: '',
       selectUniv: '不限',
       uploadimgs: [], //上传图片列表
     },
     onLoad: function () {
       var { provinceList, univList} = this.data
-      var tmp_date = dateFormat(new Date(), "yyyy-mm-dd")
-      this.setData({
-        university: [provinceList, univList[0].univs],
-        date: tmp_date
+      var that = this
+      getUnivList({
+        success(data)
+        {
+          console.log(JSON.stringify(data))
+          var tmp_date = dateFormat(new Date(), "yyyy-mm-dd")
+          that.setData({
+            provinceList: data.provinceList,
+            univList: data.univList,
+            university: [data.provinceList, data.univList[0].univs],
+            date: tmp_date
+          })
+        }
       })
+      
     },
     bindMultiPickerChange: function (e) {
+      console.log("bindMultiPickerChange", e)
       var { provinceList, univList} = this.data
       this.setData({
         selectProv: provinceList[e.detail.value[0]].name,
         selectUniv: univList[e.detail.value[0]].univs[e.detail.value[1]].name
       })
+      console.log(univList[e.detail.value[0]].univs[e.detail.value[1]].name)
       console.log(e.detail.value[1])
       
     },
@@ -130,7 +142,7 @@ Page({
     onSubmit: function () {
       var that = this
       var {
-        tempFilePaths, title, concat,instruction
+        tempFilePaths, title, concat, instruction, date, selectUniv, uploadimgs
       } = this.data
 
       if (title == null) {
@@ -141,50 +153,60 @@ Page({
         return alert('请输入内容介绍')
       }
 
+      if (tempFilePaths == null)
+      {
+        return alert('请上传封面')
+      }
+
       this.setData({
         loading: true
       })
       createProject({
-        title, concat, instruction, 
+        title, concat, instruction, date, selectUniv,
         success(data) {
-          if (tempFilePaths[0] == '/images/index/pro_img.png')
-          {
-            that.setData({
-              loading: false
-            })
-            alert('创建项目成功', function () {
-              var callback = getPrevPage()['callback']
-              callback && callback()
-              wx.navigateBack()
-            })
-          }
-          else
-          {
-            uploadFile(
-              {
-                url: 'project/updateProjectImgWx',
-                data: {
-                  project_id: data.project_id,
-                  filePath: tempFilePaths[0] //filePath为必须，在公共函数里写了
-                },
-                success(data) {
-                  that.setData({
-                    loading: false
-                  })
-                  alert('创建项目成功', function () {
-                    var callback = getPrevPage()['callback']
-                    callback && callback()
-                    wx.navigateBack()
-                  })
-                },
-                error(data) {
-                  alert('创建失败，请稍后')
-                  that.setData({
-                    loading: false
-                  })
+          uploadFile(
+            {
+              url: 'project/updateProjectImgWx',
+              data: {
+                project_id: data.project_id,
+                filePath: tempFilePaths[0] //filePath为必须，在公共函数里写了
+              },
+              success(data) {
+                //逐章内容图片上传
+                var fail_num = 0;
+                for (var i=0; i<uploadimgs.length; i++)
+                {
+                  var filePath_tmp = uploadimgs[i]
+                  //上传图片
+                  uploadFile(
+                    {
+                      url: 'project/updateProjectInfoImgWx',
+                      data: {
+                        project_id: data.project_id,
+                        filePath: filePath_tmp //filePath为必须，在公共函数里写了
+                      },
+                      error(data)
+                      {
+                        fail_num++;
+                      }
+                    })
                 }
-              })
-          } 
+                that.setData({
+                  loading: false
+                })
+                alert('创建项目成功', function () {
+                  var callback = getPrevPage()['callback']
+                  callback && callback()
+                  wx.navigateBack()
+                }) 
+              },
+              error(data) {
+                alert('创建失败，请稍后')
+                that.setData({
+                  loading: false
+                })
+              }
+            }) 
         },
         error(data) {
           that.setData({
