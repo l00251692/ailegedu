@@ -6,7 +6,7 @@
           <image src="{{info.project_head || '/images/index/default-project-head.png'}}" />
        </view>
         <text class="banner-title">{{info.item_title}}</text>
-    </view>
+  </view>
   <view class="shop-content">
     <view class=" weui-tab weui-tab_shop">
       <view class="weui-navbar">
@@ -34,10 +34,10 @@
             <image wx:for="{{info.addImgarr}}" class="info_img" src="{{item.url}}"> 
             </image>
           </scroll-view>
-          
           <view class="bottom">
             <view class="share"  bindtap='onShare'>
               <image src='/images/index/share.png'></image>
+              
             </view>
             <view class="like" bindtap='onLike'>
               <image wx:if="{{info.isLike}}" src='/images/index/like_fill.png'></image>
@@ -47,6 +47,11 @@
               <text wx:if="{{info.days > 0}}"> 距离结束还有{{info.days}}天</text>
               <text wx:else> 已结束 </text> 
             </view>
+          </view>
+          <canvas canvas-id="shareCanvas" style="width:600px;height:900px"></canvas>
+          <view hidden='{{hidden}}' class='preview'>
+            <image src='{{shareImgSrc}}' mode='widthFix'></image>
+            <button type='primary' size='mini' bindtap='saveSharePic'>保存分享图</button>
           </view>
       </swiper-item>
       <swiper-item class="weui-tab__content weui-tab__content_review">

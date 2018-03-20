@@ -520,6 +520,35 @@ overflow:hidden;
   background-color: #5cd79a
 }
 
+canvas{
+  position: fixed;
+  top: 0;
+  left: 999px;
+}
+
+.preview {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.9);
+  position: absolute;
+  z-index: 2;
+}
+.preview image{
+  width: 70%;
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  z-index: 3;
+  border: 1px dashed #fff;
+}
+.preview button{
+  width: 40%;
+  position: absolute;
+  bottom: 150rpx;
+  left: 30%;
+  z-index: 4;
+}
+
 /*评论页面*/
 .comments {
   margin-top: 6rpx;
