@@ -36,12 +36,12 @@
           </scroll-view>
           
           <view class="bottom">
-            <view class="share" bindtap='onShare'>
+            <view class="share"  bindtap='onShare'>
               <image src='/images/index/share.png'></image>
             </view>
             <view class="like" bindtap='onLike'>
-              <image wx:if="{{isLike}}" src='/images/index/like_fill.png'></image>
-              <image wx:else src='/images/index/like_fill.png'></image>
+              <image wx:if="{{info.isLike}}" src='/images/index/like_fill.png'></image>
+              <image wx:else src='/images/index/like.png'></image>
             </view>
             <view class="leaveDate">
               <text wx:if="{{info.days > 0}}"> 距离结束还有{{info.days}}天</text>

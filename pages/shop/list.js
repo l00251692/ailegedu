@@ -123,7 +123,7 @@ Page({
   onShareAppMessage() {
     return {
       title: '逛一逛',
-      path: '/pages/index/index'
+      path: '/pages/shop/list'
     }
   }
 })

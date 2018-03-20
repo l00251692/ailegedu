@@ -737,9 +737,20 @@ export function getProjectInfo(options) {
   var {
     project_id, success
   } = options
+  
+  if (!getApp().globalData.loginInfo.is_login)
+   {
+     var user_id = 0
+  }
+  else{
+    var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+  }
+
+  
   fetch({
     url: 'project/getProjectInfoWx',
     data: {
+      user_id,
       project_id,
     },
     success
@@ -752,8 +763,6 @@ export function createProject(options) {
   var {
     title, concat, instruction, date, selectUniv,success,error
   } = options
-  console.log(selectUniv)
-  console.log(date)
   var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
   fetch({
     url: 'project/createProjectWx',
@@ -776,6 +785,11 @@ export function sendProjdectComment(options) {
   var {
     project_id, comment, success, error
   } = options
+
+  if (!getApp().globalData.loginInfo.is_login) {
+    return alert("请先在'我的'页面登录")
+  }
+  
   var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
   fetch({
     url: 'project/sendProjdecCommentWx',
@@ -847,4 +861,24 @@ export function getUnivList(options){
     data: {},
     success
   })
+}
+
+export function setProjectLikeStatus(options){
+  var { status, project_id, success } = options
+
+  if (!getApp().globalData.loginInfo.is_login) {
+    return alert("请先在'我的'页面登录")
+  }
+  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+
+  fetch({
+    url: 'user/setProjectLikeStatusWx',
+    data: {
+      status,
+      project_id,
+      user_id
+    },
+    success
+  })
+
 }

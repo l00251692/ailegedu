@@ -98,4 +98,10 @@ Page({
     callback() {
        this.init()
     },
+    onShareAppMessage() {
+      return {
+        title: '项目列表',
+        path: '/pages/index/index'
+      }
+    }
 })

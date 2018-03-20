@@ -1,5 +1,5 @@
 import {
-  getProjectInfo, sendProjdectComment,getCommentList
+  getProjectInfo, sendProjdectComment, getCommentList, setProjectLikeStatus
 } from '../../utils/api'
 import {
   alert
@@ -244,7 +244,6 @@ Page({
   //发送评论评论 事件处理
   send: function () {
     var that = this
-    console.log("send comment:" + that.data.content)
     if (that.data.content.trim().length > 0) {
       sendProjdectComment({
         project_id:this.id,
@@ -270,6 +269,36 @@ Page({
       that.setData({
         content: ""//清空文本域值
       })
+    }
+  },
+
+  onLike: function (e) {
+    var{ id, info:{isLike} } = this.data
+    console.log("onLike1:" + JSON.stringify(isLike))
+    var that = this
+
+    setProjectLikeStatus({
+      status: !isLike,
+      project_id : that.id,
+      success(data)
+      {
+        that.setData({
+          'info.isLike': !isLike 
+        })
+        console.log("onLike2:" + JSON.stringify(that.data.info.isLike))
+        wx.showToast({
+          title: !isLike ? '关注成功' : '取消成功',
+          icon: 'none',
+          duration: 1500
+        });
+      }
+    })     
+  },
+  onShareAppMessage() {
+    var { info } = this.data
+    return {
+      title: info.item_title,
+      path: '/pages/project/detail'
     }
   }
 })
