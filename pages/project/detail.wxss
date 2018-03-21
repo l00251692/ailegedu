@@ -463,6 +463,7 @@ overflow:hidden;
   padding-left: 40rpx;
   padding-right: 40rpx;
   color: #999999;
+  height:400rpx；
 }
 
 .info_text_area
@@ -479,7 +480,7 @@ overflow:hidden;
 .bottom {
   display:-webkit-box;
   -webkit-box-orient:horizontal;
-  position:absolute;
+  position:fixed;
   bottom:0;
   left:0;
   right:0;
@@ -530,7 +531,6 @@ canvas{
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,.9);
-  position: absolute;
   z-index: 2;
 }
 .preview image{

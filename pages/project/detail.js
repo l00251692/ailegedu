@@ -1,5 +1,5 @@
 import {
-  getProjectInfo, sendProjdectComment, getCommentList, setProjectLikeStatus
+  getProjectInfo, sendProjdectComment, getCommentList, setProjectLikeStatus, getShareQr
 } from '../../utils/api'
 import {
   alert
@@ -12,7 +12,7 @@ Page({
     hasMore: true,
     loading: false,
     page: 0,
-    hiden:true, //控制分享生成的图片是否显示
+    hidden:true, //控制分享生成的图片是否显示
     isShow: false,//控制emoji表情是否显示
     isLoad: true,//解决初试加载时emoji动画执行一次
     content: "",//评论框的内容
@@ -248,7 +248,6 @@ Page({
       sendProjdectComment({
         project_id:this.id,
         comment: that.data.content,
-        //comment:"你好啊",
         success(data)
         {
           that.setData({
@@ -276,63 +275,77 @@ Page({
 
     var that = this;
     //1. 请求后端API生成小程序码
-    // getQr({
-    //   success(data)
-    //   {
-    //     that.setData({
-    //       qrImgPaht: data.path
-    //     })
-    //   }
-    // });
+     getShareQr({
+       project_id:that.id,
+       success(data)
+       {
+         console.log("7")
+         that.setData({
+           qrImgPath: data.path
+         })
+         console.log("8")
+         var { qrImgPath } = that.data
+         console.log(qrImgPath)
+         wx.getImageInfo({
+           src: qrImgPath,
+           success: function (res) {
+             console.log("555555")
+             //2. canvas绘制文字和图片
+             const ctx = wx.createCanvasContext('shareCanvas')
+             var qrPath = res.path
+             var imgPath = '/images/default-shop.png'
+             var bgImgPath = that.data.info.project_head
+             ctx.drawImage(bgImgPath, 0, 0, 600, 520)
 
-    //2. canvas绘制文字和图片
-    const ctx = wx.createCanvasContext('shareCanvas')
-    var imgPath = '/images/default-shop.png'
-    var bgImgPath = '/images/sharebg.png'
-    ctx.drawImage(bgImgPath, 0, 0, 600, 520)
+             ctx.setFillStyle('white')
+             ctx.fillRect(0, 520, 600, 280);
 
-    ctx.setFillStyle('white')
-    ctx.fillRect(0, 520, 600, 280);
+             ctx.drawImage(imgPath, 30, 550, 60, 60)
+             ctx.drawImage(qrPath, 410, 610, 160, 160) //二维码图片
 
-    ctx.drawImage(imgPath, 30, 550, 60, 60)
-    ctx.drawImage(bgImgPath, 30, 550, 60, 60);
-    ctx.drawImage(imgPath, 410, 610, 160, 160) //二维码图片
+             ctx.setFontSize(28)
+             ctx.setFillStyle('#6F6F6F')
+             ctx.fillText(that.data.info.item_title, 110, 590)
 
-    ctx.setFontSize(28)
-    ctx.setFillStyle('#6F6F6F')
-    ctx.fillText('妖妖灵', 110, 590)
+             ctx.setFontSize(30)
+             ctx.setFillStyle('#111111')
+             ctx.fillText(that.data.info.item_title, 30, 660)
+             ctx.fillText('进行中', 30, 700)
 
-    ctx.setFontSize(30)
-    ctx.setFillStyle('#111111')
-    ctx.fillText('宠友们快来围观萌宠靓照', 30, 660)
-    ctx.fillText('我在萌爪幼稚园', 30, 700)
-
-    ctx.setFontSize(24)
-    ctx.fillText('长按扫码查看详情', 30, 770)
-    ctx.draw()
-
-    // 3. canvas画布转成图片
-    setTimeout(function() {
-      wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: 600,
-      height: 800,
-      destWidth: 600,
-      destHeight: 800,
-      canvasId: 'shareCanvas',
-      success: function (res) {
-        console.log(res.tempFilePath);
-        that.setData({
-          shareImgSrc: res.tempFilePath,
-          hidden: false
-        })
-      },
-      fail: function (res) {
-        console.log(res)
-      }
-    })
-    },2000)
+             ctx.setFontSize(24)
+             ctx.fillText('长按扫码查看详情', 30, 770)
+             ctx.draw()
+             console.log("121212")
+             // 3. canvas画布转成图片
+             setTimeout(function () {
+               wx.canvasToTempFilePath({
+                 x: 0,
+                 y: 0,
+                 width: 600,
+                 height: 800,
+                 destWidth: 600,
+                 destHeight: 800,
+                 canvasId: 'shareCanvas',
+                 success: function (res) {
+                   console.log(res.tempFilePath);
+                   that.setData({
+                     shareImgSrc: res.tempFilePath,
+                     hidden: false
+                   })
+                 },
+                 fail: function (res) {
+                   console.log(res)
+                 }
+               })
+             }, 2000)
+           },
+           fail:function(res){
+             console.log("333333")
+             console.log(JSON.stringify(res))
+           }
+         })
+       }
+     });
   },
 
   saveSharePic:function(e)
@@ -344,9 +357,9 @@ Page({
       success(res) {
         wx.showModal({
           title: '存图成功',
-          content: '图片成功保存到相册了，去发圈噻~',
+          content: '图片成功保存到相册了，可以分享到朋友圈了~',
           showCancel: false,
-          confirmText: '好哒',
+          confirmText: '好的',
           confirmColor: '#72B9C3',
           success: function (res) {
             if (res.confirm) {

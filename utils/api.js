@@ -882,3 +882,16 @@ export function setProjectLikeStatus(options){
   })
 
 }
+
+export function getShareQr(options) {
+  var {  project_id, success } = options
+
+  fetch({
+    url: 'project/getShareQrWx',
+    data: {
+      project_id
+    },
+    success
+  })
+
+}

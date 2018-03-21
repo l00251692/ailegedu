@@ -16,6 +16,7 @@
       </view>
       <swiper bindchange="swiperChange" current="{{activeIndex}}" autoplay="{{false}}" class="weui-tab__panel">
       <swiper-item class="weui-tab__content weui-tab__content_info">
+        <scroll-view class="scroll-view_review" enable-back-to-top="true" scroll-y="true">
           <view class="infoitem">
             <text class="infoitem_inf">发起人</text>
             <text class="infoitem_inf2">{{info.create_userName}}</text>
@@ -29,30 +30,12 @@
             <text class="infoitem_inf2" wx:if="{{info.concat}}">{{info.concat}}</text>
             <text class="infoitem_inf2" wx:else>无</text>
           </view>
-          <scroll-view scroll-y style="height: 400rpx" class="info_text">
+          <view scroll-y  class="info_text">
             <text >{{info.subtitle}}</text>
-            <image wx:for="{{info.addImgarr}}" class="info_img" src="{{item.url}}"> 
+            <image wx:for="{{info.addImgarr}}" wx:key="{{item.url}}" class="info_img" src="{{item.url}}"> 
             </image>
-          </scroll-view>
-          <view class="bottom">
-            <view class="share"  bindtap='onShare'>
-              <image src='/images/index/share.png'></image>
-              
-            </view>
-            <view class="like" bindtap='onLike'>
-              <image wx:if="{{info.isLike}}" src='/images/index/like_fill.png'></image>
-              <image wx:else src='/images/index/like.png'></image>
-            </view>
-            <view class="leaveDate">
-              <text wx:if="{{info.days > 0}}"> 距离结束还有{{info.days}}天</text>
-              <text wx:else> 已结束 </text> 
-            </view>
           </view>
-          <canvas canvas-id="shareCanvas" style="width:600px;height:900px"></canvas>
-          <view hidden='{{hidden}}' class='preview'>
-            <image src='{{shareImgSrc}}' mode='widthFix'></image>
-            <button type='primary' size='mini' bindtap='saveSharePic'>保存分享图</button>
-          </view>
+        </scroll-view>
       </swiper-item>
       <swiper-item class="weui-tab__content weui-tab__content_review">
           <scroll-view class="scroll-view_review" enable-back-to-top="true" bindscrolltolower="onScrolltolower" scroll-y="true">
@@ -74,17 +57,28 @@
                 </view>
               </view>
             </view>
-            <!--加载更多模版-->
-            <!-- <block wx:if="{{loading}}">
-              <template is="loading" />
-            </block>
-            <block wx:else>
-              <template is="nodata" />
-            </block> -->
             <template is="load-more" data="{{loading: loading, hasMore: hasMore}}"></template>
           </scroll-view>
         </swiper-item>  
       </swiper>
+      <view class="bottom" wx:if="{{activeIndex == 0}}">
+          <view class="share"  bindtap='onShare'>
+            <image src='/images/index/share.png'></image>  
+          </view>
+          <view class="like" bindtap='onLike'>
+            <image wx:if="{{info.isLike}}" src='/images/index/like_fill.png'></image>
+            <image wx:else src='/images/index/like.png'></image>
+          </view>
+          <view class="leaveDate">
+            <text wx:if="{{info.days > 0}}"> 距离结束还有{{info.days}}天</text>
+            <text wx:else> 已结束 </text> 
+          </view>
+      </view>
+      <canvas canvas-id="shareCanvas" style="width:600rpx;height:900rpx"></canvas>
+      <view style="display:{{hidden ? 'none' : 'block'}}" class='preview'>
+        <image src='{{shareImgSrc}}' mode='widthFix'></image>
+        <button type='primary' size='mini' bindtap='saveSharePic'>保存分享图</button>
+      </view>
       <view class="cf-bg" catchtap="cemojiCfBg" style="display:{{cfBg ? 'block' : 'none'}}"></view>
       <view class="comment-fixed" wx:if="{{activeIndex == 1}}">
             <view class="cf-box">
