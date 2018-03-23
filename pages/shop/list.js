@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 import {
-  getSellers
+  getSellers, getUnivList
 } from '../../utils/api'
 
 Page({
@@ -9,44 +9,48 @@ Page({
     category: [
       {
         "category_id": "1",
-        "title": "创业",
+        "title": "美食小吃",
         "icon": "/images/category/1.png"
       },
       {
         "category_id": "2",
-        "title": "最好的时间",
+        "title": "宿舍小铺",
         "icon": "/images/category/2.png"
       },
       {
         "category_id": "3",
-        "title": "是15年前",
+        "title": "好玩好物",
         "icon": "/images/category/3.png"
       },
       {
         "category_id": "4",
-        "title": "和现在",
+        "title": "学霸补习",
         "icon": "/images/category/4.png"
       },
       {
         "category_id": "5",
-        "title": "免费",
+        "title": "二手共享",
         "icon": "/images/category/5.png"
       },
       {
         "category_id": "6",
-        "title": "入驻",
+        "title": "众筹活动",
         "icon": "/images/category/6.png"
       },
       {
         "category_id": "7",
-        "title": "不限范围",
+        "title": "校园服务",
         "icon": "/images/category/7.png"
       },
       {
         "category_id": "8",
-        "title": "就在此刻",
+        "title": "免费入驻",
         "icon": "/images/category/8.png"
       }
+    ],
+    msgList:[
+      { url: "url", title: "E点校园让生活容易点" },
+      { url: "url", title: "大学生创业项目免费入住" },
     ],
     page: 0,
     hasMore: true,
@@ -59,15 +63,17 @@ Page({
   initAddress() {
     var that = this
     this.invalidateData()
-    getApp().getCurrentAddress(function (address) {
-      if (address.addr_id) {
-        address['title'] = `${address.addr} ${address.detail}`
-      }
-      that.setData({
-        currentAddress: address
-      })
-      that.loadData()
-    })
+    // getApp().getCurrentAddress(function (address) {
+    //   if (address.addr_id) {
+    //     address['title'] = `${address.addr} ${address.detail}`
+    //   }
+    //   that.setData({
+    //     currentAddress: address
+    //   })
+    //   that.loadData()
+    // })
+    
+    this.loadData()
   },
 
   loadData() {
@@ -76,33 +82,57 @@ Page({
     }
     var that = this
     var {
-      page,
+      page, provinceList, univList
     } = this.data
 
     this.setData({
       loading: true
     })
-    getSellers({
-      page,
+
+    getUnivList({
+      flag:1,
       success(data) {
-        var {
-          shopList
-        } = that.data
-        var a =[]
-        a = JSON.parse(data)
-        var list = a.map(item => {
-          item['distanceFormat'] = (item.distance / 1000).toFixed(2)
-          return item
-        })
+        console.log("whakthalkh")
+        console.log(data)
         that.setData({
-          shopList: shopList ? shopList.concat(list) : list,
-          page: page + 1,
-          hasMore: data.count == 0,
-          loading: false
+          provinceList: data.provinceList,
+          univList: data.univList,
+          university: [data.provinceList, data.univList[0].univs],
+        })
+
+        if (wx.getStorageSync('lastUniv')) {
+          that.setData({
+            lastUniv: wx.getStorageSync('lastUniv')
+          })
+        }
+        else {
+          wx.setStorageSync('lastUniv', data.univList[0].univs[0].name)
+          that.setData({
+            lastUniv: data.univList[0].univs[0].name
+          })
+        }
+
+        getSellers({
+          page,
+          selectUniv: that.data.lastUniv,
+          success(data) {
+            var { shopList } = that.data
+            var list = data.map(item => {
+              item['distanceFormat'] = (item.distance / 1000).toFixed(2)
+              return item
+            })
+            that.setData({
+              shopList: shopList ? shopList.concat(list) : list,
+              page: page + 1,
+              hasMore: data.count == 0,
+              loading: false
+            })
+          }
         })
       }
     })
   },
+
   invalidateData() {
     this.setData({
       page: 0,
@@ -110,6 +140,33 @@ Page({
       loading: false,
       shopList: null
     })
+  },
+  bindMultiPickerChange: function (e) {
+    console.log("bindMultiPickerChange", e)
+    var { provinceList, univList } = this.data
+    this.setData({
+      selectProv: provinceList[e.detail.value[0]].name,
+      lastUniv: univList[e.detail.value[0]].univs[e.detail.value[1]].name
+    })
+    wx.setStorageSync('lastUniv', univList[e.detail.value[0]].univs[e.detail.value[1]].name)
+    this.invalidateData()
+    this.loadData()
+  },
+
+  bindMultiPickerColumnChange(e) {
+    var { provinceList, univList } = this.data
+    if (e.detail.column == 0) {
+      var univs = [];
+      for (var i = 0; i < univList.length; i++) {
+        if (univList[i].provinceId == provinceList[e.detail.value].proviceId) {
+          univs = univList[i].univs;
+          break;
+        }
+      }
+      this.setData({
+        province: [provinceList, univs]
+      })
+    }
   },
   onReachBottom(e) {
     if (this.data.hasMore && !this.data.loading) {

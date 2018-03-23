@@ -32,6 +32,7 @@ Page({
       var { provinceList, univList} = this.data
       var that = this
       getUnivList({
+        flag:0,
         success(data)
         {
           console.log(JSON.stringify(data))

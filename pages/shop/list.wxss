@@ -11,8 +11,8 @@
 
 .address {
   position: relative;
-  padding: 3px 15px 3px 5px;
-  min-width: 150px;
+  padding: 6rpx 20rpx 6rpx 10rpx;
+  min-width: 400rpx;
   max-width: 90%;
   font-size: 14px;
   color: #fff;
@@ -21,13 +21,20 @@
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 15px/50%;
   overflow: hidden;
+  display:flex;
 }
 
-.address__icon {
+.address_title{
+  padding-left:20rpx;
+  flex:7;
+}
+
+.address_icon {
   margin-top: -2px;
   width: 24px;
   height: 24px;
   vertical-align: middle;
+  flex:1;
 }
 
 .search {
@@ -44,7 +51,6 @@
   padding: 0 10px 10px;
   font-size: 14px;
   text-align: center;
-  background-color: #fff;
   overflow: hidden;
 }
 
@@ -57,6 +63,50 @@
 .category__icon {
   height: 36px;
   width: 36px;
+}
+
+.banner{
+  display:flex;
+  flex-direction: row;
+}
+
+.toutiao_img{
+  flex:1;
+  height:80rpx;
+  width:80rpx;
+  padding-left: 20rpx;
+}
+.swiper_container {
+ height: 82rpx;
+ width: 100%;
+ background: #fff;
+ flex:6;
+}
+
+.container_item{
+  display:flex;
+  flex-direction: row;
+}
+
+
+.banner_img{
+  width: 80rpx;
+  height: 80rpx;
+  flex:1;
+  padding-right: 20rpx;
+  align-items:center;
+}
+
+.swiper_item {
+ flex:6;
+ font-size: 32rpx;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ letter-spacing: 4rpx;
+ padding-left: 40rpx;
+ align-items:center;
+ line-height:82rpx;
 }
 
 

@@ -7,6 +7,7 @@ import {
 export function getSellers(options) {
   var {
     page,
+    selectUniv,
     success
   } = options
   page = page || 0
@@ -16,6 +17,7 @@ export function getSellers(options) {
       url: 'campus/getAllCampusWx',
       data: {
         page,
+        selectUniv,
         city_name: address.city,
         city_id: address.city_id,
         district_name: address.district,
@@ -854,11 +856,13 @@ export function setProjectCommentRead(options) {
     })
 }
 export function getUnivList(options){
-  var { success } = options
+  var { flag, success } = options
 
   fetch({
     url: 'project/getUnivListWx',
-    data: {},
+    data: {
+      flag,
+    },
     success
   })
 }

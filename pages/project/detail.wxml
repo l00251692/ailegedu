@@ -74,10 +74,12 @@
             <text wx:else> 已结束 </text> 
           </view>
       </view>
-      <canvas canvas-id="shareCanvas" style="width:600rpx;height:900rpx"></canvas>
-      <view style="display:{{hidden ? 'none' : 'block'}}" class='preview'>
-        <image src='{{shareImgSrc}}' mode='widthFix'></image>
-        <button type='primary' size='mini' bindtap='saveSharePic'>保存分享图</button>
+      <view class="comment-fixed" wx:if="{{activeIndex == 0}}">
+        <canvas canvas-id="shareCanvas" style="width:600rpx;height:900rpx"></canvas>
+        <view style="display:{{hidden ? 'none' : 'block'}}" class='preview'>
+          <image src='{{shareImgSrc}}' mode='widthFix'></image>
+          <button type='primary' size='mini' bindtap='saveSharePic'>保存分享图</button>
+        </view>
       </view>
       <view class="cf-bg" catchtap="cemojiCfBg" style="display:{{cfBg ? 'block' : 'none'}}"></view>
       <view class="comment-fixed" wx:if="{{activeIndex == 1}}">
