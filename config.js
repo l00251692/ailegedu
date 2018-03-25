@@ -1,9 +1,10 @@
 // var host = "apitest.ipaotui.com"
 //var host = "api.ipaotui.com"
-var host = "localhost"
+//var host = "localhost"
+var host = "ailogic.xin"
 const debug = wx.getStorageSync('debug')
 if (debug) {
-  host = "localhost"
+  host = "ailogic.xin"
 }
 
 
