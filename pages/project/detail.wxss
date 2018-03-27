@@ -520,6 +520,13 @@ overflow:hidden;
   -webkit-box-pack: center;
   background-color: #5cd79a
 }
+.leaveDate0 {
+  display:-webkit-box;
+  -webkit-box-flex: 3;
+  -webkit-box-align: center; 
+  -webkit-box-pack: center;
+  background-color: #e8e8e8;
+}
 
 canvas{
   position: fixed;

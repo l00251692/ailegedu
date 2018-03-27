@@ -7,7 +7,6 @@ if (debug) {
   host = "ailogic.xin"
 }
 
-
 module.exports = {
   host,
   qqmapKey: 'FPOBZ-UT2K2-ZFYUC-CX67E-IOOYS-7XFQ6'

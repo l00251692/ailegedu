@@ -69,10 +69,8 @@
             <image wx:if="{{info.isLike}}" src='/images/index/like_fill.png'></image>
             <image wx:else src='/images/index/like.png'></image>
           </view>
-          <view class="leaveDate">
-            <text wx:if="{{info.days > 0}}"> 距离结束还有{{info.days}}天</text>
-            <text wx:else> 已结束 </text> 
-          </view>
+          <view class="leaveDate" wx:if="{{info.days > 0}}">距离结束还有{{info.days}}天</view>
+          <view class="leaveDate0" wx:else> 已结束 </view>
       </view>
       <view class="comment-fixed" wx:if="{{activeIndex == 0}}">
         <canvas canvas-id="shareCanvas" style="width:600rpx;height:900rpx"></canvas>
