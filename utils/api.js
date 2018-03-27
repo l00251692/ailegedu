@@ -11,22 +11,14 @@ export function getSellers(options) {
     success
   } = options
   page = page || 0
-  getApp().getCurrentAddress(address => {
-    var location = address.location
-    fetch({
-      url: 'campus/getAllCampusWx',
-      data: {
-        page,
-        selectUniv,
-        city_name: address.city,
-        city_id: address.city_id,
-        district_name: address.district,
-        district_id: address.district_id,
-        longitude: location.longitude,
-        latitude: location.latitude
-      },
-      success
-    })
+
+  fetch({
+    url: 'campus/getAllCampusWx',
+    data: {
+      page,
+      selectUniv
+    },
+    success
   })
 }
 
@@ -36,17 +28,13 @@ export function getSellerInfo(options) {
     seller_id,
     success, complete
   } = options
-  getApp().getCurrentAddress(address => {
-    var location = address.location
-    fetch({
-      url: 'campus/getCampusByIdWx',
-      data: {
-        seller_id,
-        longitude: location.longitude,
-        latitude: location.latitude
-      },
-      success, complete
-    })
+  
+  fetch({
+    url: 'campus/getCampusByIdWx',
+    data: {
+      seller_id,
+    },
+    success, complete
   })
 }
 
@@ -742,6 +730,7 @@ export function getProjectInfo(options) {
   
   if (!getApp().globalData.loginInfo.is_login)
    {
+     console.log("未登录")
      var user_id = 0
   }
   else{
@@ -788,22 +777,36 @@ export function sendProjdectComment(options) {
     project_id, comment, success, error
   } = options
 
-  if (!getApp().globalData.loginInfo.is_login) {
-    return alert("请先在'我的'页面登录")
-  }
-  
-  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
-  fetch({
-    url: 'project/sendProjdecCommentWx',
-    data: {
-      user_id,
-      project_id,
-      comment
-    },
-    success,
-    error
-  })
 
+  if (!getApp().globalData.loginInfo.is_login) {
+    //用户先登录
+    getApp().getLoginInfo(loginInfo => {
+      var { user_id, user_token } = loginInfo.userInfo
+      fetch({
+        url: 'project/sendProjdecCommentWx',
+        data: {
+          user_id,
+          project_id,
+          comment
+        },
+        success,
+        error
+      })
+    })
+  }
+  else {
+    var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+    fetch({
+      url: 'project/sendProjdecCommentWx',
+      data: {
+        user_id,
+        project_id,
+        comment
+      },
+      success,
+      error
+    })
+  } 
 }
 
 
@@ -871,19 +874,32 @@ export function setProjectLikeStatus(options){
   var { status, project_id, success } = options
 
   if (!getApp().globalData.loginInfo.is_login) {
-    return alert("请先在'我的'页面登录")
+    //用户先登录
+    getApp().getLoginInfo(loginInfo => {
+      var { user_id, user_token } = loginInfo.userInfo
+      fetch({
+        url: 'user/setProjectLikeStatusWx',
+        data: {
+          status,
+          project_id,
+          user_id
+        },
+        success
+      })
+    })
   }
-  var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
-
-  fetch({
-    url: 'user/setProjectLikeStatusWx',
-    data: {
-      status,
-      project_id,
-      user_id
-    },
-    success
-  })
+  else {
+    var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+    fetch({
+      url: 'user/setProjectLikeStatusWx',
+      data: {
+        status,
+        project_id,
+        user_id
+      },
+      success
+    })
+  } 
 
 }
 

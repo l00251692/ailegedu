@@ -376,7 +376,6 @@ Page({
 
   onLike: function (e) {
     var{ id, info:{isLike} } = this.data
-    console.log("onLike1:" + JSON.stringify(isLike))
     var that = this
 
     setProjectLikeStatus({
