@@ -68,15 +68,12 @@ Page({
     getSellerInfo({
       seller_id: id,
       success(data) {
-        var a = []
-        a = JSON.parse(data)
-        console.log("sellerinfo:" + data);
-        a['distanceFormat'] = +(a['distance'] / 1000).toFixed(2)
+        data['distanceFormat'] = +(data['distance'] / 1000).toFixed(2)
         that.setData({
-          info: a
+          info: data
         })
         wx.setNavigationBarTitle({
-          title: a.seller_name
+          title: data.seller_name
         })
       },
       complete() {

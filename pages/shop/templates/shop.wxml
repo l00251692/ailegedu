@@ -1,7 +1,7 @@
 <import src="/templates/star-rate.wxml" />
 
 <template name="shop">
-  <view wx:if="{{is_rest == 1}}"  class="weui-media-box weui-media-box_appmsg shop__item">
+  <view wx:if="{{status == 0}}"  class="weui-media-box weui-media-box_appmsg shop__item">
     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
       <image class="weui-media-box__thumb" src="{{pic_url || '/images/default-shop.png'}}" />
       <view class="shop__rest">休息中</view>
