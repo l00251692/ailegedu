@@ -1,7 +1,7 @@
 // pages/order/list.js
 import { ORDER_STATES } from './constant'
 import {
-  getOrders, getPayment, paySuccess
+  getOrders, getPayment, paySuccess, setOrderReceive
 } from '../../utils/api'
 
 import {
@@ -119,6 +119,33 @@ Page({
         that.setData({
           loading: false
         })
+      }
+    })
+  },
+  onConfirm(e){
+    var { id } = e.currentTarget
+    var that = this
+    var { list, loading } = this.data
+    if (loading) {
+      return;
+    }
+    this.setData({
+      loading: true
+    })
+    var { order_id } = list[id]
+    setOrderReceive({
+      order_id,
+      success(data){
+        wx.showToast({
+          title: '确认收货成功',
+        })
+        that.setData({
+          loading: false
+        })
+        that.initData()
+      },
+      error(data){
+        return alert("确认收货失败，请联系客服")
       }
     })
   },

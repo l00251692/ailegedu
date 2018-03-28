@@ -93,3 +93,14 @@
   vertical-align: middle;
   margin-right: 1.34em;
 }
+
+.weui-btn_mini2 {
+  display: inline-block;
+  line-height: 2.3;
+  font-size: 13px;
+  padding: 0 1.34em;
+  border-radius: 0;
+  vertical-align: middle;
+  margin-right: 1.34em;
+  background-color: #ff0000;
+}

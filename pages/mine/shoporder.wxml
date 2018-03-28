@@ -27,7 +27,7 @@
       </navigator>
       <view wx:if="{{item.state == 2}}" class="order-item__ft">
         <button id="{{index}}" bindtap="onRecvOrderTap" class="weui-btn_primary weui-btn_mini">接单</button> 
-        <button id="{{index}}" bindtap="onRejectOrderTap" class="weui-btn_primary weui-btn_mini">拒绝</button>
+        <button id="{{index}}" bindtap="onRejectOrderTap" class="weui-btn_primary weui-btn_mini2">拒绝</button>
       </view>
     </view>
   </view>

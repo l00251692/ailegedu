@@ -21,6 +21,9 @@
         <button id="{{index}}" bindtap="onPayTap" wx:if="{{item.state == 1}}" class="weui-btn_primary weui-btn_mini">立即付款</button>
         <navigator wx:elif="{{item.state == 4 && item.is_reviews == 0}}" url="/pages/order/review?id={{item.order_id}}" class="weui-btn_primary weui-btn_mini">去评论</navigator>
       </view>
+      <view wx:elif="{{item.state == 3}}" class="order-item__ft">
+        <button id="{{index}}" bindtap="onConfirm" class="weui-btn_primary weui-btn_mini">确认收货</button>
+      </view>
     </view>
   </view>
   <template is="load-more" data="{{hasMore: hasMore, loading: loading}}"></template>

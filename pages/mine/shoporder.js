@@ -188,6 +188,9 @@ Page({
       order_id,
       success(data) {
         wx.stopBackgroundAudio()
+        wx.showToast({
+          title: '订单已接单',
+        })
         that.initData();
         that.setData({
           loading: false,
@@ -219,6 +222,9 @@ Page({
       order_id,
       success(data) {
         wx.stopBackgroundAudio()
+        wx.showToast({
+          title: '订单已拒绝',
+        })
         that.initData();
         that.setData({
           loading: false,
@@ -228,7 +234,7 @@ Page({
       error() {
         that.setData({
           loading: false,
-          tip: '订单未成功拒绝，请联系管理员'
+          tip: '订单未成功拒绝，请联系客服'
         })
       }
     })

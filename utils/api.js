@@ -943,3 +943,16 @@ export function getShareQr(options) {
   })
 
 }
+
+export function setOrderReceive(options){
+  var { order_id, success,error } = options
+
+  fetch({
+    url: 'order/setOrderReceiveWx',
+    data: {
+      order_id
+    },
+    success,
+    error
+  })
+}
