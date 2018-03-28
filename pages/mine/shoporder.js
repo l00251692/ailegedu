@@ -8,6 +8,8 @@ import {
   datetimeFormat, requestPayment
 } from '../../utils/util'
 
+import { host } from '../../config'
+
 var initData = {
   websocketFlag:false,
   tip: '',
@@ -98,7 +100,7 @@ Page({
     }
     var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
     wx.connectSocket({
-      url: 'ws://localhost/webSocketServer?x=' + user_id,
+      url: 'wss://${host}/webSocketServer?x=' + user_id,
       data: {
         y:'',
       },

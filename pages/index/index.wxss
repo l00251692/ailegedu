@@ -131,7 +131,7 @@
     position:absolute;
     right:0;
     top:0;
-    background:#07b5e0;
+    background:#5cd79a;
     color:#fff;
     font-size:32rpx;
     padding:6rpx 20rpx;
