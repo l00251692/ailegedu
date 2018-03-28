@@ -248,6 +248,7 @@ Page({
     }
   },
   onPullDownRefresh() {
+    console.log("onPullDownRefresh")
     if (getApp().globalData.loginInfo.is_login) {
       wx.showNavigationBarLoading()
       this.initData(() => {

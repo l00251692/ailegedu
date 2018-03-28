@@ -95,6 +95,9 @@ Page({
          this.getProjectList();
        }
     },
+    onPullDownRefresh() {
+      this.getProjectList();
+    },
     callback() {
        this.init()
     },

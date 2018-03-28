@@ -174,6 +174,13 @@ Page({
       this.loadData()
     }
   },
+  onPullDownRefresh() {
+    if (getApp().globalData.loginInfo.is_login) {
+      this.loadData()
+    } else {
+      wx.stopPullDownRefresh()
+    }
+  },
   callback(address) {
     getApp().setCurrentAddress(address)
     this.initAddress()
