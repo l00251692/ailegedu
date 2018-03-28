@@ -53,6 +53,34 @@ export function getReviews(options) {
     success
   })
 }
+
+
+export function getSellerStatus(options) {
+  var { seller_id, success,error } = options
+
+  fetch({
+    url: 'campus/getCampusStatusWx',
+    data: {
+      seller_id
+    },
+    success,
+    error
+  })
+}
+
+export function setSellerStatus(options) {
+  var { seller_id, status, success,error } = options
+  console.log("setSellerStatus:" + seller_id + status)
+  fetch({
+    url: 'campus/setCampusStatusWx',
+    data: {
+      seller_id,
+      status
+    },
+    success,
+    error
+  })
+}
 /*
 // 短信验证码
 export function getCode(options) {

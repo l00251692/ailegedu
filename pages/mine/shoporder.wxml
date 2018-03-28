@@ -2,7 +2,14 @@
 <import src="/templates/load-more.wxml" />
 <!--<view wx:if="{{loginInfo.is_login}}">-->
 <view >
-  <view class="header"> {{tip}} </view>
+  <view class="header"> 
+      <view class="status">
+        <text wx:if="{{status == 0}}">已关店</text>
+        <text wx:else>营业中</text>
+        <switch type="switch" checked="{{status}}" bindchange="listenerSwitch"/>
+      </view>   
+      <text class="tip">{{tip}}</text>
+   </view>
   <view class="order-list">
     <view class="order-item" wx:for="{{list}}" wx:key="order_id">
       <view class="order-item__hd">

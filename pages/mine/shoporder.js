@@ -1,11 +1,11 @@
 // pages/order/list.js
 import { ORDER_STATES } from '../order/constant'
 import {
-  getOrders, getPayment, setRecvOrder, setRejectOrder, getShopOrders
+  getOrders, getPayment, setRecvOrder, setRejectOrder, getShopOrders, getSellerStatus, setSellerStatus
 } from '../../utils/api'
 
 import {
-  datetimeFormat, requestPayment
+  datetimeFormat, requestPayment, alert
 } from '../../utils/util'
 
 import { host } from '../../config'
@@ -13,6 +13,7 @@ import { host } from '../../config'
 var initData = {
   websocketFlag:false,
   tip: '',
+  status:0,
   page: 0,
   hasMore: true,
   loading: false,
@@ -25,7 +26,6 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    console.log('min load')
     this.id = options.id
     var that = this
     if (getApp().globalData.loginInfo.is_login) {
@@ -64,26 +64,55 @@ Page({
     this.setData({
       loading: true
     })
-    getShopOrders({
-      campus_id:this.id,
-      page,
-      success(data) {
-        var { list } = that.data
-        var { list: list2, count, page } = data
-        console.log("orderlist:" + JSON.stringify(data))
-        list2 = list2.map(item => {
-          item['add_time_format'] = datetimeFormat(item.add_time)
-          return item
-        })
+    getSellerStatus({
+      seller_id: that.id,
+      success(data){
         that.setData({
-          loading: false,
-          list: list ? list.concat(list2) : list2,
-          hasMore: count == 5,
-          page: page + 1
+          status: data.status
         })
+        getShopOrders({
+          campus_id: that.id,
+          page,
+          success(data) {
+            var { list } = that.data
+            var { list: list2, count, page } = data
+            console.log("orderlist:" + JSON.stringify(data))
+            list2 = list2.map(item => {
+              item['add_time_format'] = datetimeFormat(item.add_time)
+              return item
+            })
+            that.setData({
+              loading: false,
+              list: list ? list.concat(list2) : list2,
+              hasMore: count == 5,
+              page: page + 1
+            })
 
-        cb && cb()
+            cb && cb()
 
+          }
+        })
+      },
+      error(data){
+        return alert("获取店铺信息失败")
+      }
+    })
+  },
+
+  listenerSwitch:function(e){
+    var { status } = this.data
+    var that = this
+
+    setSellerStatus({
+      seller_id:that.id,
+      status:!status,
+      success(data){
+        that.setData({
+          status:!status
+        })
+      },
+      error(data){
+        return alert("操作失败，请联系客服")
       }
     })
   },
