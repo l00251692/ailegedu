@@ -88,49 +88,50 @@ Page({
     this.setData({
       loading: true
     })
-
-    getUnivList({
-      flag:1,
-      success(data) {
-        console.log("whakthalkh")
-        console.log(data)
-        that.setData({
-          provinceList: data.provinceList,
-          univList: data.univList,
-          university: [data.provinceList, data.univList[0].univs],
-        })
-
-        if (wx.getStorageSync('lastUniv')) {
+    getApp().getLoginInfo(loginInfo => {
+      getUnivList({
+        flag: 1,
+        success(data) {
+          console.log("whakthalkh")
+          console.log(data)
           that.setData({
-            lastUniv: wx.getStorageSync('lastUniv')
+            provinceList: data.provinceList,
+            univList: data.univList,
+            university: [data.provinceList, data.univList[0].univs],
           })
-        }
-        else {
-          wx.setStorageSync('lastUniv', data.univList[0].univs[0].name)
-          that.setData({
-            lastUniv: data.univList[0].univs[0].name
-          })
-        }
 
-        getSellers({
-          page,
-          selectUniv: that.data.lastUniv,
-          success(data) {
-            var { shopList } = that.data
-            var list = data.map(item => {
-              item['distanceFormat'] = (item.distance / 1000).toFixed(2)
-              return item
-            })
+          if (wx.getStorageSync('lastUniv')) {
             that.setData({
-              shopList: shopList ? shopList.concat(list) : list,
-              page: page + 1,
-              hasMore: data.count == 0,
-              loading: false
+              lastUniv: wx.getStorageSync('lastUniv')
             })
           }
-        })
-      }
-    })
+          else {
+            wx.setStorageSync('lastUniv', data.univList[0].univs[0].name)
+            that.setData({
+              lastUniv: data.univList[0].univs[0].name
+            })
+          }
+
+          getSellers({
+            page,
+            selectUniv: that.data.lastUniv,
+            success(data) {
+              var { shopList } = that.data
+              var list = data.map(item => {
+                item['distanceFormat'] = (item.distance / 1000).toFixed(2)
+                return item
+              })
+              that.setData({
+                shopList: shopList ? shopList.concat(list) : list,
+                page: page + 1,
+                hasMore: data.count == 0,
+                loading: false
+              })
+            }
+          })
+        }
+      })
+    })  
   },
 
   invalidateData() {
