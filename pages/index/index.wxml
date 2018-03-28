@@ -36,11 +36,13 @@
                     </view>
                     <view class="item_info">
                         <!-- <text class="tip">{{item.subtitle}}</text> -->
-                        <image class="pro_img" src="{{item.project_head || '/images/index/default-project-head.png'}}" mode="aspectFill"></image>
-                        <view class="title">
+                        <image class="pro_img"  src="{{item.project_head || '/images/index/default-project-head.png'}}" mode="aspectFill"></image>
+                         <text class="num" wx:if="{{item.days > 0}}">进行中</text>
+                         <text class="num2" wx:else>已结束</text>    
+                    </view>
+                    <view class="title">
                           <text class="item_title">{{item.item_title}}</text>
                         </view>
-                    </view>
                     <view class="foot">
                         <view class="left">
                             <view class="focus">
@@ -51,9 +53,6 @@
                               <image src="/images/index/comment_fill.png"></image>
                               <text class="text">{{item.comments}}</text>
                             </view>
-                        </view>
-                        <view class="right">
-                             <text class="num" wx:if="{{item.days > 0}}">剩余:<text>{{item.days}}天结束</text></text> 
                         </view>
                     </view>
                     <!-- <view class="line"></view> -->

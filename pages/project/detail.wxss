@@ -525,7 +525,7 @@ overflow:hidden;
   -webkit-box-flex: 3;
   -webkit-box-align: center; 
   -webkit-box-pack: center;
-  background-color: #e8e8e8;
+  background-color: #888888;
 }
 
 canvas{
