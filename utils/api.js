@@ -956,3 +956,43 @@ export function setOrderReceive(options){
     error
   })
 }
+
+export function updateProjectImg(options) {
+  var { project_id, head_img, success, error } = options
+
+  fetch({
+    url: 'project/updateProjectImgWx',
+    data: {
+      project_id,
+      head_img
+    },
+    success,
+    error
+  })
+}
+
+export function updateProjectInfoImg(options) {
+  var { project_id, info_img_url } = options
+
+  fetch({
+    url: 'project/updateProjectInfoImgWx',
+    data: {
+      project_id,
+      info_img_url
+    },
+  })
+}
+
+
+export function getQiniuToken(options) {
+
+  var { success, error } = options
+
+  fetch({
+    url: 'project/getQiniuTokenWx',
+    data: {
+    },
+    success,
+    error
+  })
+}
