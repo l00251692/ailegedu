@@ -24,7 +24,7 @@ Page({
       },
       {
         "category_id": "4",
-        "title": "学霸补习",
+        "title": "技能补习",
         "icon": "/images/category/4.png"
       },
       {
@@ -34,7 +34,7 @@ Page({
       },
       {
         "category_id": "6",
-        "title": "众筹活动",
+        "title": "众筹项目",
         "icon": "/images/category/6.png"
       },
       {
