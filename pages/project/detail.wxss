@@ -528,24 +528,27 @@ overflow:hidden;
   background-color: #888888;
 }
 
+.share-cavas{
+  z-index: 600;
+}
+
 canvas{
   position: fixed;
   top: 0;
   left: 999px;
+  width:600px;
+  height:800px;
 }
 
 .preview {
-  width: 100%;
-  height: 100%;
   background: rgba(0,0,0,.9);
-  z-index: 2;
 }
 .preview image{
   width: 70%;
   position: absolute;
-  top: 10%;
+  bottom: 250rpx;
   left: 15%;
-  z-index: 3;
+  z-index: 600;
   border: 1px dashed #fff;
 }
 .preview button{
@@ -553,7 +556,7 @@ canvas{
   position: absolute;
   bottom: 150rpx;
   left: 30%;
-  z-index: 4;
+  z-index: 600;
 }
 
 /*评论页面*/

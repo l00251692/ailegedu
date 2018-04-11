@@ -36,6 +36,7 @@
             </image>
           </view>
         </scroll-view>
+        <canvas canvas-id="shareCanvas" ></canvas>
       </swiper-item>
       <swiper-item class="weui-tab__content weui-tab__content_review">
           <scroll-view class="scroll-view_review" enable-back-to-top="true" bindscrolltolower="onScrolltolower" scroll-y="true">
@@ -72,8 +73,8 @@
           <view class="leaveDate" wx:if="{{info.days > 0}}">距离结束还有{{info.days}}天</view>
           <view class="leaveDate0" wx:else> 已结束 </view>
       </view>
-      <view class="comment-fixed" wx:if="{{activeIndex == 0}}">
-        <canvas canvas-id="shareCanvas" style="width:600rpx;height:900rpx"></canvas>
+      <view class="share-cavas" wx:if="{{activeIndex == 0}}">
+        <!-- <canvas canvas-id="shareCanvas" ></canvas> -->
         <view style="display:{{hidden ? 'none' : 'block'}}" class='preview'>
           <image src='{{shareImgSrc}}' mode='widthFix'></image>
           <button type='primary' size='mini' bindtap='saveSharePic'>保存分享图</button>

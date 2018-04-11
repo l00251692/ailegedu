@@ -289,61 +289,62 @@ Page({
          wx.getImageInfo({
            src: qrImgPath,
            success: function (res) {
-             console.log("555555")
-             //2. canvas绘制文字和图片
-             const ctx = wx.createCanvasContext('shareCanvas')
-             var qrPath = res.path
-             var imgPath = '/images/default-shop.png'
-             var bgImgPath = that.data.info.project_head
-             ctx.drawImage(bgImgPath, 0, 0, 600, 520)
+              console.log("555555")
+              //2. canvas绘制文字和图片
+              const ctx = wx.createCanvasContext('shareCanvas')
+              var qrPath = res.path
+              var userHead = that.data.info.create_userHead
+              var bgImgPath = that.data.info.project_head
+              ctx.drawImage(bgImgPath, 0, 0, 600, 520)
 
-             ctx.setFillStyle('white')
-             ctx.fillRect(0, 520, 600, 280);
+              ctx.setFillStyle('white')
+              ctx.fillRect(0, 520, 600, 280);
 
-             ctx.drawImage(imgPath, 30, 550, 60, 60)
-             ctx.drawImage(qrPath, 410, 610, 160, 160) //二维码图片
+              ctx.drawImage(userHead, 30, 550, 60, 60)
+              ctx.drawImage(qrPath, 410, 610, 160, 160) //二维码图片
 
-             ctx.setFontSize(28)
-             ctx.setFillStyle('#6F6F6F')
-             ctx.fillText(that.data.info.item_title, 110, 590)
+              ctx.setFontSize(28)
+              ctx.setFillStyle('#6F6F6F')
+              ctx.fillText(that.data.info.create_userName, 110, 590)
 
-             ctx.setFontSize(30)
-             ctx.setFillStyle('#111111')
-             ctx.fillText(that.data.info.item_title, 30, 660)
-             ctx.fillText('进行中', 30, 700)
+              ctx.setFontSize(30)
+              ctx.setFillStyle('#111111')
+              ctx.fillText(that.data.info.item_title, 30, 660)
 
-             ctx.setFontSize(24)
-             ctx.fillText('长按扫码查看详情', 30, 770)
-             ctx.draw()
-             console.log("121212")
-             // 3. canvas画布转成图片
-             setTimeout(function () {
-               wx.canvasToTempFilePath({
-                 x: 0,
-                 y: 0,
-                 width: 600,
-                 height: 800,
-                 destWidth: 600,
-                 destHeight: 800,
-                 canvasId: 'shareCanvas',
-                 success: function (res) {
-                   console.log(res.tempFilePath);
-                   that.setData({
-                     shareImgSrc: res.tempFilePath,
-                     hidden: false
-                   })
-                 },
-                 fail: function (res) {
-                   console.log(res)
-                 }
-               })
-             }, 2000)
-           },
-           fail:function(res){
-             console.log("333333")
-             console.log(JSON.stringify(res))
-           }
-         })
+              ctx.setFontSize(24)
+              ctx.fillText('长按扫码查看详情', 30, 770)
+
+              console.log("121212")
+              ctx.draw()
+              
+                // 3. canvas画布转成图片
+              setTimeout(function () {
+                  wx.canvasToTempFilePath({
+                  x: 0,
+                  y: 0,
+                  width: 600,
+                  height: 800,
+                    destWidth: 600,
+                    destHeight: 800,
+                    canvasId: 'shareCanvas',
+                    success: function (res) {
+                      console.log(res.tempFilePath);
+                      that.setData({
+                        shareImgSrc: res.tempFilePath,
+                        hidden: false
+                      })
+                    },
+                    fail: function (res) {
+                      console.log(res)
+                  }
+                })
+              }, 2000)
+            },
+            fail:function(res){
+              console.log("333333")
+              console.log(JSON.stringify(res))
+            }
+          })
        }
      });
   },
@@ -352,6 +353,7 @@ Page({
   {
     var that = this
     //4. 当用户点击分享到朋友圈时，将图片保存到相册
+    console.log("saveSharePic:" + that.data.shareImgSrc)
     wx.saveImageToPhotosAlbum({
       filePath: that.data.shareImgSrc,
       success(res) {
