@@ -24,7 +24,7 @@
         </view>
         <view class="list_wrap">
             <view class="list"  wx:for="{{projectList}}" wx:key="{{project_id}}">
-                <navigator class="item" url="/pages/project/detail?id={{item.project_id}}">
+                <navigator class="item" url="/pages/project/detail?callback=callback&&id={{item.project_id}}">
                     <view class="top">
                         <view class="left">
                             <image class="img" src="{{item.create_userHead}}"></image>

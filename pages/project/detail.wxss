@@ -537,7 +537,7 @@ canvas{
   top: 0;
   left: 999px;
   width:600px;
-  height:800px;
+  height:600px;
 }
 
 .preview {

@@ -13,23 +13,18 @@ Page({
   },
     onLoad: function () {
       var that = this
-      this.init()    
+      this.getBanner()
+        
     },
     onShow: function () {
       // 页面显示
+      this.init()  
     },
-    search: function (e) {
 
-        wx.navigateTo({
-            url: '/pages/activity/search/index'
-        });
-
-    },
     init()
     {
       var that = this
       this.initData()
-      this.getBanner()
       this.getProjectList()
     },
     initData() {
@@ -54,7 +49,7 @@ Page({
           }
       })      
     },
-    getProjectList: function (e) { 
+    getProjectList(cb) { 
       if (this.data.loading) {
         return;
       }
@@ -72,6 +67,7 @@ Page({
               hasMore: data.count == 10, //一次最多10个，如果这次取到10个说明还有
               loading: false
             })
+            cb && cb()
           }
       })
     },
@@ -96,7 +92,9 @@ Page({
        }
     },
     onPullDownRefresh() {
-      this.getProjectList();
+      this.getProjectList(function () {
+        wx.stopPullDownRefresh()
+      });
     },
     callback() {
        this.init()

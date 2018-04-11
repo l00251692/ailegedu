@@ -27,8 +27,8 @@
           </view>
           <view class="infoitem">
             <text class="infoitem_inf">联系方式</text>
-            <text class="infoitem_inf2" wx:if="{{info.concat}}">{{info.concat}}</text>
-            <text class="infoitem_inf2" wx:else>无</text>
+            <text class="infoitem_inf2" wx:if="{{info.concat && typeof(info.concat)!= undefined}}">{{info.concat}}</text>
+            <text class="infoitem_inf2" wx:else>暂未提供</text>
           </view>
           <view scroll-y  class="info_text">
             <text >{{info.subtitle}}</text>

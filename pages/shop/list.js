@@ -76,7 +76,7 @@ Page({
     this.loadData()
   },
 
-  loadData() {
+  loadData(cb) {
     if (this.data.loading) {
       return;
     }
@@ -121,6 +121,7 @@ Page({
                 item['distanceFormat'] = (item.distance / 1000).toFixed(2)
                 return item
               })
+              cb && cb()
               that.setData({
                 shopList: shopList ? shopList.concat(list) : list,
                 page: page + 1,
@@ -176,7 +177,9 @@ Page({
   },
   onPullDownRefresh() {
     if (getApp().globalData.loginInfo.is_login) {
-      this.loadData()
+      this.loadData(function () {
+        wx.stopPullDownRefresh()
+      })
     } else {
       wx.stopPullDownRefresh()
     }

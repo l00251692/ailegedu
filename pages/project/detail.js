@@ -43,6 +43,7 @@ Page({
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     this.id = options.id
+    this.callback = options.callback || 'callback'
     this.loadData()
     this.loadReview()   
   },
@@ -275,78 +276,87 @@ Page({
 
     var that = this;
     //1. 请求后端API生成小程序码
-     getShareQr({
-       project_id:that.id,
-       success(data)
-       {
-         console.log("7")
-         that.setData({
-           qrImgPath: data.path
-         })
-         console.log("8")
-         var { qrImgPath } = that.data
-         console.log(qrImgPath)
-         wx.getImageInfo({
-           src: qrImgPath,
-           success: function (res) {
-              console.log("555555")
-              //2. canvas绘制文字和图片
-              const ctx = wx.createCanvasContext('shareCanvas')
-              var qrPath = res.path
-              var userHead = that.data.info.create_userHead
-              var bgImgPath = that.data.info.project_head
-              ctx.drawImage(bgImgPath, 0, 0, 600, 520)
+    wx.showToast({
+      title: '图片生成中...',
+      icon: 'loading',
+      duration: 4000
+    });
+    getShareQr({
+      project_id:that.id,
+      success(data)
+      {
+        that.setData({
+          qrImgPath: data.path
+        })
+        var { qrImgPath } = that.data
+        wx.getImageInfo({
+          src: qrImgPath,
+          success: function (res) {
+            //2. canvas绘制文字和图片
+            const ctx = wx.createCanvasContext('shareCanvas')
+            var qrPath = res.path
+            var userHead = that.data.info.create_userHead
+            var bgImgPath = that.data.info.project_head
+            ctx.drawImage(bgImgPath, 0, 0, 600, 320)
 
-              ctx.setFillStyle('white')
-              ctx.fillRect(0, 520, 600, 280);
+            ctx.setFillStyle('white')
+            ctx.fillRect(0, 320, 600, 280);
 
-              ctx.drawImage(userHead, 30, 550, 60, 60)
-              ctx.drawImage(qrPath, 410, 610, 160, 160) //二维码图片
-
-              ctx.setFontSize(28)
-              ctx.setFillStyle('#6F6F6F')
-              ctx.fillText(that.data.info.create_userName, 110, 590)
-
-              ctx.setFontSize(30)
-              ctx.setFillStyle('#111111')
-              ctx.fillText(that.data.info.item_title, 30, 660)
-
-              ctx.setFontSize(24)
-              ctx.fillText('长按扫码查看详情', 30, 770)
-
-              console.log("121212")
-              ctx.draw()
-              
-                // 3. canvas画布转成图片
-              setTimeout(function () {
-                  wx.canvasToTempFilePath({
-                  x: 0,
-                  y: 0,
-                  width: 600,
-                  height: 800,
-                    destWidth: 600,
-                    destHeight: 800,
-                    canvasId: 'shareCanvas',
-                    success: function (res) {
-                      console.log(res.tempFilePath);
-                      that.setData({
-                        shareImgSrc: res.tempFilePath,
-                        hidden: false
-                      })
-                    },
-                    fail: function (res) {
-                      console.log(res)
-                  }
-                })
-              }, 2000)
-            },
-            fail:function(res){
-              console.log("333333")
-              console.log(JSON.stringify(res))
+            var title = that.data.info.item_title
+            if (title.length > 20)
+            {
+              title = title.substring(0, 16)+"..."
             }
-          })
-       }
-     });
+
+            ctx.setFontSize(30)
+            ctx.setFillStyle('#111111')
+            ctx.fillText(title, 30, 350, 570)
+
+            ctx.drawImage(userHead, 30, 410, 60, 60)
+            ctx.drawImage(qrPath, 410, 410, 160, 160) //二维码图片
+
+            ctx.setFontSize(28)
+            ctx.setFillStyle('#6F6F6F')
+            ctx.fillText(that.data.info.create_userName, 110, 450)
+
+            
+
+            ctx.setFontSize(24)
+            ctx.fillText('长按扫码查看详情', 30, 570)
+
+            console.log("121212")
+            ctx.draw(false,)
+
+            // 3. canvas画布转成图片
+            setTimeout(function () {
+                wx.canvasToTempFilePath({
+                x: 0,
+                y: 0,
+                width: 600,
+                height: 600,
+                  destWidth: 600,
+                  destHeight: 600,
+                  canvasId: 'shareCanvas',
+                  success: function (res) {
+                    console.log(res.tempFilePath);
+                    that.setData({
+                      shareImgSrc: res.tempFilePath,
+                      hidden: false
+                    })
+                  },
+                  fail: function (res) {
+                    console.log(res)
+                }
+              })
+            }, 2000)
+          },
+          fail:function(res){
+            console.log("333333")
+            console.log(JSON.stringify(res))
+          }
+        })
+      }
+    });
   },
 
   saveSharePic:function(e)
@@ -388,7 +398,6 @@ Page({
         that.setData({
           'info.isLike': !isLike 
         })
-        console.log("onLike2:" + JSON.stringify(that.data.info.isLike))
         wx.showToast({
           title: !isLike ? '关注成功' : '取消成功',
           icon: 'none',
