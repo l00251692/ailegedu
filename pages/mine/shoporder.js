@@ -159,8 +159,8 @@ Page({
       {
           wx.playBackgroundAudio({
             //播放地址
-            dataUrl: 'http://localhost/order.mp3',
-            title: '积木',
+            dataUrl: 'https://p6sm3pvn3.bkt.clouddn.com/order.mp3',
+            title: '小蓝鲸',
             coverImgUrl: ''
           })
           that.setData({

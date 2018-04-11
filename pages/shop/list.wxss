@@ -68,6 +68,7 @@
 .banner{
   display:flex;
   flex-direction: row;
+  background:#ffffff;
 }
 
 .toutiao_img{
@@ -100,11 +101,12 @@
 .swiper_item {
  flex:6;
  font-size: 32rpx;
+ font-family:"宋体";
  overflow: hidden;
  text-overflow: ellipsis;
  white-space: nowrap;
  letter-spacing: 4rpx;
- padding-left: 40rpx;
+ padding-left: 50rpx;
  align-items:center;
  line-height:82rpx;
 }

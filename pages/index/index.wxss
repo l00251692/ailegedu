@@ -275,6 +275,6 @@
   bottom: 60rpx;  
   right: 60rpx;  
   z-index: 500; 
-  border-radius:50%; 
+  /*border-radius:50%; */
 } 
 

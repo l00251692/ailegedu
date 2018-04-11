@@ -27,12 +27,12 @@
   </view>
 </view>
 <view class="banner">
-  <image src="/images/default-shop.png" class="toutiao_img"></image>
+  <image src="/images/toutiao.png" class="toutiao_img"></image>
   <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
   <block wx:for="{{msgList}}" wx:key="{{item.title}}">
     <swiper-item class="container_item">
       <view class="swiper_item">{{item.title}}</view>
-      <image src="/images/default-shop.png" class="banner_img"></image>
+      <image src="{{item.src}}" class="banner_img"></image>
     </swiper-item>
   </block>
  </swiper>

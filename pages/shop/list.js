@@ -49,8 +49,8 @@ Page({
       }
     ],
     msgList:[
-      { url: "url", title: "E点校园让生活容易点" },
-      { url: "url", title: "大学生创业项目免费入住" },
+      { url: "url", title: "让大学生校园创业更容易", src: "/images/toutiao_ban_1.png" },
+      { url: "url", title: "免费接入热线：18261149716", src:"/images/toutiao_ban_2.png"},
     ],
     page: 0,
     hasMore: true,
