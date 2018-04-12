@@ -61,7 +61,8 @@ Page({
   callbackAddress(addr_id) {
     var that = this
     var {id} = this
-    var {loading} = this.data
+    var { info: { receiver_addr_id, receiver, receiver_phone, receiver_addr}, loading} = this.data
+    
     if (loading) {
       return
     }
@@ -73,8 +74,12 @@ Page({
       quasi_order_id: id,
       addr_id,
       success(data) {
+        console.log( "updateaddr:" + JSON.stringify(data))
         that.setData({
-          info: JSON.parse(data),
+          'info.receiver_addr_id': data.receiver_addr_id,
+          'info.receiver': data.receiver,
+          'info.receiver_phone': data.receiver_phone,
+          'info.receiver_addr': data.receiver_addr,
           loading: false
         })
         wx.hideNavigationBarLoading()

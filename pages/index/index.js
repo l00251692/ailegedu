@@ -13,12 +13,11 @@ Page({
   },
     onLoad: function () {
       var that = this
-      this.getBanner()
-        
+      this.getBanner()     
     },
     onShow: function () {
       // 页面显示
-      this.init()  
+      this.init() 
     },
 
     init()
@@ -55,6 +54,11 @@ Page({
       }
       var that = this;
       var { page } = this.data
+      
+      this.setData({
+        loading: true
+      })
+
       getProjectList(
       {
           page,

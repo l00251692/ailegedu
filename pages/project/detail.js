@@ -237,7 +237,7 @@ Page({
   },
 
   onCommentInput(e) {
-    var { value: conent } = e.detail
+    var { value: content } = e.detail
     this.setData({
       content
     })
