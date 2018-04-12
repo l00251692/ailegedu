@@ -301,7 +301,6 @@
 }
 
 .info_img {
-  width:90%;
   padding-bottom:2rpx;
   padding-top:2rpx;
 }
@@ -463,7 +462,9 @@ overflow:hidden;
   padding-left: 40rpx;
   padding-right: 40rpx;
   color: #999999;
-  height:400rpx；
+  height:400rpx;
+  display:flex;
+  flex-direction: column;
 }
 
 .info_text_area

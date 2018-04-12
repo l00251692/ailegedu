@@ -33,7 +33,7 @@
             <input type="text" bindinput="onConcatInput" class="concat_inf2" name="concat" placeholder='电话/QQ/微信'></input>
          </view>
          <view class="intruction">
-            <text class="instr_inf">项目介绍*</text> <text class="tip">（基本情况，团队组成，众筹目标，投资汇报等）</text>
+            <text class="instr_inf">项目介绍*</text> <text class="tip">（基本情况，团队组成，众筹目标，投资回报等）</text>
             <textarea bindinput="onInstructionInput" placeholder='最多输入5000字' maxlength="5000"class ="textarea">       </textarea>
           </view>
           <view class="upload-img">

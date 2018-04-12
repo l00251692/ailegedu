@@ -41,7 +41,9 @@ Page({
         success(data)
         {
           console.log(JSON.stringify(data))
-          var tmp_date = dateFormat(new Date(), "yyyy-mm-dd")
+          var tmp = new Date()
+          var milliseconds = tmp.getTime() + 1000 * 60 * 60 * 24 * 30;
+          var tmp_date = dateFormat(new Date(milliseconds), "yyyy-mm-dd")
           that.setData({
             provinceList: data.provinceList,
             univList: data.univList,
@@ -94,12 +96,12 @@ Page({
       })
     },
 
-    chooseImage2: function (type) {
+    chooseImage2: function ()  {
       console.log("chooseImage2")
       var that = this;
       wx.chooseImage({
         sizeType: ['original', 'compressed'],
-        sourceType: [type],
+        sourceType: ['album', 'camera'],
         success: function (res) {
           that.setData({
             uploadimgs: that.data.uploadimgs.concat(res.tempFilePaths)
@@ -219,7 +221,7 @@ Page({
                       },
                         {
                           region: 'ECN', //华东
-                          domain: 'p6sm3pvn3.bkt.clouddn.com',
+                          domain: 'img.ailogic.xin',
                           key: 'prj_' + project_id + '_' + filePath_tmp.substr(30,50),
                           uptoken: token
                         }, (res) => {
@@ -259,7 +261,7 @@ Page({
                   })
                 }, {
                   region: 'ECN', //华东
-                  domain: 'p6sm3pvn3.bkt.clouddn.com', // // bucket 域名，下载资源时用到。如果设置，会在 success callback 的 res 参数加上可以直接使用的 ImageURL 字段。否则需要自己拼接
+                  domain: 'img.ailogic.xin', // // bucket 域名，下载资源时用到。如果设置，会在 success callback 的 res 参数加上可以直接使用的 ImageURL 字段。否则需要自己拼接
                   //key: 'customFileName.jpg', // [非必须]自定义文件 key。如果不设置，默认为使用微信小程序 API 的临时文件名
                   key: 'prj_' + project_id , //项目ID不重复
                   // 以下方法三选一即可，优先级为：uptoken > uptokenURL > uptokenFunc
