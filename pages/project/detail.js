@@ -2,7 +2,7 @@ import {
   getProjectInfo, sendProjdectComment, getCommentList, setProjectLikeStatus, getShareQr
 } from '../../utils/api'
 import {
-  alert
+  alert,getPrevPage
 } from '../../utils/util'
 Page({
   data: {
@@ -258,6 +258,7 @@ Page({
           })
           that.initComment()
           that.loadReview()
+          getPrevPage()[that.callback]()
         },
         error(data)
         {
@@ -403,6 +404,7 @@ Page({
           icon: 'none',
           duration: 1500
         });
+        getPrevPage()[that.callback]()
       }
     })     
   },

@@ -120,24 +120,21 @@ Page({
   connectWebsocket: function () {
     var that = this
     var websocketFlag  = wx.getStorageSync('websocketFlag')
-    if (websocketFlag)
-    {
-      this.setData({
-        tip:'您已登录商家系统，请保持小程序不要关闭'
-      })
-      return
-    }
+
+    console.log(" begin wx.connectSocket")
     var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
+
     wx.connectSocket({
-      url: 'wss://${host}/webSocketServer?x=' + user_id,
+      url: `wss://${host}/webSocketServer?x=` + user_id,
       data: {
-        y:'',
+        y: '',
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: "GET"
     })
+  
     wx.onSocketOpen(function (res) {
       console.log('WebSocket连接已打开！')
       wx.setStorageSync('websocketFlag', true)
@@ -149,8 +146,9 @@ Page({
       console.log('WebSocket连接打开失败，请检查！')
       wx.setStorageSync('websocketFlag', false)
     })
+    
     wx.onSocketMessage(function (res) {
-  
+      console.log("收到socket 信息")
       if (res.data == '连接成功')
       {
          console.log('连接成功')
@@ -159,7 +157,7 @@ Page({
       {
           wx.playBackgroundAudio({
             //播放地址
-            dataUrl: 'https://p6sm3pvn3.bkt.clouddn.com/order.mp3',
+            dataUrl: 'https://img.ailogic.xin/order.mp3',
             title: '小蓝鲸',
             coverImgUrl: ''
           })

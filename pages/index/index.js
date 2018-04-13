@@ -13,11 +13,11 @@ Page({
   },
     onLoad: function () {
       var that = this
-      this.getBanner()     
+      this.getBanner()  
+      this.init()    
     },
     onShow: function () {
       // 页面显示
-      this.init() 
     },
 
     init()
