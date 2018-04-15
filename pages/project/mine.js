@@ -36,6 +36,11 @@ Page({
       }
       var that = this;
       var { page } = this.data
+
+      this.setData({
+        loading: true
+      })
+      
       getMyProjectList(
       {
           page,

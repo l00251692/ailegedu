@@ -27,8 +27,8 @@
         <button loading="{{loading}}" disabled="{{loading}}" bindtap="onPayTap" wx:if="{{info.state == 1}}" class="weui-btn actionbar-btn actionbar-btn_action actionbar-btn_primary" type="primary">立即付款</button>
         <navigator url="/pages/order/review?id={{info.order_id}}" wx:if="{{(info.state == 4) && info.is_reviews == 0}}" class="actionbar-btn actionbar-btn_action actionbar-btn_primary">评价</navigator>
       </view>
-      <view wxlif="{{item.state == 3}}" class="actionbar">
-        <button bindtap="onConfirm" class="weui-btn actionbar-btn actionbar-btn_action">确认收货</button>
+      <view wx:if="{{item.state == 3}}" class="actionbar">
+        <button bindtap="onConfirm" class="weui-btn actionbar-btn actionbar-btn_action actionbar-btn_primary" type="primary">确认收货</button>
       </view>
     </swiper-item>
     <swiper-item class="tab__swiper-item tab__swiper-item_detail">
