@@ -80,7 +80,7 @@ Page({
       getApp().getLoginInfo(loginInfo => {
         if (loginInfo != null && loginInfo.is_login){
           wx.navigateTo({
-            url: '/pages/project/create'
+            url: '/pages/project/create?callback = callback'
           });
         }
         else

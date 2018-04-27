@@ -33,7 +33,8 @@ Page({
       selectUniv: '不限',
       uploadimgs: [], //上传图片列表
     },
-    onLoad: function () {
+    onLoad: function (options) {
+      this.callback = options.callback || 'callback'
       var { provinceList, univList} = this.data
       var that = this
       getUnivList({
@@ -239,6 +240,9 @@ Page({
                       wx.showToast({
                         title: '创建项目成功',
                       })
+                      //刷新项目列表
+                      getPrevPage()[that.callback]()
+
                       wx.redirectTo({
                         url: '/pages/project/detail?id=' + project_id,
                       })

@@ -49,8 +49,8 @@ Page({
       }
     ],
     msgList:[
-      { url: "url", title: "让校园创业更容易", src: "/images/toutiao_ban_1.png" },
-      { url: "url", title: "免费接入热线：18261149716", src:"/images/toutiao_ban_2.png"},
+      { url: "url", title: "简单让生活更美好", src: "/images/toutiao_ban_1.png" },
+      { url: "url", title: "入驻热线：18261149716", src:"/images/toutiao_ban_2.png"},
     ],
     page: 0,
     hasMore: true,

@@ -40,7 +40,7 @@
         "pagePath": "pages/index/index",
         "iconPath": "images/tabBar/Tabbar_Find_Empty.png",
         "selectedIconPath": "images/tabBar/Tabbar_Find_Full.png",
-        "text": "逛一逛"
+        "text": "社区"
       },
       {
         "pagePath": "pages/mine/mine",

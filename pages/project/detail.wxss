@@ -96,7 +96,6 @@
   height: 100%;
 }
 
-
 /* navbar */
 .weui-navbar__item {
   position: relative;
@@ -303,6 +302,7 @@
 .info_img {
   padding-bottom:2rpx;
   padding-top:2rpx;
+  width:100%;
 }
 
 /*shop-review*/
