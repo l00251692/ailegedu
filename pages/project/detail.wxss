@@ -300,9 +300,10 @@
 }
 
 .info_img {
-  padding-bottom:2rpx;
-  padding-top:2rpx;
+  padding-bottom:6rpx;
+  padding-top:6rpx;
   width:100%;
+  min-height: 300px;
 }
 
 /*shop-review*/

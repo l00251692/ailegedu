@@ -32,7 +32,7 @@
           </view>
           <view scroll-y  class="info_text">
             <text >{{info.subtitle}}</text>
-            <image wx:for="{{info.addImgarr}}" wx:key="{{item.url}}" class="info_img" src="{{item.url}}"> 
+            <image wx:for="{{info.addImgarr}}" wx:key="{{item.url}}" class="info_img" mode="widthFix" src="{{item.url}}"> 
             </image>
           </view>
         </scroll-view>
