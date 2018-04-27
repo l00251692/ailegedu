@@ -296,38 +296,59 @@ Page({
             //2. canvas绘制文字和图片
             const ctx = wx.createCanvasContext('shareCanvas')
             var qrPath = res.path
-            var userHead = that.data.info.create_userHead
-            var bgImgPath = that.data.info.project_head
-            ctx.drawImage(bgImgPath, 0, 0, 600, 320)
+            var userHead = 'images/default_useHead.png'
+            var bgImgPath = 'images/index/default-project-head.png'
 
-            ctx.setFillStyle('white')
-            ctx.fillRect(0, 320, 600, 280);
+            wx.downloadFile({
+              url: that.data.info.create_userHead, 
+              success: function (res) {
+                userHead = res.tempFilePath
+              },
+              fail: function (err) {
+                console.log("download userHead fail")
+              },
+              complete: function (e) {
+                wx.downloadFile({
+                  url: that.data.info.project_head,
+                  success: function (res) {
+                    bgImgPath = res.tempFilePath
+                  },
+                  fail: function (err) {
+                    console.log("download project_head fail")
+                  },
+                  complete: function (e) {
+                    ctx.drawImage(bgImgPath, 0, 0, 600, 320)
 
-            var title = that.data.info.item_title
-            if (title.length > 20)
-            {
-              title = title.substring(0, 16)+"..."
-            }
+                    ctx.setFillStyle('white')
+                    ctx.fillRect(0, 320, 600, 280);
 
-            ctx.setFontSize(30)
-            ctx.setFillStyle('#111111')
-            ctx.fillText(title, 30, 350, 570)
+                    var title = that.data.info.item_title
+                    if (title.length > 20) {
+                      title = title.substring(0, 16) + "..."
+                    }
 
-            ctx.drawImage(userHead, 30, 410, 60, 60)
-            ctx.drawImage(qrPath, 410, 410, 160, 160) //二维码图片
+                    ctx.setFontSize(30)
+                    ctx.setFillStyle('#111111')
+                    ctx.fillText(title, 30, 350, 570)
 
-            ctx.setFontSize(28)
-            ctx.setFillStyle('#6F6F6F')
-            ctx.fillText(that.data.info.create_userName, 110, 450)
+                    ctx.drawImage(userHead, 30, 410, 60, 60)
+                    ctx.drawImage(qrPath, 410, 410, 160, 160) //二维码图片
 
+                    ctx.setFontSize(28)
+                    ctx.setFillStyle('#6F6F6F')
+                    ctx.fillText(that.data.info.create_userName, 110, 450)
+
+                    ctx.setFontSize(24)
+                    ctx.fillText('长按扫码查看详情', 30, 570)
+
+                    console.log("121212")
+                    ctx.draw()
+                  }
+                })
+              }
+            })
             
-
-            ctx.setFontSize(24)
-            ctx.fillText('长按扫码查看详情', 30, 570)
-
-            console.log("121212")
-            ctx.draw(false,)
-
+            
             // 3. canvas画布转成图片
             setTimeout(function () {
                 wx.canvasToTempFilePath({
