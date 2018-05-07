@@ -39,9 +39,15 @@ Page({
     this.setData({
       loading: true
     })
+    var last_addr_id = wx.getStorageSync('lastAddrId')
+    if (!last_addr_id)
+    {
+      last_addr_id = "default";
+    }
     wx.showNavigationBarLoading()
     getQuasiOrderInfo({
       quasi_order_id: id,
+      last_addr_id,
       success(data) {
         var a = [];
         a = JSON.parse(data)
@@ -70,6 +76,7 @@ Page({
       loading: true
     })
     wx.showNavigationBarLoading()
+    wx.setStorageSync('lastAddrId', addr_id)
     updateOrderAddr({
       quasi_order_id: id,
       addr_id,

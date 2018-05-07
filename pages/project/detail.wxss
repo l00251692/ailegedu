@@ -282,8 +282,7 @@
   color: #ff5801;
 }
 .shop-rate__score {
-  flex: 3;
-  
+  flex: 3; 
 }
 
 .shop-rate__score-item {

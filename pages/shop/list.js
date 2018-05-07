@@ -92,8 +92,6 @@ Page({
       getUnivList({
         flag: 1,
         success(data) {
-          console.log("whakthalkh")
-          console.log(data)
           that.setData({
             provinceList: data.provinceList,
             univList: data.univList,
@@ -144,7 +142,6 @@ Page({
     })
   },
   bindMultiPickerChange: function (e) {
-    console.log("bindMultiPickerChange", e)
     var { provinceList, univList } = this.data
     this.setData({
       selectProv: provinceList[e.detail.value[0]].name,

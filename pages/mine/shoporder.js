@@ -124,16 +124,27 @@ Page({
     console.log(" begin wx.connectSocket")
     var { user_id, user_token } = getApp().globalData.loginInfo.userInfo
 
-    wx.connectSocket({
-      url: `wss://${host}/webSocketServer?x=` + user_id,
-      data: {
-        y: '',
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      method: "GET"
-    })
+    if (websocketFlag)
+    {
+      console.log("socket 已连接")
+      that.setData({
+        tip: '您已登录商家系统，请保持小程序不要关闭'
+      })
+    }
+    else
+    {
+      wx.connectSocket({
+        url: `wss://${host}/webSocketServer?x=` + user_id,
+        data: {
+          y: '',
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: "GET"
+      })
+    }
+    
   
     wx.onSocketOpen(function (res) {
       console.log('WebSocket连接已打开！')

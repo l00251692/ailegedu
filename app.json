@@ -5,6 +5,7 @@
     "pages/shop/address",
     "pages/order/quasi",
     "pages/order/show",
+    "pages/order/show4seller",
     "pages/order/list",
     "pages/order/content",
     "pages/order/review",

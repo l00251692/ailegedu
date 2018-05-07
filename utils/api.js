@@ -361,7 +361,7 @@ export function addQuasiOrder(options) {
 // 获取准订单
 export function getQuasiOrderInfo(options) {
   var {
-    quasi_order_id,
+    quasi_order_id, last_addr_id,
     success, error
   } = options
 
@@ -374,7 +374,8 @@ export function getQuasiOrderInfo(options) {
     url: 'order/getQuasiOrderInfoWx',
     data: {
       user_id, user_token,
-      quasi_order_id
+      quasi_order_id,
+      last_addr_id
     },
     success, error
   })

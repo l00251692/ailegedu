@@ -18,7 +18,7 @@
         </navigator>
         <view class="order-item__status {{item.state==1? 'order-item__status_pay': ''}}">{{ORDER_STATES[item.state]}}</view>
       </view>
-      <navigator url="/pages/order/show?id={{item.order_id}}" class="order-item__bd ">
+      <navigator url="/pages/order/show4seller?id={{item.order_id}}" class="order-item__bd ">
         <image class="order-item__pic" src="{{item.pic_url}}"></image>
         <view class="order-item__content weui-cell__ft_in-access">
           <view class="order-item__price">¥{{item.pay_price}}</view>
