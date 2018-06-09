@@ -63,16 +63,6 @@ Page({
   initAddress() {
     var that = this
     this.invalidateData()
-    // getApp().getCurrentAddress(function (address) {
-    //   if (address.addr_id) {
-    //     address['title'] = `${address.addr} ${address.detail}`
-    //   }
-    //   that.setData({
-    //     currentAddress: address
-    //   })
-    //   that.loadData()
-    // })
-    
     this.loadData()
   },
 
@@ -88,49 +78,48 @@ Page({
     this.setData({
       loading: true
     })
-    getApp().getLoginInfo(loginInfo => {
-      getUnivList({
-        flag: 1,
-        success(data) {
+  
+    getUnivList({
+      flag: 1,
+      success(data) {
+        that.setData({
+          provinceList: data.provinceList,
+          univList: data.univList,
+          university: [data.provinceList, data.univList[0].univs],
+        })
+
+        if (wx.getStorageSync('lastUniv')) {
           that.setData({
-            provinceList: data.provinceList,
-            univList: data.univList,
-            university: [data.provinceList, data.univList[0].univs],
-          })
-
-          if (wx.getStorageSync('lastUniv')) {
-            that.setData({
-              lastUniv: wx.getStorageSync('lastUniv')
-            })
-          }
-          else {
-            wx.setStorageSync('lastUniv', data.univList[0].univs[0].name)
-            that.setData({
-              lastUniv: data.univList[0].univs[0].name
-            })
-          }
-
-          getSellers({
-            page,
-            selectUniv: that.data.lastUniv,
-            success(data) {
-              var { shopList } = that.data
-              var list = data.map(item => {
-                item['distanceFormat'] = (item.distance / 1000).toFixed(2)
-                return item
-              })
-              cb && cb()
-              that.setData({
-                shopList: shopList ? shopList.concat(list) : list,
-                page: page + 1,
-                hasMore: data.count == 0,
-                loading: false
-              })
-            }
+            lastUniv: wx.getStorageSync('lastUniv')
           })
         }
-      })
-    })  
+        else {
+          wx.setStorageSync('lastUniv', data.univList[0].univs[0].name)
+          that.setData({
+            lastUniv: data.univList[0].univs[0].name
+          })
+        }
+
+        getSellers({
+          page,
+          selectUniv: that.data.lastUniv,
+          success(data) {
+            var { shopList } = that.data
+            var list = data.map(item => {
+              item['distanceFormat'] = (item.distance / 1000).toFixed(2)
+              return item
+            })
+            cb && cb()
+            that.setData({
+              shopList: shopList ? shopList.concat(list) : list,
+              page: page + 1,
+              hasMore: data.count == 0,
+              loading: false
+            })
+          }
+        })
+      }
+    }) 
   },
 
   invalidateData() {

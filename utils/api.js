@@ -149,7 +149,7 @@ export function getLoginInfo(options) {
   const {
     success, error, fail
   } = options
-
+  
   //调用登录接口
   wx.login({
     success(res) {
